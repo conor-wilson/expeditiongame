@@ -57,7 +57,7 @@ metadata/_edit_group_ = true
 visible = false
 sprite_frames = SubResource("SpriteFrames_u5sy4")
 autoplay = "default"
-frame_progress = 0.878131
+frame_progress = 0.104555
 
 [node name="Sprite2D" type="Sprite2D" parent="Inventory/Slot1"]
 texture = SubResource("AtlasTexture_yqjtg")
@@ -65,5 +65,6 @@ texture = SubResource("AtlasTexture_yqjtg")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Inventory/Slot1"]
 shape = SubResource("RectangleShape2D_uwrxv")
 
+[connection signal="input_event" from="Inventory/Slot1" to="." method="_on_slot_1_input_event"]
 [connection signal="mouse_entered" from="Inventory/Slot1" to="." method="_on_slot_1_mouse_entered"]
 [connection signal="mouse_exited" from="Inventory/Slot1" to="." method="_on_slot_1_mouse_exited"]
