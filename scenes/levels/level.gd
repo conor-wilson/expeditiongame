@@ -2,6 +2,8 @@ extends Node2D
 
 var hovered_tile_coords:Vector2 = Vector2(0,0)
 
+@export var block_tiles:TileMapLayer
+
 var block_tilemap_coords = {
 	Global.Block.EMPTY: Vector2i(-1,-1),
 	Global.Block.WOOD:  Vector2(0,1),
@@ -20,11 +22,15 @@ func _ready() -> void:
 	
 
 func _on_tile_pressed() -> void:
+	
+	if block_tiles == null:
+		push_error("tile clicked on level that has no block tiles")
+	
 	if !InventoryManager.selected_block_is(Global.Block.EMPTY):
 		
 		# TODO: Check if block has hilighted sprite
-		var cell_coords:Vector2i = $Blocks.local_to_map(hovered_tile_coords)
-		$Blocks.set_cell(cell_coords, 0, block_tilemap_coords[InventoryManager.get_selected_block()])
+		var cell_coords:Vector2i = block_tiles.local_to_map(hovered_tile_coords)
+		block_tiles.set_cell(cell_coords, 0, block_tilemap_coords[InventoryManager.get_selected_block()])
 
 # TODO: This is a very silly way to resolve the global position / local position issue. Fix this. 
 var tile_global_position_offset:Vector2 = Vector2(64, 160)
