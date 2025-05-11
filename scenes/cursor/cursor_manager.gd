@@ -1,40 +1,40 @@
 extends Node
 
-@onready var CURSOR:Resource = preload("res://assets/art/cursors/cursor.png")
-@onready var GREEN_BLOCK:Resource = preload("res://assets/art/cursors/GreenBlockCursor.png")
+@onready var EMPTY_CURSOR:Resource = preload("res://assets/art/cursors/EmptyCursor.png")
+@onready var WOOD_BLOCK_CURSOR = preload("res://assets/art/cursors/WoodBlockCursor.png")
+@onready var STONE_BLOCK_CURSOR = preload("res://assets/art/cursors/StoneBlockCursor.png")
+@onready var WATER_BLOCK_CURSOR = preload("res://assets/art/cursors/WaterBlockCursor.png")
+@onready var FIRE_BLOCK_CURSOR = preload("res://assets/art/cursors/FireBlockCursor.png")
+
+@onready var cursor_hotspots = {
+	EMPTY_CURSOR:       Vector2.ZERO,
+	WOOD_BLOCK_CURSOR:  Vector2.ZERO,
+	STONE_BLOCK_CURSOR: Vector2.ZERO,
+	WATER_BLOCK_CURSOR: Vector2.ZERO,
+	FIRE_BLOCK_CURSOR:  Vector2.ZERO,
+}
 
 var current_cursor:Resource
-#var current_dragging_object:DraggableObject = null
-#var current_hovering_object:DraggableObject = null
-#var last_dragging_object:DraggableObject = null
+
+@onready var block_cursors = {
+	Global.Block.EMPTY: EMPTY_CURSOR,
+	Global.Block.WOOD:  WOOD_BLOCK_CURSOR,
+	Global.Block.STONE: STONE_BLOCK_CURSOR,
+	Global.Block.WATER: WATER_BLOCK_CURSOR,
+	Global.Block.FIRE:  FIRE_BLOCK_CURSOR,
+}
 
 func _ready() -> void:
-	set_mouse_cursor(CURSOR)
-
-#func _process(delta: float) -> void:
-	#if !Input.is_action_pressed("click"):
-		## TODO: This is the second iteration of my ad-hoc fix for a gamebreaking
-		## bug that can cause the desktop to be un-interactable. It's definitely
-		## an inefficient solution that doesn't really address the actual
-		## problem, but it is good enough for now (and maybe forever)
-		#if current_dragging_object != null:
-			#last_dragging_object = current_dragging_object
-		#current_dragging_object = null
+	set_mouse_cursor(EMPTY_CURSOR)
 
 func set_mouse_cursor(source:Resource):
-	Input.set_custom_mouse_cursor(source, 0, _get_hotspot(source))
+	Input.set_custom_mouse_cursor(source, 0, cursor_hotspots[source])
 	current_cursor = source
 	
+func set_mouse_block_cursor(block:Global.Block):
+	var source:Resource = block_cursors[block]
+	Input.set_custom_mouse_cursor(source, 0, cursor_hotspots[source])
+	current_cursor = source
 
 func current_cursor_is(source:Resource) -> bool:
 	return current_cursor == source
-
-# _get_hotspot returns the hotspot offset for the provided custom cursor resource.
-func _get_hotspot(source:Resource) -> Vector2: 
-	match source:
-		CURSOR:
-			return Vector2.ZERO
-		GREEN_BLOCK:
-			return Vector2.ZERO
-		_:
-			return Vector2.ZERO
