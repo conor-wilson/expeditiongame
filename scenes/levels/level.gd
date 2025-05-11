@@ -1,6 +1,9 @@
 extends Node2D
 
-var hovered_tile_coords:Vector2 = Vector2(0,0)
+# TODO: This is a very silly way to resolve the global position / local position issue. Fix this. 
+const tile_global_position_offset:Vector2 = Vector2(64, 160)
+
+var hovered_tile_coords:Vector2 = Vector2i(0,0)
 
 @export var block_tiles:TileMapLayer
 
@@ -24,18 +27,27 @@ func _on_tile_pressed() -> void:
 	if block_tiles == null:
 		push_error("tile clicked on level that has no block tiles")
 	
-	if !InventoryManager.selected_block_is(Global.Block.EMPTY):
+	if _block_can_be_placed_on_cell(hovered_tile_coords):
 		
 		# TODO: Check if block has hilighted sprite
-		var cell_coords:Vector2i = block_tiles.local_to_map(hovered_tile_coords)
-		block_tiles.set_cell(cell_coords, 0, block_tilemap_coords[InventoryManager.get_selected_block()])
-
-# TODO: This is a very silly way to resolve the global position / local position issue. Fix this. 
-var tile_global_position_offset:Vector2 = Vector2(64, 160)
+		block_tiles.set_cell(hovered_tile_coords, 0, block_tilemap_coords[InventoryManager.get_selected_block()])
 
 func _on_tile_hovered(button:TileButton):
-	hovered_tile_coords = button.global_position - tile_global_position_offset
+	
+	hovered_tile_coords = _get_map_tile_coords(button.global_position)
+	
 	print("hovered_tile_coords: ", hovered_tile_coords)
 	$HoverGhosts.clear()
-	if !InventoryManager.selected_block_is(Global.Block.EMPTY):
-		$HoverGhosts.set_cell($HoverGhosts.local_to_map(hovered_tile_coords), 0, block_tilemap_coords[InventoryManager.get_selected_block()])
+	if _block_can_be_placed_on_cell(hovered_tile_coords):
+		$HoverGhosts.set_cell(hovered_tile_coords, 0, block_tilemap_coords[InventoryManager.get_selected_block()])
+
+# _block_can_be_placed_on_cell returns true if the cell at the provided coordinates is empty 
+# (checks Blocks layer).
+func _block_can_be_placed_on_cell(coords : Vector2i) -> bool:
+	return (
+		!InventoryManager.selected_block_is(Global.Block.EMPTY) &&
+		block_tiles.get_cell_tile_data(coords) == null
+		)
+
+func _get_map_tile_coords(global_coords:Vector2) -> Vector2i:
+	return block_tiles.local_to_map(global_coords - tile_global_position_offset)
