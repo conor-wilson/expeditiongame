@@ -4,7 +4,7 @@ signal selected
 
 # The block that this slot contains
 @export var block:Global.Block = Global.Block.EMPTY
-@export var amount:int = 1
+#@export var amount:int = 1
 
 @onready var block_sprites = {
 	Global.Block.WOOD:  $Sprites/WoodSprite,
@@ -16,24 +16,34 @@ signal selected
 func _ready() -> void:
 	_set_sprite()
 
-func set_contents(new_block:Global.Block, new_amount:int):
+func set_contents(new_block:Global.Block, amount:int):
 	
 	# Set the new contents
 	block = new_block
-	amount = new_amount
 	
-	# Set the sprite behaviour
+	# Setup the visual behaviour
+	show()
 	_set_sprite()
+	_set_count(amount)
+
 
 func _set_sprite():
 	
-	if block == Global.Block.EMPTY || amount == 0:
-		$Sprites.hide()
+	if block == Global.Block.EMPTY:
+		hide()
 		return
 	
 	for sprite in $Sprites.get_children():
 		sprite.hide()
 	block_sprites[block].show()
+
+func _set_count(amount:int):
+	
+	if !amount:
+		hide()
+		return
+	
+	$Count.text = String.num_int64(amount)
 
 # TODO: Maybe distinguish between the look of a hovered block vs a selected
 # block by adding distinct functionality to the below functions.

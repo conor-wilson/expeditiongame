@@ -6,8 +6,9 @@ const tile_global_position_offset:Vector2 = Vector2(64, 160)
 var hovered_tile_coords:Vector2 = Vector2i(0,0)
 
 @export var block_tiles:TileMapLayer
+@export var inventory:Array[Global.Block]
 
-var block_tilemap_coords = {
+var block_tilemap_coords:Dictionary = {
 	Global.Block.EMPTY: Vector2i(-1,-1),
 	Global.Block.WOOD:  Vector2(0,1),
 	Global.Block.STONE: Vector2(1,1),
@@ -22,6 +23,10 @@ func _ready() -> void:
 				tile.connect("pressed", _on_tile_pressed)
 				tile.connect("hovered", _on_tile_hovered)
 
+func load():
+	# TODO: Reset tiles
+	InventoryManager.set_inventory(inventory)
+
 func _on_tile_pressed() -> void:
 	
 	if block_tiles == null:
@@ -30,7 +35,11 @@ func _on_tile_pressed() -> void:
 	if _block_can_be_placed_on_cell(hovered_tile_coords):
 		
 		# TODO: Check if block has hilighted sprite
-		block_tiles.set_cell(hovered_tile_coords, 0, block_tilemap_coords[InventoryManager.get_selected_block()])
+		place_block(hovered_tile_coords)
+
+func place_block(coords:Vector2i):
+	block_tiles.set_cell(coords, 0, block_tilemap_coords[InventoryManager.get_selected_block()])
+	InventoryManager.subtract_from_selected_block()
 
 func _on_tile_hovered(button:TileButton):
 	

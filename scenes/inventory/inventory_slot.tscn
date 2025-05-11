@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://nig5w7o84v7"]
+[gd_scene load_steps=13 format=3 uid="uid://nig5w7o84v7"]
 
 [ext_resource type="Script" uid="uid://c5o3x6mtce48b" path="res://scenes/inventory/inventory_slot.gd" id="1_c7w7p"]
 [ext_resource type="Texture2D" uid="uid://f3l60kttwqkd" path="res://assets/art/BlockHighlight-Sheet.png" id="1_u6pog"]
@@ -49,6 +49,8 @@ filter_clip = true
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c00wg"]
 size = Vector2(32, 32)
 
+[sub_resource type="LabelSettings" id="LabelSettings_c7w7p"]
+
 [node name="InventorySlot" type="Area2D"]
 script = ExtResource("1_c7w7p")
 
@@ -73,6 +75,16 @@ texture = SubResource("AtlasTexture_td8r7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_c00wg")
+
+[node name="Count" type="Label" parent="."]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+text = "1"
+label_settings = SubResource("LabelSettings_c7w7p")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

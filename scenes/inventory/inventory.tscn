@@ -13,27 +13,27 @@ tile_set = ExtResource("1_el5y6")
 
 [node name="Slots" type="Node2D" parent="."]
 
-[node name="Slot1" parent="Slots" instance=ExtResource("2_4axmw")]
+[node name="Slot0" parent="Slots" instance=ExtResource("2_4axmw")]
 position = Vector2(48, 48)
 block = 1
 
-[node name="Slot2" parent="Slots" instance=ExtResource("2_4axmw")]
+[node name="Slot1" parent="Slots" instance=ExtResource("2_4axmw")]
 position = Vector2(48, 112)
 block = 2
 
-[node name="Slot3" parent="Slots" instance=ExtResource("2_4axmw")]
+[node name="Slot2" parent="Slots" instance=ExtResource("2_4axmw")]
 position = Vector2(48, 176)
 block = 3
 
-[node name="Slot4" parent="Slots" instance=ExtResource("2_4axmw")]
+[node name="Slot3" parent="Slots" instance=ExtResource("2_4axmw")]
 position = Vector2(48, 240)
 block = 4
 
-[node name="Slot5" parent="Slots" instance=ExtResource("2_4axmw")]
+[node name="Slot4" parent="Slots" instance=ExtResource("2_4axmw")]
 position = Vector2(48, 304)
 
+[connection signal="selected" from="Slots/Slot0" to="." method="_on_slot_selected"]
 [connection signal="selected" from="Slots/Slot1" to="." method="_on_slot_selected"]
 [connection signal="selected" from="Slots/Slot2" to="." method="_on_slot_selected"]
 [connection signal="selected" from="Slots/Slot3" to="." method="_on_slot_selected"]
 [connection signal="selected" from="Slots/Slot4" to="." method="_on_slot_selected"]
-[connection signal="selected" from="Slots/Slot5" to="." method="_on_slot_selected"]

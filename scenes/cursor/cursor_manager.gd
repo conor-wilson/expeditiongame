@@ -6,7 +6,7 @@ extends Node
 @onready var WATER_BLOCK_CURSOR = preload("res://assets/art/cursors/WaterBlockCursor.png")
 @onready var FIRE_BLOCK_CURSOR = preload("res://assets/art/cursors/FireBlockCursor.png")
 
-@onready var cursor_hotspots = {
+@onready var cursor_hotspots:Dictionary = {
 	EMPTY_CURSOR:       Vector2.ZERO,
 	WOOD_BLOCK_CURSOR:  Vector2.ZERO,
 	STONE_BLOCK_CURSOR: Vector2.ZERO,
@@ -16,7 +16,7 @@ extends Node
 
 var current_cursor:Resource
 
-@onready var block_cursors = {
+@onready var block_cursors:Dictionary = {
 	Global.Block.EMPTY: EMPTY_CURSOR,
 	Global.Block.WOOD:  WOOD_BLOCK_CURSOR,
 	Global.Block.STONE: STONE_BLOCK_CURSOR,

@@ -1,10 +1,45 @@
 extends Node
 
-var inventory = {}
+signal inventory_updated
+
+var inventory:Dictionary = {
+	Global.Block.WOOD: 0,
+	Global.Block.STONE: 0,
+	Global.Block.WATER: 0,
+	Global.Block.FIRE: 0,
+}
 var selected_block:Global.Block = Global.Block.EMPTY
 
-func set_inventory(new_inventory):
-	inventory = new_inventory
+func subtract_from_selected_block():
+	inventory[selected_block] -= 1
+	
+	if inventory[selected_block] <= 0:
+		set_selected_block(Global.Block.EMPTY)
+		CursorManager.set_mouse_block_cursor(Global.Block.EMPTY)
+	
+	inventory_updated.emit()
+
+# Inventory Getters and Setters
+
+func set_inventory(new_inventory:Array[Global.Block]):
+	
+	inventory = {
+		Global.Block.WOOD: 0,
+		Global.Block.STONE: 0,
+		Global.Block.WATER: 0,
+		Global.Block.FIRE: 0,
+	}
+	
+	for block in new_inventory:
+		if block != Global.Block.EMPTY:
+			inventory[block] += 1
+	
+	inventory_updated.emit()
+
+func get_inventory() -> Dictionary:
+	return inventory
+
+# Selected Block Getters and Setters
 
 func set_selected_block(new_block:Global.Block):
 	selected_block = new_block

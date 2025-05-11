@@ -33,6 +33,7 @@ vertical_alignment = 1
 [node name="Level1" parent="Levels" node_paths=PackedStringArray("block_tiles") instance=ExtResource("4_lbhrr")]
 position = Vector2(64, 160)
 block_tiles = NodePath("Blocks")
+inventory = Array[int]([1, 1, 1, 2, 2, 3])
 
 [node name="Blocks" type="TileMapLayer" parent="Levels/Level1"]
 show_behind_parent = true
