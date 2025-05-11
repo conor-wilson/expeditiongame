@@ -18,8 +18,6 @@ func _ready() -> void:
 			if tile is TileButton:
 				tile.connect("pressed", _on_tile_pressed)
 				tile.connect("hovered", _on_tile_hovered)
-	
-	
 
 func _on_tile_pressed() -> void:
 	
@@ -38,3 +36,6 @@ var tile_global_position_offset:Vector2 = Vector2(64, 160)
 func _on_tile_hovered(button:TileButton):
 	hovered_tile_coords = button.global_position - tile_global_position_offset
 	print("hovered_tile_coords: ", hovered_tile_coords)
+	$HoverGhosts.clear()
+	if !InventoryManager.selected_block_is(Global.Block.EMPTY):
+		$HoverGhosts.set_cell($HoverGhosts.local_to_map(hovered_tile_coords), 0, block_tilemap_coords[InventoryManager.get_selected_block()])
