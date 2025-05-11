@@ -7,6 +7,7 @@ var hovered_tile_coords:Vector2 = Vector2i(0,0)
 
 @export var block_tiles:TileMapLayer
 @export var inventory:Array[Global.Block]
+@export var player_start_position:Vector2i = Vector2i(5, 10)
 
 var block_tilemap_coords:Dictionary = {
 	Global.Block.EMPTY: Vector2i(-1,-1),
@@ -24,12 +25,28 @@ func _ready() -> void:
 			if tile is TileButton:
 				tile.connect("pressed", _on_tile_pressed)
 				tile.connect("hovered", _on_tile_hovered)
-	
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("up"):
+		$Player.walk(Vector2i.UP)
+	if Input.is_action_just_pressed("down"):
+		$Player.walk(Vector2i.DOWN)
+	if Input.is_action_just_pressed("left"):
+		$Player.walk(Vector2i.LEFT)
+	if Input.is_action_just_pressed("right"):
+		$Player.walk(Vector2i.RIGHT)
+
 
 func load():
+	
 	# TODO: Reset tiles
+	
+	# Reset the inventory
 	InventoryManager.set_inventory(inventory)
 	$Inventory.refresh_inventory()
+	
+	# Move the Player to the start position
+	$Player.teleport(player_start_position)
 
 func _on_tile_pressed() -> void:
 	
