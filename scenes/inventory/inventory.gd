@@ -1,7 +1,8 @@
 extends Node2D
 
+signal focus_grabbed
 
-func load_inventory():
+func refresh_inventory():
 	var inventory:Dictionary = InventoryManager.get_inventory()
 	
 	# TODO: Make it so that the inventory slots aren't necessarily the same block every time
@@ -15,3 +16,7 @@ func _on_slot_selected() -> void:
 	for slot in $Slots.get_children():
 		if slot is InventorySlot:
 			slot.check_selected()
+
+
+func _on_slot_focus_entered() -> void:
+	focus_grabbed.emit()

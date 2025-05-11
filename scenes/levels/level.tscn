@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=4 uid="uid://rfdyr27e7slo"]
+[gd_scene load_steps=6 format=4 uid="uid://rfdyr27e7slo"]
 
 [ext_resource type="Script" uid="uid://deljq3x1fx6hv" path="res://scenes/levels/level.gd" id="1_b2cq8"]
 [ext_resource type="TileSet" uid="uid://cro1fx4ifi25h" path="res://scenes/gametiles.tres" id="2_xb4v1"]
 [ext_resource type="PackedScene" uid="uid://bqqiceuiy84sl" path="res://scenes/levels/tile_button.tscn" id="3_urvlt"]
+[ext_resource type="PackedScene" uid="uid://k2me1ajen246" path="res://scenes/inventory/inventory.tscn" id="4_xb4v1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xb4v1"]
+size = Vector2(352, 352)
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_b2cq8")
@@ -91,6 +95,7 @@ focus_neighbor_bottom = NodePath("../../Row1/Column9")
 offset_left = 320.0
 offset_right = 352.0
 focus_neighbor_left = NodePath("../Column9")
+focus_neighbor_right = NodePath("../../../Inventory/Slots/Slot0")
 focus_neighbor_bottom = NodePath("../../Row1/Column10")
 
 [node name="Row1" type="Node2D" parent="TileButtons"]
@@ -178,6 +183,7 @@ offset_left = 320.0
 offset_right = 352.0
 focus_neighbor_left = NodePath("../Column9")
 focus_neighbor_top = NodePath("../../Row0/Column10")
+focus_neighbor_right = NodePath("../../../Inventory/Slots/Slot0")
 focus_neighbor_bottom = NodePath("../../Row2/Column10")
 
 [node name="Row2" type="Node2D" parent="TileButtons"]
@@ -265,7 +271,7 @@ offset_left = 320.0
 offset_right = 352.0
 focus_neighbor_left = NodePath("../Column9")
 focus_neighbor_top = NodePath("../../Row1/Column10")
-focus_neighbor_right = NodePath("../../Row3/Column10")
+focus_neighbor_right = NodePath("../../../Inventory/Slots/Slot0")
 focus_neighbor_bottom = NodePath("../../Row3/Column10")
 
 [node name="Row3" type="Node2D" parent="TileButtons"]
@@ -353,6 +359,7 @@ offset_left = 320.0
 offset_right = 352.0
 focus_neighbor_left = NodePath("../Column9")
 focus_neighbor_top = NodePath("../../Row2/Column10")
+focus_neighbor_right = NodePath("../../../Inventory/Slots/Slot0")
 focus_neighbor_bottom = NodePath("../../Row4/Column10")
 
 [node name="Row4" type="Node2D" parent="TileButtons"]
@@ -440,6 +447,7 @@ offset_left = 320.0
 offset_right = 352.0
 focus_neighbor_left = NodePath("../Column9")
 focus_neighbor_top = NodePath("../../Row3/Column10")
+focus_neighbor_right = NodePath("../../../Inventory/Slots/Slot1")
 focus_neighbor_bottom = NodePath("../../Row5/Column10")
 
 [node name="Row5" type="Node2D" parent="TileButtons"]
@@ -527,6 +535,7 @@ offset_left = 320.0
 offset_right = 352.0
 focus_neighbor_left = NodePath("../Column9")
 focus_neighbor_top = NodePath("../../Row4/Column10")
+focus_neighbor_right = NodePath("../../../Inventory/Slots/Slot1")
 focus_neighbor_bottom = NodePath("../../Row6/Column10")
 
 [node name="Row6" type="Node2D" parent="TileButtons"]
@@ -614,6 +623,7 @@ offset_left = 320.0
 offset_right = 352.0
 focus_neighbor_left = NodePath("../Column9")
 focus_neighbor_top = NodePath("../../Row5/Column10")
+focus_neighbor_right = NodePath("../../../Inventory/Slots/Slot2")
 focus_neighbor_bottom = NodePath("../../Row7/Column10")
 
 [node name="Row7" type="Node2D" parent="TileButtons"]
@@ -701,6 +711,7 @@ offset_left = 320.0
 offset_right = 352.0
 focus_neighbor_left = NodePath("../Column9")
 focus_neighbor_top = NodePath("../../Row6/Column10")
+focus_neighbor_right = NodePath("../../../Inventory/Slots/Slot2")
 focus_neighbor_bottom = NodePath("../../Row8/Column10")
 
 [node name="Row8" type="Node2D" parent="TileButtons"]
@@ -788,6 +799,7 @@ offset_left = 320.0
 offset_right = 352.0
 focus_neighbor_left = NodePath("../Column9")
 focus_neighbor_top = NodePath("../../Row7/Column10")
+focus_neighbor_right = NodePath("../../../Inventory/Slots/Slot3")
 focus_neighbor_bottom = NodePath("../../Row9/Column10")
 
 [node name="Row9" type="Node2D" parent="TileButtons"]
@@ -875,6 +887,7 @@ offset_left = 320.0
 offset_right = 352.0
 focus_neighbor_left = NodePath("../Column9")
 focus_neighbor_top = NodePath("../../Row8/Column10")
+focus_neighbor_right = NodePath("../../../Inventory/Slots/Slot3")
 focus_neighbor_bottom = NodePath("../../Row10/Column10")
 
 [node name="Row10" type="Node2D" parent="TileButtons"]
@@ -952,3 +965,29 @@ offset_left = 320.0
 offset_right = 352.0
 focus_neighbor_left = NodePath("../Column9")
 focus_neighbor_top = NodePath("../../Row9/Column10")
+
+[node name="Inventory" parent="." instance=ExtResource("4_xb4v1")]
+position = Vector2(416, 64)
+
+[node name="Slot0" parent="Inventory/Slots" index="0"]
+focus_neighbor_left = NodePath("../../../TileButtons/Row3/Column10")
+
+[node name="Slot1" parent="Inventory/Slots" index="1"]
+focus_neighbor_left = NodePath("../../../TileButtons/Row5/Column10")
+
+[node name="Slot2" parent="Inventory/Slots" index="2"]
+focus_neighbor_left = NodePath("../../../TileButtons/Row7/Column10")
+
+[node name="Slot3" parent="Inventory/Slots" index="3"]
+focus_neighbor_left = NodePath("../../../TileButtons/Row9/Column10")
+
+[node name="GameArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameArea"]
+position = Vector2(176, 176)
+shape = SubResource("RectangleShape2D_xb4v1")
+
+[connection signal="focus_grabbed" from="Inventory" to="." method="_on_inventory_focus_grabbed"]
+[connection signal="mouse_exited" from="GameArea" to="." method="_on_game_area_mouse_exited"]
+
+[editable path="Inventory"]

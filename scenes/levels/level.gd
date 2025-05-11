@@ -16,16 +16,20 @@ var block_tilemap_coords:Dictionary = {
 	Global.Block.FIRE:  Vector2(3,1),
 }
 
+# TODO: Do some stuff with focus grabbing when resources run out
+
 func _ready() -> void:
 	for row in $TileButtons.get_children():
 		for tile in row.get_children():
 			if tile is TileButton:
 				tile.connect("pressed", _on_tile_pressed)
 				tile.connect("hovered", _on_tile_hovered)
+	
 
 func load():
 	# TODO: Reset tiles
 	InventoryManager.set_inventory(inventory)
+	$Inventory.refresh_inventory()
 
 func _on_tile_pressed() -> void:
 	
@@ -33,13 +37,12 @@ func _on_tile_pressed() -> void:
 		push_error("tile clicked on level that has no block tiles")
 	
 	if _block_can_be_placed_on_cell(hovered_tile_coords):
-		
-		# TODO: Check if block has hilighted sprite
 		place_block(hovered_tile_coords)
 
 func place_block(coords:Vector2i):
 	block_tiles.set_cell(coords, 0, block_tilemap_coords[InventoryManager.get_selected_block()])
 	InventoryManager.subtract_from_selected_block()
+	$Inventory.refresh_inventory()
 
 func _on_tile_hovered(button:TileButton):
 	
@@ -47,7 +50,7 @@ func _on_tile_hovered(button:TileButton):
 	
 	print("hovered_tile_coords: ", hovered_tile_coords)
 	$HoverGhosts.clear()
-	if _block_can_be_placed_on_cell(hovered_tile_coords):
+	if !InventoryManager.selected_block_is(Global.Block.EMPTY):
 		$HoverGhosts.set_cell(hovered_tile_coords, 0, block_tilemap_coords[InventoryManager.get_selected_block()])
 
 # _block_can_be_placed_on_cell returns true if the cell at the provided coordinates is empty 
@@ -60,3 +63,16 @@ func _block_can_be_placed_on_cell(coords : Vector2i) -> bool:
 
 func _get_map_tile_coords(global_coords:Vector2) -> Vector2i:
 	return block_tiles.local_to_map(global_coords - tile_global_position_offset)
+
+
+func _on_inventory_focus_grabbed() -> void:
+	hovered_tile_coords = Vector2i(-1,-1)
+	$HoverGhosts.clear()
+
+
+# TODO: Make the below work
+
+func _on_game_area_mouse_exited() -> void:
+	hovered_tile_coords = Vector2i(-1,-1)
+	$HoverGhosts.clear()
+	print("YO")

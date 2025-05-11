@@ -4,6 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://f3l60kttwqkd" path="res://assets/art/BlockHighlight-Sheet.png" id="1_u6pog"]
 [ext_resource type="Texture2D" uid="uid://lodcoadeks5q" path="res://assets/art/TileMap.png" id="2_c7w7p"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c7w7p"]
+bg_color = Color(0.6, 0.6, 0.6, 0.513726)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_iywne"]
 atlas = ExtResource("1_u6pog")
 region = Rect2(0, 0, 48, 48)
@@ -46,20 +49,26 @@ atlas = ExtResource("2_c7w7p")
 region = Rect2(96, 32, 32, 32)
 filter_clip = true
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_c00wg"]
-size = Vector2(32, 32)
-
 [sub_resource type="LabelSettings" id="LabelSettings_c7w7p"]
 
-[node name="InventorySlot" type="Area2D"]
+[node name="InventorySlot" type="Button"]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+theme_override_styles/focus = SubResource("StyleBoxFlat_c7w7p")
+flat = true
 script = ExtResource("1_c7w7p")
 
 [node name="Highlight" type="AnimatedSprite2D" parent="."]
 visible = false
+position = Vector2(16, 16)
 sprite_frames = SubResource("SpriteFrames_0uvgv")
 autoplay = "default"
 
 [node name="Sprites" type="Node2D" parent="."]
+show_behind_parent = true
+position = Vector2(16, 16)
 
 [node name="WoodSprite" type="Sprite2D" parent="Sprites"]
 texture = SubResource("AtlasTexture_c7w7p")
@@ -73,19 +82,14 @@ texture = SubResource("AtlasTexture_c00wg")
 [node name="FireSprite" type="Sprite2D" parent="Sprites"]
 texture = SubResource("AtlasTexture_td8r7")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_c00wg")
-
 [node name="Count" type="Label" parent="."]
-offset_left = -16.0
-offset_top = -16.0
-offset_right = 16.0
-offset_bottom = 16.0
+offset_right = 32.0
+offset_bottom = 32.0
 text = "1"
 label_settings = SubResource("LabelSettings_c7w7p")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

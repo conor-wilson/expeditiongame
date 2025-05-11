@@ -1,10 +1,10 @@
-class_name InventorySlot extends Area2D
+class_name InventorySlot extends Button
 
 signal selected
 
 # The block that this slot contains
 @export var block:Global.Block = Global.Block.EMPTY
-#@export var amount:int = 1
+@export var starting_count:int = 1
 
 @onready var block_sprites = {
 	Global.Block.WOOD:  $Sprites/WoodSprite,
@@ -15,6 +15,7 @@ signal selected
 
 func _ready() -> void:
 	_set_sprite()
+	_set_count(starting_count)
 
 func set_contents(new_block:Global.Block, amount:int):
 	
@@ -45,22 +46,13 @@ func _set_count(amount:int):
 	
 	$Count.text = String.num_int64(amount)
 
-# TODO: Maybe distinguish between the look of a hovered block vs a selected
-# block by adding distinct functionality to the below functions.
+# TODO: Create a custom focus texture for this
 
 func check_selected():
 	if InventoryManager.selected_block_is(block):
 		show_selected()
 	else:
 		show_deselected()
-		show_not_hovering()
-
-func show_hovering():
-	if block == Global.Block.EMPTY: return
-	$Highlight.show()
-
-func show_not_hovering():
-	$Highlight.hide()
 
 func show_selected():
 	if block == Global.Block.EMPTY: return
@@ -70,18 +62,18 @@ func show_deselected():
 	$Highlight.hide()
 
 func _on_mouse_entered() -> void:
-	show_hovering()
+	#hovered.emit(self)
+	grab_focus()
 
 func _on_mouse_exited() -> void:
 	if InventoryManager.selected_block != block:
 		check_selected()
 
-func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_pressed() -> void:
 	if block == Global.Block.EMPTY: return
 	
-	if event.is_action_pressed("click"):
-		print("BLOCK CLICKED: ", block)
-		InventoryManager.set_selected_block(block)
-		CursorManager.set_mouse_block_cursor(block)
-		check_selected()
-		selected.emit()
+	print("BLOCK CLICKED: ", block)
+	InventoryManager.set_selected_block(block)
+	CursorManager.set_mouse_block_cursor(block)
+	check_selected()
+	selected.emit()
