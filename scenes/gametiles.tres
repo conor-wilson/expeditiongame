@@ -1,7 +1,7 @@
 [gd_resource type="TileSet" load_steps=5 format=3 uid="uid://cro1fx4ifi25h"]
 
 [ext_resource type="Texture2D" uid="uid://lodcoadeks5q" path="res://assets/art/TileMap.png" id="1_qy32k"]
-[ext_resource type="Texture2D" uid="uid://c37687jjmhppb" path="res://assets/art/MapHighlight-Sheet.png" id="2_nryul"]
+[ext_resource type="Texture2D" uid="uid://ewbrx7d35sd6" path="res://assets/art/tiles/Blocks-Sheet.png" id="2_nryul"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjtg"]
 texture = ExtResource("1_qy32k")
@@ -16,11 +16,29 @@ texture = ExtResource("1_qy32k")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pu314"]
 texture = ExtResource("2_nryul")
-texture_region_size = Vector2i(32, 32)
-0:0/animation_columns = 2
+0:1/animation_speed = 2.0
+0:1/animation_frame_0/duration = 1.0
+0:1/animation_frame_1/duration = 1.0
+0:1/animation_frame_2/duration = 1.0
+0:1/animation_frame_3/duration = 1.0
+0:1/0 = 0
+0:2/animation_speed = 2.0
+0:2/animation_frame_0/duration = 1.0
+0:2/animation_frame_1/duration = 1.0
+0:2/animation_frame_2/duration = 1.0
+0:2/animation_frame_3/duration = 1.0
+0:2/0 = 0
+0:3/animation_speed = 2.0
+0:3/animation_frame_0/duration = 1.0
+0:3/animation_frame_1/duration = 1.0
+0:3/animation_frame_2/duration = 1.0
+0:3/animation_frame_3/duration = 1.0
+0:3/0 = 0
 0:0/animation_speed = 2.0
 0:0/animation_frame_0/duration = 1.0
 0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/animation_frame_3/duration = 1.0
 0:0/0 = 0
 
 [resource]

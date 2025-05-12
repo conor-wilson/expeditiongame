@@ -1,15 +1,20 @@
 [gd_scene load_steps=5 format=3 uid="uid://c5v700ycfca72"]
 
-[ext_resource type="Texture2D" uid="uid://mumnbvlobwxo" path="res://assets/art/player/Player.png" id="1_8afob"]
+[ext_resource type="Texture2D" uid="uid://b2wjg4bmhvaex" path="res://assets/art/player/Player-Sheet.png" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://coytss6thqkkf" path="res://scenes/player/player.gd" id="2_dovo2"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dovo2"]
-texture = ExtResource("1_8afob")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gmlin"]
+texture = ExtResource("1_dovo2")
+0:0/animation_columns = 4
+0:0/animation_speed = 5.0
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/animation_frame_3/duration = 1.0
 0:0/0 = 0
-0:1/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_gmlin"]
-sources/0 = SubResource("TileSetAtlasSource_dovo2")
+sources/0 = SubResource("TileSetAtlasSource_gmlin")
 
 [node name="Player" type="TileMapLayer"]
 tile_map_data = PackedByteArray(0, 0, 5, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0)

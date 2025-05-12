@@ -16,10 +16,10 @@ var hovered_tile_coords:Vector2 = Vector2i(0,0)
 
 var block_tilemap_coords:Dictionary = {
 	Global.Block.EMPTY: Vector2i(-1,-1),
-	Global.Block.WOOD:  Vector2(0,1),
-	Global.Block.STONE: Vector2(1,1),
-	Global.Block.WATER: Vector2(2,1),
-	Global.Block.FIRE:  Vector2(3,1),
+	Global.Block.WOOD:  Vector2(0,0),
+	Global.Block.STONE: Vector2(0,1),
+	Global.Block.WATER: Vector2(0,2),
+	Global.Block.FIRE:  Vector2(0,3),
 }
 
 ##########################
@@ -59,7 +59,7 @@ func _on_tile_pressed() -> void:
 		place_block(hovered_tile_coords)
 
 func place_block(coords:Vector2i):
-	block_tiles.set_cell(coords, 0, block_tilemap_coords[InventoryManager.get_selected_block()])
+	block_tiles.set_cell(coords, 1, block_tilemap_coords[InventoryManager.get_selected_block()])
 	InventoryManager.subtract_from_selected_block()
 	$Inventory.refresh_inventory()
 
@@ -70,7 +70,7 @@ func _on_tile_hovered(button:TileButton):
 	print("hovered_tile_coords: ", hovered_tile_coords)
 	$HoverGhosts.clear()
 	if !InventoryManager.selected_block_is(Global.Block.EMPTY):
-		$HoverGhosts.set_cell(hovered_tile_coords, 0, block_tilemap_coords[InventoryManager.get_selected_block()])
+		$HoverGhosts.set_cell(hovered_tile_coords, 1, block_tilemap_coords[InventoryManager.get_selected_block()])
 
 # _block_can_be_placed_on_cell returns true if the cell at the provided coordinates is empty 
 # (checks Blocks layer).

@@ -6,11 +6,11 @@ signal selected
 @export var block:Global.Block = Global.Block.EMPTY
 @export var starting_count:int = 1
 
-@onready var block_sprites = {
-	Global.Block.WOOD:  $Sprites/WoodSprite,
-	Global.Block.STONE: $Sprites/StoneSprite,
-	Global.Block.WATER: $Sprites/WaterSprite,
-	Global.Block.FIRE:  $Sprites/FireSprite,
+@onready var block_animations = {
+	Global.Block.WOOD:  "wood",
+	Global.Block.STONE: "stone",
+	Global.Block.WATER: "water",
+	Global.Block.FIRE:  "fire",
 }
 
 func _ready() -> void:
@@ -34,9 +34,8 @@ func _set_sprite():
 		hide()
 		return
 	
-	for sprite in $Sprites.get_children():
-		sprite.hide()
-	block_sprites[block].show()
+	$Sprite.play(block_animations[block])
+	show()
 
 func _set_count(amount:int):
 	

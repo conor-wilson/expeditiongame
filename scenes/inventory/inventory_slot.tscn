@@ -1,8 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://nig5w7o84v7"]
+[gd_scene load_steps=26 format=3 uid="uid://nig5w7o84v7"]
 
 [ext_resource type="Script" uid="uid://c5o3x6mtce48b" path="res://scenes/inventory/inventory_slot.gd" id="1_c7w7p"]
 [ext_resource type="Texture2D" uid="uid://f3l60kttwqkd" path="res://assets/art/BlockHighlight-Sheet.png" id="1_u6pog"]
-[ext_resource type="Texture2D" uid="uid://lodcoadeks5q" path="res://assets/art/TileMap.png" id="2_c7w7p"]
+[ext_resource type="Texture2D" uid="uid://ewbrx7d35sd6" path="res://assets/art/tiles/Blocks-Sheet.png" id="3_c7w7p"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c7w7p"]
 bg_color = Color(0.6, 0.6, 0.6, 0.513726)
@@ -29,25 +29,145 @@ animations = [{
 "speed": 2.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_c7w7p"]
-atlas = ExtResource("2_c7w7p")
-region = Rect2(0, 16, 16, 16)
-filter_clip = true
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_0uvgv"]
-atlas = ExtResource("2_c7w7p")
-region = Rect2(16, 16, 16, 16)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_c00wg"]
-atlas = ExtResource("2_c7w7p")
-region = Rect2(32, 16, 16, 16)
-filter_clip = true
+atlas = ExtResource("3_c7w7p")
+region = Rect2(0, 48, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_td8r7"]
-atlas = ExtResource("2_c7w7p")
+atlas = ExtResource("3_c7w7p")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c00wg"]
+atlas = ExtResource("3_c7w7p")
+region = Rect2(32, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_17ha1"]
+atlas = ExtResource("3_c7w7p")
+region = Rect2(48, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7q7gl"]
+atlas = ExtResource("3_c7w7p")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7vfo"]
+atlas = ExtResource("3_c7w7p")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmxl7"]
+atlas = ExtResource("3_c7w7p")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5iewa"]
+atlas = ExtResource("3_c7w7p")
 region = Rect2(48, 16, 16, 16)
-filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4e26q"]
+atlas = ExtResource("3_c7w7p")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqts8"]
+atlas = ExtResource("3_c7w7p")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_urcj8"]
+atlas = ExtResource("3_c7w7p")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8bnqe"]
+atlas = ExtResource("3_c7w7p")
+region = Rect2(48, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xxpls"]
+atlas = ExtResource("3_c7w7p")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m465s"]
+atlas = ExtResource("3_c7w7p")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hk0b"]
+atlas = ExtResource("3_c7w7p")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pic66"]
+atlas = ExtResource("3_c7w7p")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mgvq8"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0uvgv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_td8r7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c00wg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_17ha1")
+}],
+"loop": true,
+"name": &"fire",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7q7gl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l7vfo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xmxl7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5iewa")
+}],
+"loop": true,
+"name": &"stone",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4e26q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fqts8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_urcj8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8bnqe")
+}],
+"loop": true,
+"name": &"water",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xxpls")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m465s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0hk0b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pic66")
+}],
+"loop": true,
+"name": &"wood",
+"speed": 5.0
+}]
 
 [sub_resource type="LabelSettings" id="LabelSettings_c7w7p"]
 font_size = 8
@@ -68,25 +188,36 @@ scale = Vector2(0.666667, 0.666667)
 sprite_frames = SubResource("SpriteFrames_0uvgv")
 autoplay = "default"
 
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(8, 8)
+sprite_frames = SubResource("SpriteFrames_mgvq8")
+animation = &"wood"
+
 [node name="Sprites" type="Node2D" parent="."]
+visible = false
 show_behind_parent = true
 position = Vector2(16, 16)
 
-[node name="WoodSprite" type="Sprite2D" parent="Sprites"]
+[node name="StoneSprite" type="AnimatedSprite2D" parent="Sprites"]
+visible = false
 position = Vector2(-8, -8)
-texture = SubResource("AtlasTexture_c7w7p")
+sprite_frames = SubResource("SpriteFrames_mgvq8")
+animation = &"stone"
+autoplay = "wood"
 
-[node name="StoneSprite" type="Sprite2D" parent="Sprites"]
+[node name="WaterSprite" type="AnimatedSprite2D" parent="Sprites"]
+visible = false
 position = Vector2(-8, -8)
-texture = SubResource("AtlasTexture_0uvgv")
+sprite_frames = SubResource("SpriteFrames_mgvq8")
+animation = &"water"
+autoplay = "wood"
 
-[node name="WaterSprite" type="Sprite2D" parent="Sprites"]
+[node name="FireSprite" type="AnimatedSprite2D" parent="Sprites"]
+visible = false
 position = Vector2(-8, -8)
-texture = SubResource("AtlasTexture_c00wg")
-
-[node name="FireSprite" type="Sprite2D" parent="Sprites"]
-position = Vector2(-8, -8)
-texture = SubResource("AtlasTexture_td8r7")
+sprite_frames = SubResource("SpriteFrames_mgvq8")
+animation = &"fire"
+autoplay = "wood"
 
 [node name="Count" type="Label" parent="."]
 layout_mode = 0
