@@ -9,3 +9,6 @@ func teleport(new_coords:Vector2i):
 
 func walk(direction:Vector2i):
 	teleport(character_coords+direction)
+
+func get_character_coords() -> Vector2i:
+	return character_coords
