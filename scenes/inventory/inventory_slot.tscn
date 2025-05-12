@@ -193,32 +193,6 @@ position = Vector2(8, 8)
 sprite_frames = SubResource("SpriteFrames_mgvq8")
 animation = &"wood"
 
-[node name="Sprites" type="Node2D" parent="."]
-visible = false
-show_behind_parent = true
-position = Vector2(16, 16)
-
-[node name="StoneSprite" type="AnimatedSprite2D" parent="Sprites"]
-visible = false
-position = Vector2(-8, -8)
-sprite_frames = SubResource("SpriteFrames_mgvq8")
-animation = &"stone"
-autoplay = "wood"
-
-[node name="WaterSprite" type="AnimatedSprite2D" parent="Sprites"]
-visible = false
-position = Vector2(-8, -8)
-sprite_frames = SubResource("SpriteFrames_mgvq8")
-animation = &"water"
-autoplay = "wood"
-
-[node name="FireSprite" type="AnimatedSprite2D" parent="Sprites"]
-visible = false
-position = Vector2(-8, -8)
-sprite_frames = SubResource("SpriteFrames_mgvq8")
-animation = &"fire"
-autoplay = "wood"
-
 [node name="Count" type="Label" parent="."]
 layout_mode = 0
 offset_right = 16.0

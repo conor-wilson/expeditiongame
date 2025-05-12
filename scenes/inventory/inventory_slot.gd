@@ -2,6 +2,8 @@ class_name InventorySlot extends Button
 
 signal selected
 
+# TODO: Synchronise the framerates of the sprites here and in the tilemaps
+
 # The block that this slot contains
 @export var block:Global.Block = Global.Block.EMPTY
 @export var starting_count:int = 1
