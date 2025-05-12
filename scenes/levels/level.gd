@@ -21,6 +21,7 @@ const block_tilemap_coords:Dictionary = {
 }
 
 @export var block_tiles:TileMapLayer
+@export var enemies:Array[Character]
 @export var inventory:Array[Global.Block]
 @export var player_start_position:Vector2i = Vector2i(5, 10)
 
@@ -43,6 +44,10 @@ func _ready() -> void:
 				tile.connect("pressed", _on_tile_pressed)
 				tile.connect("hovered", _on_tile_hovered)
 	
+	# Initialise everything
+	$Player.start_position = player_start_position
+	$Player.reset()
+	
 	# Disable everything
 	disable()
 
@@ -54,8 +59,12 @@ func load():
 	InventoryManager.set_inventory(inventory)
 	$Inventory.refresh_inventory()
 	
-	# Move the Player to the start position
-	$Player.teleport(player_start_position)
+	# Reset the Player
+	$Player.reset()
+	
+	# Reset the Enemies
+	for enemy in enemies:
+		enemy.reset()
 	
 	# Start the Planning Phase
 	_start_planning_phase()

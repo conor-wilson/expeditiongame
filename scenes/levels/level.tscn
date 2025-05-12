@@ -4,7 +4,7 @@
 [ext_resource type="TileSet" uid="uid://cro1fx4ifi25h" path="res://scenes/gametiles.tres" id="2_xb4v1"]
 [ext_resource type="PackedScene" uid="uid://bqqiceuiy84sl" path="res://scenes/levels/tile_button.tscn" id="3_urvlt"]
 [ext_resource type="PackedScene" uid="uid://k2me1ajen246" path="res://scenes/inventory/inventory.tscn" id="4_xb4v1"]
-[ext_resource type="PackedScene" uid="uid://c5v700ycfca72" path="res://scenes/player/player.tscn" id="5_urvlt"]
+[ext_resource type="PackedScene" uid="uid://c5v700ycfca72" path="res://scenes/player/character.tscn" id="5_urvlt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xb4v1"]
 size = Vector2(176, 176)

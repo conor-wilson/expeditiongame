@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://c5v700ycfca72"]
+
+[ext_resource type="Texture2D" uid="uid://b2wjg4bmhvaex" path="res://assets/art/characters/Player-Sheet.png" id="1_unmdi"]
+[ext_resource type="Texture2D" uid="uid://dwfogxqrhvgg6" path="res://assets/art/characters/Enemies-Sheet.png" id="2_p42bw"]
+[ext_resource type="Script" uid="uid://coytss6thqkkf" path="res://scenes/player/character.gd" id="3_s4akd"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p42bw"]
+texture = ExtResource("1_unmdi")
+0:0/animation_speed = 5.0
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/animation_frame_3/duration = 1.0
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1u06v"]
+texture = ExtResource("2_p42bw")
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/animation_frame_3/duration = 1.0
+0:0/0 = 0
+0:1/animation_frame_0/duration = 1.0
+0:1/animation_frame_1/duration = 1.0
+0:1/animation_frame_2/duration = 1.0
+0:1/animation_frame_3/duration = 1.0
+0:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_gmlin"]
+sources/1 = SubResource("TileSetAtlasSource_1u06v")
+sources/0 = SubResource("TileSetAtlasSource_p42bw")
+
+[node name="Character" type="TileMapLayer"]
+tile_map_data = PackedByteArray(0, 0, 5, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+tile_set = SubResource("TileSet_gmlin")
+script = ExtResource("3_s4akd")

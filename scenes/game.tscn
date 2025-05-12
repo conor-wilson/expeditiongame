@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=4 uid="uid://dvu7ny3j1n00j"]
+[gd_scene load_steps=7 format=4 uid="uid://dvu7ny3j1n00j"]
 
 [ext_resource type="Script" uid="uid://debtv741hvvl7" path="res://scenes/game.gd" id="1_lnu2h"]
 [ext_resource type="TileSet" uid="uid://cro1fx4ifi25h" path="res://scenes/gametiles.tres" id="2_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://c5v700ycfca72" path="res://scenes/player/character.tscn" id="4_iywne"]
 [ext_resource type="PackedScene" uid="uid://rfdyr27e7slo" path="res://scenes/levels/level.tscn" id="4_lbhrr"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lnu2h"]
@@ -28,6 +29,11 @@ inventory = Array[int]([1, 1, 1, 2, 2, 3])
 show_behind_parent = true
 tile_map_data = PackedByteArray("AAAJAAUAAQAAAAEAAAAIAAUAAQAAAAEAAAAHAAUAAQAAAAEAAAABAAUAAQAAAAEAAAACAAUAAQAAAAEAAAADAAUAAQAAAAEAAAAGAAoAAQAAAAEAAAAHAAoAAQAAAAEAAAAIAAoAAQAAAAEAAAAJAAoAAQAAAAEAAAAKAAoAAQAAAAEAAAAKAAkAAQAAAAEAAAAEAAoAAQAAAAEAAAADAAoAAQAAAAEAAAACAAoAAQAAAAEAAAABAAoAAQAAAAEAAAAAAAoAAQAAAAEAAAAAAAkAAQAAAAEAAAAAAAgAAQAAAAEAAAAAAAcAAQAAAAEAAAAAAAYAAQAAAAEAAAAAAAUAAQAAAAEAAAAAAAQAAQAAAAEAAAAAAAMAAQAAAAEAAAAAAAIAAQAAAAEAAAAAAAEAAQAAAAEAAAAAAAAAAQAAAAEAAAABAAAAAQAAAAEAAAACAAAAAQAAAAEAAAADAAAAAQAAAAEAAAAEAAAAAQAAAAEAAAAFAAAAAQAAAAEAAAAGAAAAAQAAAAEAAAAHAAAAAQAAAAEAAAAIAAAAAQAAAAEAAAAJAAAAAQAAAAEAAAAKAAAAAQAAAAEAAAAKAAEAAQAAAAEAAAAKAAIAAQAAAAEAAAAKAAMAAQAAAAEAAAAKAAQAAQAAAAEAAAAKAAUAAQAAAAEAAAAKAAYAAQAAAAEAAAAKAAcAAQAAAAEAAAAKAAgAAQAAAAEAAAAIAAIAAAAAAAEAAAA=")
 tile_set = ExtResource("2_lbhrr")
+
+[node name="Goblin" parent="Levels/Level1" instance=ExtResource("4_iywne")]
+tile_map_data = PackedByteArray("AAAFAAoAAAAAAAAAAAABAAYAAQAAAAEAAAA=")
+character_type = 1
+start_position = Vector2i(2, 6)
 
 [node name="Title" type="Label" parent="."]
 offset_right = 320.0
