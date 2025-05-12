@@ -1,6 +1,7 @@
 class_name Level extends Node2D
 
 signal phase_change(Phase)
+signal win
 
 # TODO: This is a very silly way to resolve the global position / local position issue. Fix this. 
 const tile_global_position_offset:Vector2 = Vector2(32, 80)
@@ -10,7 +11,8 @@ const MIN_Y:int = 0
 const MAX_X:int = 10
 const MAX_Y:int = 10
 
-var block_tilemap_coords:Dictionary = {
+const exit_tilemap_coords:Vector2i = Vector2i(0,1)
+const block_tilemap_coords:Dictionary = {
 	Global.Block.EMPTY: Vector2i(-1,-1),
 	Global.Block.WOOD:  Vector2(0,0),
 	Global.Block.STONE: Vector2(0,1),
@@ -26,6 +28,7 @@ var hovered_tile_coords:Vector2 = Vector2i(0,0)
 
 enum Phase { DISABLED, PLAN, EXPLORE }
 var phase:Phase
+
 
 ##########################
 ## BOOTUP FUNCTIONALITY ##
@@ -172,6 +175,11 @@ func _move_player(direction: Vector2i) -> bool:
 	
 	var new_coords = $Player.get_character_coords() + direction
 	
+	if block_tiles.get_cell_source_id(new_coords) == 0 && block_tiles.get_cell_atlas_coords(new_coords) == exit_tilemap_coords:
+		win.emit()
+		$Player.teleport(new_coords)
+		disable()
+		return true
 	if _player_can_move_to_cell(new_coords):
 		$Player.teleport(new_coords)
 		return true
