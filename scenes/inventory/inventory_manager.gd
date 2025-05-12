@@ -39,6 +39,14 @@ func set_inventory(new_inventory:Array[Global.Block]):
 func get_inventory() -> Dictionary:
 	return inventory
 
+func inventory_is_empty() -> bool:
+	return (
+		inventory[Global.Block.WOOD] == 0 &&
+		inventory[Global.Block.STONE] == 0 &&
+		inventory[Global.Block.WATER] == 0 &&
+		inventory[Global.Block.FIRE] == 0
+	)
+
 # Selected Block Getters and Setters
 
 func set_selected_block(new_block:Global.Block):
