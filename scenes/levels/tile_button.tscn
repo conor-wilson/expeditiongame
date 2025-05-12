@@ -5,8 +5,8 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fquos"]
 
 [node name="TileButton" type="Button"]
-offset_right = 32.0
-offset_bottom = 32.0
+offset_right = 16.0
+offset_bottom = 16.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_fquos")
 flat = true
 script = ExtResource("1_fquos")

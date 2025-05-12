@@ -1,7 +1,7 @@
 extends Node2D
 
 # TODO: This is a very silly way to resolve the global position / local position issue. Fix this. 
-const tile_global_position_offset:Vector2 = Vector2(64, 160)
+const tile_global_position_offset:Vector2 = Vector2(32, 80)
 
 const MIN_X:int = 0
 const MIN_Y:int = 0

@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://rfdyr27e7slo" path="res://scenes/levels/level.tscn" id="4_lbhrr"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lnu2h"]
-font_size = 32
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_lnu2h")
@@ -15,10 +14,8 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAA
 tile_set = ExtResource("2_lbhrr")
 
 [node name="Title" type="Label" parent="."]
-offset_left = 64.0
-offset_top = 32.0
-offset_right = 576.0
-offset_bottom = 128.0
+offset_right = 320.0
+offset_bottom = 80.0
 text = "[MAGIC MAP GAME]"
 label_settings = SubResource("LabelSettings_lnu2h")
 horizontal_alignment = 1
@@ -27,7 +24,7 @@ vertical_alignment = 1
 [node name="Levels" type="Node2D" parent="."]
 
 [node name="Level1" parent="Levels" node_paths=PackedStringArray("block_tiles") instance=ExtResource("4_lbhrr")]
-position = Vector2(64, 160)
+position = Vector2(32, 80)
 block_tiles = NodePath("Blocks")
 inventory = Array[int]([1, 1, 1, 2, 2, 3])
 

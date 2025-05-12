@@ -31,38 +31,40 @@ animations = [{
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c7w7p"]
 atlas = ExtResource("2_c7w7p")
-region = Rect2(0, 32, 32, 32)
+region = Rect2(0, 16, 16, 16)
 filter_clip = true
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0uvgv"]
 atlas = ExtResource("2_c7w7p")
-region = Rect2(32, 32, 32, 32)
+region = Rect2(16, 16, 16, 16)
 filter_clip = true
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c00wg"]
 atlas = ExtResource("2_c7w7p")
-region = Rect2(64, 32, 32, 32)
+region = Rect2(32, 16, 16, 16)
 filter_clip = true
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_td8r7"]
 atlas = ExtResource("2_c7w7p")
-region = Rect2(96, 32, 32, 32)
+region = Rect2(48, 16, 16, 16)
 filter_clip = true
 
 [sub_resource type="LabelSettings" id="LabelSettings_c7w7p"]
+font_size = 8
 
 [node name="InventorySlot" type="Button"]
-offset_left = -16.0
-offset_top = -16.0
-offset_right = 16.0
-offset_bottom = 16.0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
 theme_override_styles/focus = SubResource("StyleBoxFlat_c7w7p")
 flat = true
 script = ExtResource("1_c7w7p")
 
 [node name="Highlight" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2(16, 16)
+position = Vector2(8, 8)
+scale = Vector2(0.666667, 0.666667)
 sprite_frames = SubResource("SpriteFrames_0uvgv")
 autoplay = "default"
 
@@ -71,20 +73,25 @@ show_behind_parent = true
 position = Vector2(16, 16)
 
 [node name="WoodSprite" type="Sprite2D" parent="Sprites"]
+position = Vector2(-8, -8)
 texture = SubResource("AtlasTexture_c7w7p")
 
 [node name="StoneSprite" type="Sprite2D" parent="Sprites"]
+position = Vector2(-8, -8)
 texture = SubResource("AtlasTexture_0uvgv")
 
 [node name="WaterSprite" type="Sprite2D" parent="Sprites"]
+position = Vector2(-8, -8)
 texture = SubResource("AtlasTexture_c00wg")
 
 [node name="FireSprite" type="Sprite2D" parent="Sprites"]
+position = Vector2(-8, -8)
 texture = SubResource("AtlasTexture_td8r7")
 
 [node name="Count" type="Label" parent="."]
-offset_right = 32.0
-offset_bottom = 32.0
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
 text = "1"
 label_settings = SubResource("LabelSettings_c7w7p")
 horizontal_alignment = 1

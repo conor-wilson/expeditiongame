@@ -5,12 +5,10 @@
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dovo2"]
 texture = ExtResource("1_8afob")
-texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:1/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_gmlin"]
-tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_dovo2")
 
 [node name="Player" type="TileMapLayer"]
