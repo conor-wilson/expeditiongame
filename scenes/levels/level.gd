@@ -2,6 +2,7 @@ class_name Level extends Node2D
 
 signal phase_change(Phase)
 signal win
+signal loss
 signal tick
 
 # TODO: This is a very silly way to resolve the global position / local position issue. Fix this. 
@@ -184,9 +185,19 @@ func progress_one_tick(movement_direction:Vector2i):
 	await get_tree().create_timer(0.2).timeout
 	
 	# Move enemies
+	var player_killed:bool
 	for enemy in enemies:
 		var direction_to_player:Vector2i = $Player.get_character_coords() - enemy.get_character_coords()
 		enemy.walk(direction_to_player.clamp(Vector2i(-1,-1), Vector2i(1,1)))
+		
+		# Check to see if the player has been killed
+		if enemy.get_character_coords() == $Player.get_character_coords():
+			player_killed = true
+	
+	# Resolve player death
+	if player_killed:
+		loss.emit()
+		disable()
 
 func _on_player_win() -> void:
 	disable()

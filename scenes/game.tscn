@@ -65,5 +65,15 @@ text = "YOU WIN!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="TempLossMessage" type="Label" parent="."]
+offset_left = 48.0
+offset_top = 152.0
+offset_right = 192.0
+offset_bottom = 184.0
+text = "YOU ARE DEAD x.x"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="loss" from="Levels/Level1" to="." method="_on_level_1_loss"]
 [connection signal="phase_change" from="Levels/Level1" to="." method="_on_level_1_phase_change"]
 [connection signal="win" from="Levels/Level1" to="." method="_on_level_1_win"]

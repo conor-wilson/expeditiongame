@@ -4,6 +4,7 @@ extends Node2D
 func _ready() -> void:
 	$Levels/Level1.load()
 	$TempWinMessage.hide()
+	$TempLossMessage.hide()
 
 
 # TODO: Either change the way this is done, or apply the same methodology to the Inventory.
@@ -17,3 +18,8 @@ func _on_level_1_phase_change(Phase: Variant) -> void:
 # TODO: Same here?
 func _on_level_1_win() -> void:
 	$TempWinMessage.show()
+
+
+# TODO: Same here?
+func _on_level_1_loss() -> void:
+	$TempLossMessage.show()
