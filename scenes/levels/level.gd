@@ -179,6 +179,9 @@ func _event_to_direction_vector(event: InputEvent) -> Vector2i:
 	
 	return Vector2i.ZERO
 
+var water_block_coords:Dictionary = {}
+var fire_block_coords:Dictionary = {} 
+
 func progress_one_tick(movement_direction:Vector2i):
 	
 	## Move the Player
@@ -193,7 +196,6 @@ func progress_one_tick(movement_direction:Vector2i):
 	## Move enemies
 	var player_killed:bool
 	for enemy in enemies:
-		print("YAAAA")
 		var direction_to_player:Vector2i = $Player.get_character_coords() - enemy.get_character_coords()
 		enemy.walk(direction_to_player.clamp(Vector2i(-1,-1), Vector2i(1,1)))
 		
@@ -202,29 +204,46 @@ func progress_one_tick(movement_direction:Vector2i):
 			player_killed = true
 	
 	## Activate blocks
-	var water_block_coords:Array[Vector2i] = []
-	var fire_block_coords:Array[Vector2i]  = []
+	_setup_block_coords()
+	
+	### Activate water blocks
+	for coords in water_block_coords:
+		if water_block_coords[coords]:
+			if $Player.character_coords == coords: 
+				player_killed = true
+			if _flood_surrounding_tiles(coords):
+				player_killed = true
+	
+	## Activate fire blocks
+	for coords in fire_block_coords:
+		if fire_block_coords[coords]:
+			if $Player.character_coords == coords: 
+				player_killed = true
+			if _burn_surrounding_tiles(coords):
+				player_killed = true
+			block_tiles.erase_cell(coords)
+	
+	# TODO: Add enemy death
+	
+	## Resolve player death
+	if player_killed:
+		loss.emit()
+		disable()
+
+func _setup_block_coords():
 	for block_coords in block_tiles.get_used_cells():
 		if block_tiles.get_cell_source_id(block_coords) == 1:
 			var block_atlas_coords:Vector2i = block_tiles.get_cell_atlas_coords(block_coords)
 			
 			match block_atlas_coords:
 				block_tilemap_coords[Global.Block.WATER]:
-					water_block_coords.append(block_coords)
+					water_block_coords[block_coords] = true
 				block_tilemap_coords[Global.Block.FIRE]:
-					fire_block_coords.append(block_coords)
-	
-	### Activate water blocks
-	for coords in water_block_coords:
-		if $Player.character_coords == coords: 
-			player_killed = true
-		if _flood_surrounding_tiles(coords):
-			player_killed = true
-	
-	## Resolve player death
-	if player_killed:
-		loss.emit()
-		disable()
+					fire_block_coords[block_coords] = true
+
+# TODO: Maybe use inheritance here to make the below more generic
+
+## WATER FUNCTIONALITY
 
 func _flood_surrounding_tiles(coords:Vector2i) -> bool:
 	
@@ -244,11 +263,45 @@ func _flood_surrounding_tiles(coords:Vector2i) -> bool:
 func _flood_tile(coords:Vector2i) -> bool:
 	if _tile_is_floodable(coords):
 		block_tiles.set_cell(coords, 1, block_tilemap_coords[Global.Block.WATER])
+		fire_block_coords[coords] = null
 		return coords == $Player.get_character_coords()
 	return false
 
 func _tile_is_floodable(coords:Vector2i) -> bool:
-	return _tile_is_within_map(coords) && block_tiles.get_cell_tile_data(coords) == null
+	return _tile_is_within_map(coords) && (
+		block_tiles.get_cell_tile_data(coords) == null ||
+		block_tiles.get_cell_atlas_coords(coords) == block_tilemap_coords[Global.Block.FIRE]
+	)
+
+## FIRE FUNCTIONALITY
+
+func _burn_surrounding_tiles(coords:Vector2i) -> bool:
+	
+	var player_killed:bool = false
+	
+	if _burn_tile(coords+Vector2i.UP):
+		player_killed = true
+	if _burn_tile(coords+Vector2i.DOWN):
+		player_killed = true
+	if _burn_tile(coords+Vector2i.LEFT):
+		player_killed = true
+	if _burn_tile(coords+Vector2i.RIGHT):
+		player_killed = true
+		
+	return player_killed
+
+func _burn_tile(coords:Vector2i) -> bool:
+	if _tile_is_burnable(coords):
+		block_tiles.set_cell(coords, 1, block_tilemap_coords[Global.Block.FIRE])
+		return coords == $Player.get_character_coords()
+	return false
+
+func _tile_is_burnable(coords:Vector2i) -> bool:
+	return _tile_is_within_map(coords) && (
+		coords == $Player.get_character_coords() ||
+		block_tiles.get_cell_atlas_coords(coords) == block_tilemap_coords[Global.Block.WOOD]
+	)
+
 
 func _tile_is_within_map(coords:Vector2i) -> bool:
 	
