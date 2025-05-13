@@ -173,22 +173,6 @@ func _event_to_direction_vector(event: InputEvent) -> Vector2i:
 	
 	return Vector2i.ZERO
 
-#func _move_player(direction: Vector2i) -> bool:
-	#if phase != Phase.EXPLORE: return false
-	#
-	#var new_coords = $Player.get_character_coords() + direction
-	#
-	#if block_tiles.get_cell_source_id(new_coords) == 0 && block_tiles.get_cell_atlas_coords(new_coords) == exit_tilemap_coords:
-		#win.emit()
-		#progress_one_tick(new_coords)
-		#disable()
-		#return true
-	#if _player_can_move_to_cell(new_coords):
-		#progress_one_tick(new_coords)
-		#return true
-	#else:
-		#return false
-
 func progress_one_tick(movement_direction:Vector2i):
 	
 	# Move the Player
@@ -196,13 +180,13 @@ func progress_one_tick(movement_direction:Vector2i):
 	if !$Player.walk(movement_direction):
 		print("Can't move player direction ", movement_direction)
 	
+	# Delay by one tick (TODO: Make this a node, and prevent player movement while it's happening)
 	await get_tree().create_timer(0.2).timeout
 	
 	# Move enemies
 	for enemy in enemies:
 		var direction_to_player:Vector2i = $Player.get_character_coords() - enemy.get_character_coords()
 		enemy.walk(direction_to_player.clamp(Vector2i(-1,-1), Vector2i(1,1)))
-
 
 func _on_player_win() -> void:
 	disable()

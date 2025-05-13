@@ -46,20 +46,28 @@ func teleport(new_coords:Vector2i):
 	character_coords = new_coords
 	set_cell(new_coords, tilemap_source, tilemap_coords)
 
-func walk(direction:Vector2i) -> bool:
+func walk(direction:Vector2i) -> Vector2i:
 	
 	# Move the character if possible
 	var new_coords = character_coords+direction
-	if ((!_can_move_to_cell(character_coords+Vector2i(direction.x, 0)) && !_can_move_to_cell(character_coords+Vector2i(0, direction.y))) ||
-		!_can_move_to_cell(new_coords)): 
-		return false
+	if (!_can_move_to_cell(new_coords) || 
+		(!_can_move_to_cell(character_coords+Vector2i(direction.x, 0)) && !_can_move_to_cell(character_coords+Vector2i(0, direction.y)))):
+		# TODO: Review this. It's messy.
+		if new_coords.x && !_can_move_to_cell(character_coords+Vector2i(direction.x, 0)):
+			direction.x = 0
+		if new_coords.y && !_can_move_to_cell(character_coords+Vector2i(0, direction.y)):
+			direction.y = 0
+		new_coords = character_coords+direction
+	if !_can_move_to_cell(new_coords):
+		return Vector2i.ZERO
+	
 	teleport(new_coords)
 	
 	# Check for win condition for player
 	if character_type == CharacterType.PLAYER && _is_win_space(character_coords):
 		win.emit()
 	
-	return true
+	return direction
 
 func _can_move_to_cell(coords:Vector2i) -> bool:
 	
