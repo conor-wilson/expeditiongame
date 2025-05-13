@@ -993,5 +993,6 @@ shape = SubResource("RectangleShape2D_xb4v1")
 
 [connection signal="focus_grabbed" from="Inventory" to="." method="_on_inventory_focus_grabbed"]
 [connection signal="mouse_exited" from="GameArea" to="." method="_on_game_area_mouse_exited"]
+[connection signal="win" from="Player" to="." method="_on_player_win"]
 
 [editable path="Inventory"]

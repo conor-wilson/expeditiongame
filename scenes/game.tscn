@@ -20,9 +20,10 @@ tile_set = ExtResource("2_lbhrr")
 
 [node name="Levels" type="Node2D" parent="."]
 
-[node name="Level1" parent="Levels" node_paths=PackedStringArray("block_tiles") instance=ExtResource("4_lbhrr")]
+[node name="Level1" parent="Levels" node_paths=PackedStringArray("block_tiles", "enemies") instance=ExtResource("4_lbhrr")]
 position = Vector2(32, 80)
 block_tiles = NodePath("Blocks")
+enemies = [NodePath("Goblin")]
 inventory = Array[int]([1, 1, 1, 2, 2, 3])
 
 [node name="Blocks" type="TileMapLayer" parent="Levels/Level1"]
@@ -30,9 +31,10 @@ show_behind_parent = true
 tile_map_data = PackedByteArray("AAAJAAUAAQAAAAEAAAAIAAUAAQAAAAEAAAAHAAUAAQAAAAEAAAABAAUAAQAAAAEAAAACAAUAAQAAAAEAAAADAAUAAQAAAAEAAAAGAAoAAQAAAAEAAAAHAAoAAQAAAAEAAAAIAAoAAQAAAAEAAAAJAAoAAQAAAAEAAAAKAAoAAQAAAAEAAAAKAAkAAQAAAAEAAAAEAAoAAQAAAAEAAAADAAoAAQAAAAEAAAACAAoAAQAAAAEAAAABAAoAAQAAAAEAAAAAAAoAAQAAAAEAAAAAAAkAAQAAAAEAAAAAAAgAAQAAAAEAAAAAAAcAAQAAAAEAAAAAAAYAAQAAAAEAAAAAAAUAAQAAAAEAAAAAAAQAAQAAAAEAAAAAAAMAAQAAAAEAAAAAAAIAAQAAAAEAAAAAAAEAAQAAAAEAAAAAAAAAAQAAAAEAAAABAAAAAQAAAAEAAAACAAAAAQAAAAEAAAADAAAAAQAAAAEAAAAEAAAAAQAAAAEAAAAFAAAAAQAAAAEAAAAGAAAAAQAAAAEAAAAHAAAAAQAAAAEAAAAIAAAAAQAAAAEAAAAJAAAAAQAAAAEAAAAKAAAAAQAAAAEAAAAKAAEAAQAAAAEAAAAKAAIAAQAAAAEAAAAKAAMAAQAAAAEAAAAKAAQAAQAAAAEAAAAKAAUAAQAAAAEAAAAKAAYAAQAAAAEAAAAKAAcAAQAAAAEAAAAKAAgAAQAAAAEAAAAIAAIAAAAAAAEAAAA=")
 tile_set = ExtResource("2_lbhrr")
 
-[node name="Goblin" parent="Levels/Level1" instance=ExtResource("4_iywne")]
+[node name="Goblin" parent="Levels/Level1" node_paths=PackedStringArray("block_layer") instance=ExtResource("4_iywne")]
 tile_map_data = PackedByteArray("AAAFAAoAAAAAAAAAAAABAAYAAQAAAAEAAAA=")
 character_type = 1
+block_layer = NodePath("../Blocks")
 start_position = Vector2i(2, 6)
 
 [node name="Title" type="Label" parent="."]

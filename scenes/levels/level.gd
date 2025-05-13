@@ -2,16 +2,11 @@ class_name Level extends Node2D
 
 signal phase_change(Phase)
 signal win
+signal tick
 
 # TODO: This is a very silly way to resolve the global position / local position issue. Fix this. 
 const tile_global_position_offset:Vector2 = Vector2(32, 80)
 
-const MIN_X:int = 0
-const MIN_Y:int = 0
-const MAX_X:int = 10
-const MAX_Y:int = 10
-
-const exit_tilemap_coords:Vector2i = Vector2i(0,1)
 const block_tilemap_coords:Dictionary = {
 	Global.Block.EMPTY: Vector2i(-1,-1),
 	Global.Block.WOOD:  Vector2(0,0),
@@ -46,7 +41,7 @@ func _ready() -> void:
 	
 	# Initialise everything
 	$Player.start_position = player_start_position
-	$Player.reset()
+	$Player.reset(block_tiles)
 	
 	# Disable everything
 	disable()
@@ -162,8 +157,7 @@ func _input(event: InputEvent) -> void:
 	
 	var movement_direction:Vector2i = _event_to_direction_vector(event)
 	if movement_direction:
-		if !_move_player(movement_direction):
-			print("Can't move player with action ", event)
+		progress_one_tick(movement_direction)
 
 func _event_to_direction_vector(event: InputEvent) -> Vector2i:
 	if phase != Phase.EXPLORE: return Vector2i.ZERO
@@ -179,32 +173,37 @@ func _event_to_direction_vector(event: InputEvent) -> Vector2i:
 	
 	return Vector2i.ZERO
 
-func _move_player(direction: Vector2i) -> bool:
-	if phase != Phase.EXPLORE: return false
-	
-	var new_coords = $Player.get_character_coords() + direction
-	
-	if block_tiles.get_cell_source_id(new_coords) == 0 && block_tiles.get_cell_atlas_coords(new_coords) == exit_tilemap_coords:
-		win.emit()
-		$Player.teleport(new_coords)
-		disable()
-		return true
-	if _player_can_move_to_cell(new_coords):
-		$Player.teleport(new_coords)
-		return true
-	else:
-		return false
+#func _move_player(direction: Vector2i) -> bool:
+	#if phase != Phase.EXPLORE: return false
+	#
+	#var new_coords = $Player.get_character_coords() + direction
+	#
+	#if block_tiles.get_cell_source_id(new_coords) == 0 && block_tiles.get_cell_atlas_coords(new_coords) == exit_tilemap_coords:
+		#win.emit()
+		#progress_one_tick(new_coords)
+		#disable()
+		#return true
+	#if _player_can_move_to_cell(new_coords):
+		#progress_one_tick(new_coords)
+		#return true
+	#else:
+		#return false
 
-func _player_can_move_to_cell(coords:Vector2i):
-	if phase != Phase.EXPLORE: return
+func progress_one_tick(movement_direction:Vector2i):
 	
-	if (
-		coords.x < MIN_X || coords.y < MIN_Y ||
-		coords.x > MAX_X || coords.y > MAX_Y
-		):
-		return false
+	# Move the Player
+	var old_player_coords = $Player.get_character_coords()
+	if !$Player.walk(movement_direction):
+		print("Can't move player direction ", movement_direction)
 	
-	if block_tiles.get_cell_tile_data(coords) != null:
-		return false
+	await get_tree().create_timer(0.2).timeout
 	
-	return true
+	# Move enemies
+	for enemy in enemies:
+		var direction_to_player:Vector2i = $Player.get_character_coords() - enemy.get_character_coords()
+		enemy.walk(direction_to_player.clamp(Vector2i(-1,-1), Vector2i(1,1)))
+
+
+func _on_player_win() -> void:
+	disable()
+	win.emit()
