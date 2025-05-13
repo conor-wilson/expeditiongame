@@ -8,12 +8,17 @@ signal tick
 # TODO: This is a very silly way to resolve the global position / local position issue. Fix this. 
 const tile_global_position_offset:Vector2 = Vector2(32, 80)
 
+const MIN_X:int = 0
+const MIN_Y:int = 0
+const MAX_X:int = 10
+const MAX_Y:int = 10
+
 const block_tilemap_coords:Dictionary = {
 	Global.Block.EMPTY: Vector2i(-1,-1),
-	Global.Block.WOOD:  Vector2(0,0),
-	Global.Block.STONE: Vector2(0,1),
-	Global.Block.WATER: Vector2(0,2),
-	Global.Block.FIRE:  Vector2(0,3),
+	Global.Block.WOOD:  Vector2i(0,0),
+	Global.Block.STONE: Vector2i(0,1),
+	Global.Block.WATER: Vector2i(0,2),
+	Global.Block.FIRE:  Vector2i(0,3),
 }
 
 @export var block_tiles:TileMapLayer
@@ -176,17 +181,19 @@ func _event_to_direction_vector(event: InputEvent) -> Vector2i:
 
 func progress_one_tick(movement_direction:Vector2i):
 	
-	# Move the Player
+	## Move the Player
 	var old_player_coords = $Player.get_character_coords()
 	if !$Player.walk(movement_direction):
 		print("Can't move player direction ", movement_direction)
+		return
 	
-	# Delay by one tick (TODO: Make this a node, and prevent player movement while it's happening)
+	## Delay by one tick (TODO: Make this a node, and prevent player movement while it's happening)
 	await get_tree().create_timer(0.2).timeout
 	
-	# Move enemies
+	## Move enemies
 	var player_killed:bool
 	for enemy in enemies:
+		print("YAAAA")
 		var direction_to_player:Vector2i = $Player.get_character_coords() - enemy.get_character_coords()
 		enemy.walk(direction_to_player.clamp(Vector2i(-1,-1), Vector2i(1,1)))
 		
@@ -194,10 +201,61 @@ func progress_one_tick(movement_direction:Vector2i):
 		if enemy.get_character_coords() == $Player.get_character_coords():
 			player_killed = true
 	
-	# Resolve player death
+	## Activate blocks
+	var water_block_coords:Array[Vector2i] = []
+	var fire_block_coords:Array[Vector2i]  = []
+	for block_coords in block_tiles.get_used_cells():
+		if block_tiles.get_cell_source_id(block_coords) == 1:
+			var block_atlas_coords:Vector2i = block_tiles.get_cell_atlas_coords(block_coords)
+			
+			match block_atlas_coords:
+				block_tilemap_coords[Global.Block.WATER]:
+					water_block_coords.append(block_coords)
+				block_tilemap_coords[Global.Block.FIRE]:
+					fire_block_coords.append(block_coords)
+	
+	### Activate water blocks
+	for coords in water_block_coords:
+		if $Player.character_coords == coords: 
+			player_killed = true
+		if _flood_surrounding_tiles(coords):
+			player_killed = true
+	
+	## Resolve player death
 	if player_killed:
 		loss.emit()
 		disable()
+
+func _flood_surrounding_tiles(coords:Vector2i) -> bool:
+	
+	var player_killed:bool = false
+	
+	if _flood_tile(coords+Vector2i.UP):
+		player_killed = true
+	if _flood_tile(coords+Vector2i.DOWN):
+		player_killed = true
+	if _flood_tile(coords+Vector2i.LEFT):
+		player_killed = true
+	if _flood_tile(coords+Vector2i.RIGHT):
+		player_killed = true
+		
+	return player_killed
+
+func _flood_tile(coords:Vector2i) -> bool:
+	if _tile_is_floodable(coords):
+		block_tiles.set_cell(coords, 1, block_tilemap_coords[Global.Block.WATER])
+		return coords == $Player.get_character_coords()
+	return false
+
+func _tile_is_floodable(coords:Vector2i) -> bool:
+	return _tile_is_within_map(coords) && block_tiles.get_cell_tile_data(coords) == null
+
+func _tile_is_within_map(coords:Vector2i) -> bool:
+	
+	return (
+		coords.x > MIN_X && coords.y > MIN_Y &&
+		coords.x < MAX_X && coords.y < MAX_Y
+		)
 
 func _on_player_win() -> void:
 	disable()

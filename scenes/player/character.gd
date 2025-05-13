@@ -79,7 +79,8 @@ func _can_move_to_cell(coords:Vector2i) -> bool:
 	
 	return (
 		block_layer.get_cell_tile_data(coords) == null ||
-		_is_win_space(coords)
+		_is_win_space(coords) ||
+		(block_layer.get_cell_source_id(coords) == 1 && block_layer.get_cell_atlas_coords(coords) == Vector2i(0,2))
 	)
 
 func _is_win_space(coords) -> bool:
