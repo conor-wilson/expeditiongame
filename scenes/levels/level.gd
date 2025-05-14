@@ -5,14 +5,19 @@ signal win
 signal loss
 signal tick
 
-@export var enemies:Array[Character]
-@export var inventory:Array[Global.Block]
-@export var player_start_position:Vector2i = Vector2i(5, 10)
+@export var blocks_config:MapTiles
+@export var markers_config:MapTiles
+@export var background_config:MapTiles
+@export var inventory_config:Array[Global.Block]
+
+@export var player_start_position:Vector2i = Vector2i(5, 10) # TODO: Maybe use a marker here to make it easier to do visually?
+@export var enemies:Array[Enemy]
 
 enum Phase { DISABLED, PLAN, EXPLORE }
 var phase:Phase
 
 @onready var map: Map = $Map
+@onready var player: Character = $Player
 
 
 ##########################
@@ -29,26 +34,30 @@ func _ready() -> void:
 				tile.connect("hovered", _on_tile_hovered)
 	
 	# Initialise everything
-	$Player.start_position = player_start_position
-	$Player.reset(map)
+	player.start_position = player_start_position
+	player.reset_position()
+	for enemy in enemies:
+		enemy.set_map(map)
+		enemy.reset_position()
 	
 	# Disable everything
 	disable()
 
 func load():
 	
-	# TODO: Reset the layout of the map's tiles
+	# Reset the map
+	map.reset(blocks_config, markers_config, background_config)
 	
 	# Reset the inventory
-	InventoryManager.set_inventory(inventory)
+	InventoryManager.set_inventory(inventory_config)
 	$Inventory.refresh_inventory()
 	
 	# Reset the Player
-	$Player.reset()
+	player.reset_position()
 	
 	# Reset the Enemies
 	for enemy in enemies:
-		enemy.reset()
+		enemy.reset_position()
 	
 	# Start the Planning Phase
 	_start_planning_phase()
@@ -118,10 +127,10 @@ func _start_explore_phase():
 func _input(event: InputEvent) -> void:
 	if phase != Phase.EXPLORE: return
 	
-	var movement_direction:Vector2i = _event_to_direction_vector(event)
-	if movement_direction:
-		# TODO: First move the player, then call progress_one_tick. Let's separate these concepts.
-		progress_one_tick(movement_direction)
+	var direction:Vector2i = _event_to_direction_vector(event)
+	if direction && player.walk(direction):
+		if !_check_player_death():
+			progress_one_tick()
 
 func _event_to_direction_vector(event: InputEvent) -> Vector2i:
 	if phase != Phase.EXPLORE: return Vector2i.ZERO
@@ -140,105 +149,90 @@ func _event_to_direction_vector(event: InputEvent) -> Vector2i:
 var water_block_coords:Dictionary = {}
 var fire_block_coords:Dictionary = {} 
 
-func progress_one_tick(movement_direction:Vector2i):
-	
-	## Move the Player
-	var old_player_coords = $Player.get_character_coords()
-	if !$Player.walk(movement_direction):
-		print("Can't move player direction ", movement_direction)
-		return
+func progress_one_tick():
 	
 	## Delay by one tick (TODO: Make this a node, and prevent player movement while it's happening)
 	await get_tree().create_timer(0.2).timeout
 	
 	## Move enemies
-	var player_killed:bool
 	for enemy in enemies:
-		var direction_to_player:Vector2i = $Player.get_character_coords() - enemy.get_character_coords()
-		enemy.walk(direction_to_player.clamp(Vector2i(-1,-1), Vector2i(1,1)))
-		
-		# Check to see if the player has been killed
-		if enemy.get_character_coords() == $Player.get_character_coords():
-			player_killed = true
+		enemy.follow_player(player.get_current_coords())
 	
 	## Setup block coords arrays
 	water_block_coords = map.get_block_tile_coords(Global.Block.WATER)
 	fire_block_coords = map.get_block_tile_coords(Global.Block.FIRE)
 	
-	### Activate water blocks
-	for coords in water_block_coords:
-		if water_block_coords[coords]:
-			if $Player.character_coords == coords: 
-				player_killed = true
-			if _flood_surrounding_tiles(coords):
-				player_killed = true
+	## Delay by one tick (TODO: Make this a node, and prevent player movement while it's happening)
+	await get_tree().create_timer(0.2).timeout
 	
 	## Activate fire blocks
 	for coords in fire_block_coords:
 		if fire_block_coords[coords]:
-			if $Player.character_coords == coords: 
-				player_killed = true
-			if _burn_surrounding_tiles(coords):
-				player_killed = true
+			_burn_surrounding_tiles(coords)
+	
+	## Delay by one tick (TODO: Make this a node, and prevent player movement while it's happening)
+	await get_tree().create_timer(0.2).timeout
+	
+	### Activate water blocks
+	for coords in water_block_coords:
+		if water_block_coords[coords]:
+			_flood_surrounding_tiles(coords)
 	
 	# TODO: Add enemy death
 	
-	## Resolve player death
-	if player_killed:
-		loss.emit()
-		disable()
-
+	## Resolve player win or loss
+	if !_check_player_death():
+		_check_player_win()
 
 # TODO: Maybe use inheritance here to make the below more generic
 
 ## WATER FUNCTIONALITY
 
-func _flood_surrounding_tiles(coords:Vector2i) -> bool:
-	
-	var player_killed:bool = false
-	
-	if _flood_tile(coords+Vector2i.UP):
-		player_killed = true
-	if _flood_tile(coords+Vector2i.DOWN):
-		player_killed = true
-	if _flood_tile(coords+Vector2i.LEFT):
-		player_killed = true
-	if _flood_tile(coords+Vector2i.RIGHT):
-		player_killed = true
-		
-	return player_killed
+func _flood_surrounding_tiles(coords:Vector2i):
+	_flood_tile(coords+Vector2i.UP)
+	_flood_tile(coords+Vector2i.DOWN)
+	_flood_tile(coords+Vector2i.LEFT)
+	_flood_tile(coords+Vector2i.RIGHT)
 
-func _flood_tile(coords:Vector2i) -> bool:
+func _flood_tile(coords:Vector2i):
 	if map.tile_is_floodable(coords):
 		map.place_block(coords, Global.Block.WATER)
 		fire_block_coords[coords] = null
-		return coords == $Player.get_character_coords()
-	return false
 
 ## FIRE FUNCTIONALITY
 
-func _burn_surrounding_tiles(coords:Vector2i) -> bool:
+func _burn_surrounding_tiles(coords:Vector2i):
+	_burn_tile(coords+Vector2i.UP)
+	_burn_tile(coords+Vector2i.DOWN)
+	_burn_tile(coords+Vector2i.LEFT)
+	_burn_tile(coords+Vector2i.RIGHT)
+
+func _burn_tile(coords:Vector2i):
+	if map.tile_is_flamable(coords):
+		map.place_block(coords, Global.Block.FIRE)
+
+func _check_player_death() -> bool:
 	
 	var player_killed:bool = false
 	
-	if _burn_tile(coords+Vector2i.UP):
+	# Check for deadly block tiles
+	if map.tile_is_deadly(player.get_current_coords()):
 		player_killed = true
-	if _burn_tile(coords+Vector2i.DOWN):
-		player_killed = true
-	if _burn_tile(coords+Vector2i.LEFT):
-		player_killed = true
-	if _burn_tile(coords+Vector2i.RIGHT):
-		player_killed = true
-		
+	
+	# Check for enemies
+	for enemy in enemies:
+		if enemy.get_current_coords() == player.get_current_coords():
+			player_killed = true
+	
+	# Kill the playewr
+	if player_killed:
+		loss.emit()
+		disable()
 	return player_killed
 
-func _burn_tile(coords:Vector2i) -> bool:
-	if map.tile_is_flamable(coords):
-		map.place_block(coords, Global.Block.FIRE)
-		return coords == $Player.get_character_coords()
+func _check_player_win() -> bool:
+	if map.tile_is_exit(player.get_current_coords()):
+		win.emit()
+		disable()
+		return true
 	return false
-
-
-func _on_player_win() -> void:
-	disable()
-	win.emit()

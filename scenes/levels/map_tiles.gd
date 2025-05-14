@@ -20,6 +20,18 @@ const exit_atlas_coords:Vector2i = Vector2i(0,1)
 const border_atlas_coords:Vector2i = Vector2i(0,0)
 
 
+## TILE PLACEMENT FUNCS
+
+func set_block_tile(coords:Vector2i, block:Global.Block):
+	set_cell(coords, block_source_id, block_atlas_coords[block])
+
+func copy_tiles(from_map:MapTiles):
+	
+	clear()
+	for coords in from_map.get_used_cells():
+		set_cell(coords, from_map.get_cell_source_id(coords), from_map.get_cell_atlas_coords(coords))
+
+
 ## TILE STATE CHECKER FUNCS
 
 func tile_is_block(coords:Vector2i, block:Global.Block) -> bool:
@@ -55,8 +67,3 @@ func tile_is_within_map_area(coords:Vector2i) -> bool:
 		coords.x > MIN_X && coords.y > MIN_Y &&
 		coords.x < MAX_X && coords.y < MAX_Y
 		)
-
-## TILE PLACEMENT FUNCS
-
-func set_block_tile(coords:Vector2i, block:Global.Block):
-	set_cell(coords, block_source_id, block_atlas_coords[block])

@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://dvu7ny3j1n00j"]
+[gd_scene load_steps=8 format=4 uid="uid://dvu7ny3j1n00j"]
 
 [ext_resource type="Script" uid="uid://debtv741hvvl7" path="res://scenes/game.gd" id="1_lnu2h"]
 [ext_resource type="TileSet" uid="uid://cro1fx4ifi25h" path="res://scenes/gametiles.tres" id="2_lbhrr"]
-[ext_resource type="PackedScene" uid="uid://c5v700ycfca72" path="res://scenes/player/character.tscn" id="4_iywne"]
 [ext_resource type="PackedScene" uid="uid://rfdyr27e7slo" path="res://scenes/levels/level.tscn" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://c1phvu5go5bn" path="res://scenes/levels/map_tiles.tscn" id="4_p57ef"]
+[ext_resource type="PackedScene" uid="uid://2vyytgydvb1u" path="res://scenes/player/enemy.tscn" id="5_iywne"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lnu2h"]
 
@@ -21,22 +22,28 @@ tile_set = ExtResource("2_lbhrr")
 
 [node name="Levels" type="Node2D" parent="."]
 
-[node name="Level1" parent="Levels" node_paths=PackedStringArray("enemies") instance=ExtResource("4_lbhrr")]
-enemies = [NodePath("Goblin")]
-inventory = Array[int]([1, 1, 1, 2, 2, 3, 4])
+[node name="Level1" parent="Levels" node_paths=PackedStringArray("blocks_config", "markers_config", "enemies") instance=ExtResource("4_lbhrr")]
+blocks_config = NodePath("BlocksConfig")
+markers_config = NodePath("MarkersConfig")
+inventory_config = Array[int]([1, 1, 1, 2, 2, 3, 4])
+enemies = [NodePath("Goblin"), NodePath("AngryRedMan")]
 
-[node name="Markers" parent="Levels/Level1/Map" index="1"]
-tile_map_data = PackedByteArray("AAAIAAIAAAAAAAEAAAABAAcAAAADAAAAAAABAAYAAAADAAAAAAACAAYAAAADAAAAAAADAAYAAAADAAAAAAAEAAYAAAADAAAAAAAEAAcAAAADAAAAAAAEAAgAAAADAAAAAAAEAAkAAAADAAAAAAADAAkAAAADAAAAAAADAAgAAAADAAAAAAACAAgAAAADAAAAAAABAAgAAAADAAAAAAABAAkAAAADAAAAAAACAAkAAAADAAAAAAADAAcAAAADAAAAAAACAAcAAAADAAAAAAA=")
-
-[node name="Blocks" parent="Levels/Level1/Map" index="2"]
-tile_map_data = PackedByteArray("AAAAAAAAAQAAAAEAAAABAAAAAQAAAAEAAAACAAAAAQAAAAEAAAADAAAAAQAAAAEAAAAEAAAAAQAAAAEAAAAFAAAAAQAAAAEAAAAGAAAAAQAAAAEAAAAHAAAAAQAAAAEAAAAIAAAAAQAAAAEAAAAJAAAAAQAAAAEAAAAKAAAAAQAAAAEAAAAKAAEAAQAAAAEAAAAKAAIAAQAAAAEAAAAKAAMAAQAAAAEAAAAKAAQAAQAAAAEAAAAKAAUAAQAAAAEAAAAKAAYAAQAAAAEAAAAKAAcAAQAAAAEAAAAKAAgAAQAAAAEAAAAKAAkAAQAAAAEAAAAKAAoAAQAAAAEAAAAJAAoAAQAAAAEAAAAIAAoAAQAAAAEAAAAHAAoAAQAAAAEAAAAGAAoAAQAAAAEAAAAEAAoAAQAAAAEAAAADAAoAAQAAAAEAAAACAAoAAQAAAAEAAAABAAoAAQAAAAEAAAAAAAoAAQAAAAEAAAAAAAkAAQAAAAEAAAAAAAgAAQAAAAEAAAAAAAcAAQAAAAEAAAAAAAYAAQAAAAEAAAAAAAUAAQAAAAEAAAAAAAQAAQAAAAEAAAAAAAMAAQAAAAEAAAAAAAIAAQAAAAEAAAAAAAEAAQAAAAEAAAABAAUAAQAAAAEAAAACAAUAAQAAAAEAAAADAAUAAQAAAAEAAAAHAAUAAQAAAAEAAAAIAAUAAQAAAAEAAAAJAAUAAQAAAAEAAAA=")
-
-[node name="Goblin" parent="Levels/Level1" node_paths=PackedStringArray("map") instance=ExtResource("4_iywne")]
+[node name="MarkersConfig" parent="Levels/Level1" instance=ExtResource("4_p57ef")]
 position = Vector2(32, 80)
-tile_map_data = PackedByteArray("AAAFAAoAAAAAAAAAAAABAAYAAQAAAAEAAAA=")
-character_type = 1
-map = NodePath("../Map")
+tile_map_data = PackedByteArray("AAAIAAIAAAAAAAEAAAABAAYAAAADAAAAAAADAAYAAAADAAAAAAADAAcAAAADAAAAAAADAAgAAAADAAAAAAADAAkAAAADAAAAAAACAAkAAAADAAAAAAABAAkAAAADAAAAAAABAAgAAAADAAAAAAABAAcAAAADAAAAAAACAAcAAAADAAAAAAACAAgAAAADAAAAAAABAAQAAAADAAAAAAABAAMAAAADAAAAAAABAAIAAAADAAAAAAACAAIAAAADAAAAAAACAAMAAAADAAAAAAACAAQAAAADAAAAAAADAAQAAAADAAAAAAADAAMAAAADAAAAAAADAAIAAAADAAAAAAADAAEAAAADAAAAAAACAAEAAAADAAAAAAABAAEAAAADAAAAAAA=")
+
+[node name="BlocksConfig" parent="Levels/Level1" instance=ExtResource("4_p57ef")]
+position = Vector2(32, 80)
+tile_map_data = PackedByteArray("AAACAAUAAQAAAAEAAAACAAoAAQAAAAEAAAADAAUAAQAAAAEAAAADAAoAAQAAAAEAAAAEAAoAAQAAAAEAAAAHAAUAAQAAAAEAAAAIAAUAAQAAAAEAAAAJAAUAAQAAAAEAAAAJAAoAAQAAAAEAAAAKAAUAAQAAAAEAAAAKAAcAAQAAAAEAAAAKAAoAAQAAAAEAAAAAAAAAAQAAAAEAAAAAAAEAAQAAAAEAAAAAAAIAAQAAAAEAAAAAAAMAAQAAAAEAAAAAAAQAAQAAAAEAAAAAAAUAAQAAAAEAAAAAAAYAAQAAAAEAAAAAAAcAAQAAAAEAAAAAAAgAAQAAAAEAAAAAAAkAAQAAAAEAAAAAAAoAAQAAAAEAAAABAAAAAQAAAAEAAAABAAUAAQAAAAEAAAABAAoAAQAAAAEAAAACAAAAAQAAAAEAAAADAAAAAQAAAAEAAAAEAAAAAQAAAAEAAAAFAAAAAQAAAAEAAAAGAAAAAQAAAAEAAAAGAAoAAQAAAAEAAAAHAAAAAQAAAAEAAAAHAAoAAQAAAAEAAAAIAAAAAQAAAAEAAAAIAAoAAQAAAAEAAAAJAAAAAQAAAAEAAAAKAAAAAQAAAAEAAAAKAAEAAQAAAAEAAAAKAAIAAQAAAAEAAAAKAAMAAQAAAAEAAAAKAAQAAQAAAAEAAAAKAAYAAQAAAAEAAAAKAAgAAQAAAAEAAAAKAAkAAQAAAAEAAAA=")
+
+[node name="Goblin" parent="Levels/Level1" instance=ExtResource("5_iywne")]
+position = Vector2(32, 80)
 start_position = Vector2i(2, 6)
+
+[node name="AngryRedMan" parent="Levels/Level1" instance=ExtResource("5_iywne")]
+position = Vector2(32, 80)
+kind = 1
+start_position = Vector2i(1, 1)
 
 [node name="Title" type="Label" parent="."]
 offset_right = 320.0
@@ -78,7 +85,3 @@ vertical_alignment = 1
 [connection signal="loss" from="Levels/Level1" to="." method="_on_level_1_loss"]
 [connection signal="phase_change" from="Levels/Level1" to="." method="_on_level_1_phase_change"]
 [connection signal="win" from="Levels/Level1" to="." method="_on_level_1_win"]
-
-[editable path="Levels/Level1"]
-[editable path="Levels/Level1/Map"]
-[editable path="Levels/Level1/Inventory"]

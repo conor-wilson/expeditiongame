@@ -1,0 +1,30 @@
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://dh2a7tsjqwq4s"]
+
+[ext_resource type="Texture2D" uid="uid://b2wjg4bmhvaex" path="res://assets/art/characters/Player-Sheet.png" id="1_qm8se"]
+[ext_resource type="Texture2D" uid="uid://dwfogxqrhvgg6" path="res://assets/art/characters/Enemies-Sheet.png" id="2_tmbgi"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p42bw"]
+texture = ExtResource("1_qm8se")
+0:0/animation_speed = 5.0
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/animation_frame_3/duration = 1.0
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1u06v"]
+texture = ExtResource("2_tmbgi")
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/animation_frame_3/duration = 1.0
+0:0/0 = 0
+0:1/animation_frame_0/duration = 1.0
+0:1/animation_frame_1/duration = 1.0
+0:1/animation_frame_2/duration = 1.0
+0:1/animation_frame_3/duration = 1.0
+0:1/0 = 0
+
+[resource]
+sources/1 = SubResource("TileSetAtlasSource_1u06v")
+sources/0 = SubResource("TileSetAtlasSource_p42bw")
