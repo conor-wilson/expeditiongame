@@ -2,10 +2,7 @@ class_name Character extends TileMapLayer
 
 signal win
 
-const MIN_X:int = 0
-const MIN_Y:int = 0
-const MAX_X:int = 10
-const MAX_Y:int = 10
+# TODO: Move much of this functionality to level.gd. Have this behave similarly to MapTiles
 
 const character_tilemap_sources:Dictionary = {
 	CharacterType.PLAYER: 0,
@@ -25,7 +22,7 @@ enum CharacterType {
 	ANGRY_RED_MAN, #lmao
 }
 @export var character_type:CharacterType
-@export var block_layer:TileMapLayer
+@export var map:Map
 @export var start_position:Vector2i
 
 var tilemap_source:int
@@ -37,9 +34,9 @@ func _ready() -> void:
 	tilemap_coords = character_tilemap_coords[character_type]
 	reset()
 
-func reset(new_block_layer:TileMapLayer = block_layer) -> void:
+func reset(new_map:Map = map) -> void:
 	teleport(start_position)
-	block_layer = new_block_layer
+	map = new_map
 
 func teleport(new_coords:Vector2i):
 	clear()
@@ -50,44 +47,24 @@ func walk(direction:Vector2i) -> Vector2i:
 	
 	# Move the character if possible
 	var new_coords = character_coords+direction
-	if (!_can_move_to_cell(new_coords) || 
-		(!_can_move_to_cell(character_coords+Vector2i(direction.x, 0)) && !_can_move_to_cell(character_coords+Vector2i(0, direction.y)))):
+	if (!map.tile_is_walkable(new_coords) || 
+		(!map.tile_is_walkable(character_coords+Vector2i(direction.x, 0)) && !map.tile_is_walkable(character_coords+Vector2i(0, direction.y)))):
 		# TODO: Review this. It's messy.
-		if new_coords.x && !_can_move_to_cell(character_coords+Vector2i(direction.x, 0)):
+		if new_coords.x && !map.tile_is_walkable(character_coords+Vector2i(direction.x, 0)):
 			direction.x = 0
-		if new_coords.y && !_can_move_to_cell(character_coords+Vector2i(0, direction.y)):
+		if new_coords.y && !map.tile_is_walkable(character_coords+Vector2i(0, direction.y)):
 			direction.y = 0
 		new_coords = character_coords+direction
-	if !_can_move_to_cell(new_coords):
+	if !map.tile_is_walkable(new_coords):
 		return Vector2i.ZERO
 	
 	teleport(new_coords)
 	
 	# Check for win condition for player
-	if character_type == CharacterType.PLAYER && _is_win_space(character_coords):
+	if character_type == CharacterType.PLAYER && map.tile_is_exit(character_coords):
 		win.emit()
 	
 	return direction
-
-func _can_move_to_cell(coords:Vector2i) -> bool:
-	
-	if (
-		coords.x < MIN_X || coords.y < MIN_Y ||
-		coords.x > MAX_X || coords.y > MAX_Y
-		):
-		return false
-	
-	return (
-		block_layer.get_cell_tile_data(coords) == null ||
-		_is_win_space(coords) ||
-		(block_layer.get_cell_source_id(coords) == 1 && block_layer.get_cell_atlas_coords(coords) == Vector2i(0,2))
-	)
-
-func _is_win_space(coords) -> bool:
-	return (
-		block_layer.get_cell_source_id(coords) == 0 && 
-		block_layer.get_cell_atlas_coords(coords) == exit_tilemap_coords
-	)
 
 func get_character_coords() -> Vector2i:
 	return character_coords

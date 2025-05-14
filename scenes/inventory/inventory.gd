@@ -22,5 +22,4 @@ func _on_slot_selected() -> void:
 
 
 func _on_slot_focus_entered() -> void:
-	print("WOAH!")
 	focus_grabbed.emit()
