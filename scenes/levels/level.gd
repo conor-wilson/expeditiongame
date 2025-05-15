@@ -190,7 +190,7 @@ func progress_one_tick():
 	sub_tick_timer.start()
 	await sub_tick_timer.timeout
 	
-	# TODO: Add enemy death
+	## Resolve enemy death
 	for enemy in enemies:
 		if map.tile_is_deadly(enemy.get_current_coords()):
 			enemy.kill()
