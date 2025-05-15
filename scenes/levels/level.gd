@@ -18,6 +18,7 @@ var phase:Phase
 
 @onready var map: Map = $Map
 @onready var player: Character = $Player
+@onready var inventory: Inventory = $Inventory
 
 
 ##########################
@@ -49,8 +50,7 @@ func load():
 	map.reset(blocks_config, markers_config, background_config)
 	
 	# Reset the inventory
-	InventoryManager.set_inventory(inventory_config)
-	$Inventory.refresh_inventory()
+	inventory.set_inventory_dict_from_array(inventory_config)
 	
 	# Reset the Player
 	player.reset_position()
@@ -76,18 +76,17 @@ func disable():
 func _start_planning_phase():
 	phase = Phase.PLAN
 	$TileButtons.show()
-	$Inventory.grab_focus()
+	inventory.grab_focus()
 	print("STARTED PLAN PHASE!")
 	phase_change.emit(phase)
 
 func _on_tile_pressed() -> void:
 	if phase != Phase.PLAN: return
 	
-	if map.attempt_to_place_hovered_tile(InventoryManager.get_selected_block()):
-		InventoryManager.subtract_from_selected_block()
+	if map.attempt_to_place_hovered_tile(inventory.get_selected_block()):
+		inventory.subtract_from_selected_block()
 	
-	$Inventory.refresh_inventory()
-	if InventoryManager.inventory_is_empty():
+	if inventory.is_empty():
 		_start_explore_phase()
 
 func _on_tile_hovered(button:TileButton):
@@ -95,8 +94,8 @@ func _on_tile_hovered(button:TileButton):
 	
 	var coords:Vector2i = map.global_to_tile_coords(button.global_position)
 	
-	if !InventoryManager.selected_block_is(Global.Block.EMPTY):
-		map.hover_tile(coords, InventoryManager.get_selected_block())
+	if !inventory.selected_block_is(Global.Block.EMPTY):
+		map.hover_tile(coords, inventory.get_selected_block())
 
 func _on_inventory_focus_grabbed() -> void:
 	if phase != Phase.PLAN: return

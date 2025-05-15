@@ -1,23 +1,17 @@
 class_name InventorySlot extends Button
 
-signal selected
+signal selected(InventorySlot)
 
 # TODO: Synchronise the framerates of the sprites here and in the tilemaps
 
 # The block that this slot contains
 @export var block:Global.Block = Global.Block.EMPTY
-@export var starting_count:int = 1
 
-@onready var block_animations = {
-	Global.Block.WOOD:  "wood",
-	Global.Block.STONE: "stone",
-	Global.Block.WATER: "water",
-	Global.Block.FIRE:  "fire",
-}
+@onready var blocks: MapTiles = $Blocks
+@onready var highlight: AnimatedSprite2D = $Highlight
 
-func _ready() -> void:
-	_set_sprite()
-	_set_count(starting_count)
+
+## SLOT SETTER FUNCS
 
 func set_contents(new_block:Global.Block, amount:int):
 	
@@ -26,55 +20,36 @@ func set_contents(new_block:Global.Block, amount:int):
 	
 	# Setup the visual behaviour
 	show()
-	_set_sprite()
-	_set_count(amount)
+	blocks.set_block_tile(Vector2i(0,0), new_block)
+	set_count(amount)
 
-
-func _set_sprite():
-	
-	if block == Global.Block.EMPTY:
-		hide()
-		return
-	
-	$Sprite.play(block_animations[block])
-	show()
-
-func _set_count(amount:int):
-	
+func set_count(amount:int):
+	$Count.text = String.num_int64(amount)
 	if !amount:
 		hide()
-		return
-	
-	$Count.text = String.num_int64(amount)
 
 # TODO: Create a custom focus texture for this
 
-func check_selected():
-	if InventoryManager.selected_block_is(block):
-		show_selected()
-	else:
-		show_deselected()
 
-func show_selected():
+## SLOT GETTER FUNCS
+
+func get_block() -> Global.Block:
+	return block
+
+
+## UI BEHAVIOUR FUNCS
+
+func select():
 	if block == Global.Block.EMPTY: return
-	$Highlight.show()
+	highlight.show()
+	CursorManager.set_mouse_block_cursor(block)
 
-func show_deselected():
-	$Highlight.hide()
+func deselect():
+	highlight.hide()
 
 func _on_mouse_entered() -> void:
-	#hovered.emit(self)
 	grab_focus()
-
-func _on_mouse_exited() -> void:
-	if InventoryManager.selected_block != block:
-		check_selected()
 
 func _on_pressed() -> void:
 	if block == Global.Block.EMPTY: return
-	
-	print("BLOCK CLICKED: ", block)
-	InventoryManager.set_selected_block(block)
-	CursorManager.set_mouse_block_cursor(block)
-	check_selected()
-	selected.emit()
+	selected.emit(self)

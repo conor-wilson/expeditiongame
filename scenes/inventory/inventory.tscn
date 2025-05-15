@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=4 uid="uid://k2me1ajen246"]
+[gd_scene load_steps=5 format=4 uid="uid://k2me1ajen246"]
 
 [ext_resource type="TileSet" uid="uid://cro1fx4ifi25h" path="res://scenes/gametiles.tres" id="1_el5y6"]
 [ext_resource type="Script" uid="uid://dukv51m2awla" path="res://scenes/inventory/inventory.gd" id="1_tvok8"]
 [ext_resource type="PackedScene" uid="uid://nig5w7o84v7" path="res://scenes/inventory/inventory_slot.tscn" id="2_4axmw"]
+[ext_resource type="PackedScene" uid="uid://c1phvu5go5bn" path="res://scenes/levels/map_tiles.tscn" id="3_tvok8"]
 
 [node name="Inventory" type="Node2D"]
 script = ExtResource("1_tvok8")
@@ -10,6 +11,8 @@ script = ExtResource("1_tvok8")
 [node name="Background" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAAAAAAAAACAAAAAAABAAAAAAACAAAAAAACAAAAAAACAAAAAAAAAAEAAAACAAAAAAAAAAIAAAACAAAAAAAAAAMAAAACAAAAAAAAAAQAAAACAAAAAAAAAAUAAAACAAAAAAAAAAYAAAACAAAAAAAAAAcAAAACAAAAAAAAAAgAAAACAAAAAAACAAgAAAACAAAAAAACAAcAAAACAAAAAAABAAgAAAACAAAAAAABAAcAAAACAAAAAAACAAYAAAACAAAAAAABAAYAAAACAAAAAAABAAUAAAACAAAAAAABAAQAAAACAAAAAAABAAMAAAACAAAAAAABAAIAAAACAAAAAAABAAEAAAACAAAAAAACAAEAAAACAAAAAAACAAIAAAACAAAAAAACAAMAAAACAAAAAAACAAUAAAACAAAAAAACAAQAAAACAAAAAAA=")
 tile_set = ExtResource("1_el5y6")
+
+[node name="Blocks" parent="." instance=ExtResource("3_tvok8")]
 
 [node name="Slots" type="Node2D" parent="."]
 

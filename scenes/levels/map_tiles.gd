@@ -26,7 +26,6 @@ func set_block_tile(coords:Vector2i, block:Global.Block):
 	set_cell(coords, block_source_id, block_atlas_coords[block])
 
 func copy_tiles(from_map:MapTiles):
-	
 	clear()
 	for coords in from_map.get_used_cells():
 		set_cell(coords, from_map.get_cell_source_id(coords), from_map.get_cell_atlas_coords(coords))
