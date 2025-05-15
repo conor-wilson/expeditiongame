@@ -6,12 +6,14 @@ class_name Character extends TileMapLayer
 var tilemap_source:int = 0
 var tilemap_atlas_coords:Vector2i = Vector2i(0,0)
 
+var alive:bool = true
 var current_coords:Vector2i
+
 
 ## INITIALISATION FUNCS
 
 func _ready() -> void:
-	reset_position()
+	reset()
 
 func set_map(new_map):
 	map = new_map
@@ -19,8 +21,10 @@ func set_map(new_map):
 
 ## TILE PLACEMENT FUNCS
 
-func reset_position() -> void:
+func reset() -> void:
 	teleport(start_position)
+	alive = true
+	modulate = Color.WHITE
 
 func teleport(new_coords:Vector2i):
 	clear()
@@ -28,6 +32,8 @@ func teleport(new_coords:Vector2i):
 	set_cell(new_coords, tilemap_source, tilemap_atlas_coords)
 
 func walk(direction:Vector2i) -> bool:
+	if !alive:
+		return false
 	
 	var new_coords = current_coords+direction
 	if map.tile_is_walkable(new_coords):
@@ -35,6 +41,11 @@ func walk(direction:Vector2i) -> bool:
 		return true
 	
 	return false
+
+func kill():
+	alive = false
+	modulate = Color.RED
+	# TODO: Add some alternative tiles for death
 
 
 ## TILE STATE CHECKER FUNCS

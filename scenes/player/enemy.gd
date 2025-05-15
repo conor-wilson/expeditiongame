@@ -21,12 +21,14 @@ const character_tilemap_atlas_coords:Dictionary = {
 func _ready() -> void:
 	tilemap_source = character_tilemap_sources[kind]
 	tilemap_atlas_coords = character_tilemap_atlas_coords[kind]
-	reset_position()
+	reset()
 
 
 ## TILE PLACEMENT FUNCS
 
 func follow_player(player_coords):
+	if !alive: 
+		return
 	
 	var direction:Vector2i = player_coords - current_coords
 	direction = direction.clamp(Vector2i(-1,-1), Vector2i(1,1))

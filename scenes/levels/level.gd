@@ -38,10 +38,10 @@ func _ready() -> void:
 	
 	# Initialise everything
 	player.start_position = player_start_position
-	player.reset_position()
+	player.reset()
 	for enemy in enemies:
 		enemy.set_map(map)
-		enemy.reset_position()
+		enemy.reset()
 	
 	# Disable everything
 	disable()
@@ -55,11 +55,11 @@ func load():
 	inventory.set_inventory_dict_from_array(inventory_config)
 	
 	# Reset the Player
-	player.reset_position()
+	player.reset()
 	
 	# Reset the Enemies
 	for enemy in enemies:
-		enemy.reset_position()
+		enemy.reset()
 	
 	# Start the Planning Phase
 	_start_planning_phase()
@@ -191,6 +191,9 @@ func progress_one_tick():
 	await sub_tick_timer.timeout
 	
 	# TODO: Add enemy death
+	for enemy in enemies:
+		if map.tile_is_deadly(enemy.get_current_coords()):
+			enemy.kill()
 	
 	## Resolve player win or loss
 	if !_check_player_death():
@@ -201,8 +204,6 @@ func progress_one_tick():
 func _wait_one_sub_tick():
 	sub_tick_timer.start()
 	await sub_tick_timer.timeout
-
-# TODO: Maybe use inheritance here to make the below more generic
 
 ## WATER FUNCTIONALITY
 
@@ -244,6 +245,7 @@ func _check_player_death() -> bool:
 	
 	# Kill the playewr
 	if player_killed:
+		player.kill()
 		loss.emit()
 		disable()
 	return player_killed
