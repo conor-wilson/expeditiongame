@@ -160,9 +160,19 @@ func progress_one_tick():
 	sub_tick_timer.start()
 	await sub_tick_timer.timeout
 	
+	## Apply player wind behaviour for player
+	_apply_player_wind()
+	
 	## Move enemies
 	for enemy in enemies:
 		enemy.follow_player(player.get_current_coords())
+		
+		## Wait one sub-tick
+		sub_tick_timer.start()
+		await sub_tick_timer.timeout
+	
+	## Apply wind behaviour for enemies
+	_apply_enemy_wind()
 	
 	## Setup block coords arrays
 	water_block_coords = map.get_block_tile_coords(Global.Block.WATER)
@@ -201,9 +211,25 @@ func progress_one_tick():
 	
 	tick_is_occurring = false
 
-func _wait_one_sub_tick():
-	sub_tick_timer.start()
-	await sub_tick_timer.timeout
+
+## WIND FUNCTIONALITY
+
+func _apply_player_wind():
+	while true:
+		var wind_direction:Vector2 = map.get_tile_wind_direction(player.get_current_coords())
+		if !wind_direction:
+			break
+		
+		if !player.walk(wind_direction):
+			break
+		
+		## Wait one sub-tick
+		sub_tick_timer.start()
+		await sub_tick_timer.timeout
+
+func _apply_enemy_wind():
+	# TODO
+	pass
 
 ## WATER FUNCTIONALITY
 

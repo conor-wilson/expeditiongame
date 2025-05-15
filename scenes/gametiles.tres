@@ -40,6 +40,21 @@ texture = ExtResource("2_nryul")
 0:0/animation_frame_2/duration = 1.0
 0:0/animation_frame_3/duration = 1.0
 0:0/0 = 0
+0:4/next_alternative_id = 5
+0:4/animation_speed = 5.0
+0:4/animation_frame_0/duration = 1.0
+0:4/animation_frame_1/duration = 1.0
+0:4/animation_frame_2/duration = 1.0
+0:4/animation_frame_3/duration = 1.0
+0:4/0 = 0
+0:4/1 = 1
+0:4/1/flip_v = true
+0:4/1/transpose = true
+0:4/2 = 2
+0:4/2/transpose = true
+0:4/3 = 3
+0:4/3/flip_h = true
+0:4/4 = 4
 
 [resource]
 sources/0 = SubResource("TileSetAtlasSource_yqjtg")

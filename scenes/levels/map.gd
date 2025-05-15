@@ -68,6 +68,10 @@ func stop_hovering():
 func tile_is_block(coords:Vector2i, block:Global.Block) -> bool:
 	return blocks.tile_is_block(coords, block)
 
+func get_tile_wind_direction(coords:Vector2i) -> Vector2:
+	print("YO!")
+	return markers.get_tile_wind_direction(coords)
+
 func tile_is_placeable(coords:Vector2i) -> bool:
 	return blocks.tile_is_within_map_area(coords) && (
 		markers.tile_is_placeable(coords) &&
