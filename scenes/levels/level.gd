@@ -19,7 +19,9 @@ var phase:Phase
 @onready var map: Map = $Map
 @onready var player: Character = $Player
 @onready var inventory: Inventory = $Inventory
+@onready var sub_tick_timer: Timer = $SubTickTimer
 
+var tick_is_occurring:bool = false
 
 ##########################
 ## BOOTUP FUNCTIONALITY ##
@@ -124,7 +126,8 @@ func _start_explore_phase():
 	phase_change.emit(phase)
 
 func _input(event: InputEvent) -> void:
-	if phase != Phase.EXPLORE: return
+	if phase != Phase.EXPLORE || tick_is_occurring: 
+		return
 	
 	var direction:Vector2i = _event_to_direction_vector(event)
 	if direction && player.walk(direction):
@@ -132,8 +135,6 @@ func _input(event: InputEvent) -> void:
 			progress_one_tick()
 
 func _event_to_direction_vector(event: InputEvent) -> Vector2i:
-	if phase != Phase.EXPLORE: return Vector2i.ZERO
-	
 	if event.is_action_pressed("up"):
 		return Vector2i.UP
 	elif event.is_action_pressed("down"):
@@ -150,8 +151,14 @@ var fire_block_coords:Dictionary = {}
 
 func progress_one_tick():
 	
-	## Delay by one tick (TODO: Make this a node, and prevent player movement while it's happening)
-	await get_tree().create_timer(0.2).timeout
+	# Start the tick
+	if phase != Phase.EXPLORE || tick_is_occurring: 
+		return
+	tick_is_occurring = true
+	
+	## Wait one sub-tick
+	sub_tick_timer.start()
+	await sub_tick_timer.timeout
 	
 	## Move enemies
 	for enemy in enemies:
@@ -161,27 +168,39 @@ func progress_one_tick():
 	water_block_coords = map.get_block_tile_coords(Global.Block.WATER)
 	fire_block_coords = map.get_block_tile_coords(Global.Block.FIRE)
 	
-	## Delay by one tick (TODO: Make this a node, and prevent player movement while it's happening)
-	await get_tree().create_timer(0.2).timeout
+	## Wait one sub-tick
+	sub_tick_timer.start()
+	await sub_tick_timer.timeout
 	
 	## Activate fire blocks
 	for coords in fire_block_coords:
 		if fire_block_coords[coords]:
 			_burn_surrounding_tiles(coords)
 	
-	## Delay by one tick (TODO: Make this a node, and prevent player movement while it's happening)
-	await get_tree().create_timer(0.2).timeout
+	## Wait one sub-tick
+	sub_tick_timer.start()
+	await sub_tick_timer.timeout
 	
 	### Activate water blocks
 	for coords in water_block_coords:
 		if water_block_coords[coords]:
 			_flood_surrounding_tiles(coords)
 	
+	## Wait one sub-tick
+	sub_tick_timer.start()
+	await sub_tick_timer.timeout
+	
 	# TODO: Add enemy death
 	
 	## Resolve player win or loss
 	if !_check_player_death():
 		_check_player_win()
+	
+	tick_is_occurring = false
+
+func _wait_one_sub_tick():
+	sub_tick_timer.start()
+	await sub_tick_timer.timeout
 
 # TODO: Maybe use inheritance here to make the below more generic
 

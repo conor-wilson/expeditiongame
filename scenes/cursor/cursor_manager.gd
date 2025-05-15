@@ -28,12 +28,12 @@ func _ready() -> void:
 	set_mouse_cursor(EMPTY_CURSOR)
 
 func set_mouse_cursor(source:Resource):
-	Input.set_custom_mouse_cursor(source, 0, cursor_hotspots[source])
+	Input.set_custom_mouse_cursor(source, Input.CURSOR_ARROW, cursor_hotspots[source])
 	current_cursor = source
 	
 func set_mouse_block_cursor(block:Global.Block):
 	var source:Resource = block_cursors[block]
-	Input.set_custom_mouse_cursor(source, 0, cursor_hotspots[source])
+	Input.set_custom_mouse_cursor(source, Input.CURSOR_ARROW, cursor_hotspots[source])
 	current_cursor = source
 
 func current_cursor_is(source:Resource) -> bool:

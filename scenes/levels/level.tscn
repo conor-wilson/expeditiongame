@@ -993,6 +993,10 @@ shape = SubResource("RectangleShape2D_xb4v1")
 position = Vector2(32, 80)
 map = NodePath("../Map")
 
+[node name="SubTickTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
 [connection signal="focus_grabbed" from="Inventory" to="." method="_on_inventory_focus_grabbed"]
 [connection signal="mouse_exited" from="GameArea" to="." method="_on_game_area_mouse_exited"]
 

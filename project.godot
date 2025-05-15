@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 CursorManager="*res://scenes/cursor/cursor_manager.gd"
-InventoryManager="*res://scenes/inventory/inventory_manager.gd"
 Global="*res://scenes/global.gd"
 
 [display]
