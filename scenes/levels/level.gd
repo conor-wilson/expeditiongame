@@ -166,10 +166,6 @@ func progress_one_tick():
 	## Move enemies
 	for enemy in enemies:
 		enemy.follow_player(player.get_current_coords())
-		
-		## Wait one sub-tick
-		sub_tick_timer.start()
-		await sub_tick_timer.timeout
 	
 	## Apply wind behaviour for enemies
 	_apply_enemy_wind()
@@ -229,6 +225,7 @@ func _apply_player_wind():
 
 func _apply_enemy_wind():
 	# TODO
+	# This is going to be a bit tricky cuz we want them all to happen at the same time. 
 	pass
 
 ## WATER FUNCTIONALITY
