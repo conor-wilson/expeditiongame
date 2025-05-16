@@ -6,6 +6,7 @@ signal loss
 signal tick
 
 @export var blocks_config:MapTiles
+@export var wind_config:MapTiles
 @export var markers_config:MapTiles
 @export var background_config:MapTiles
 @export var inventory_config:Array[Global.Block]
@@ -49,7 +50,7 @@ func _ready() -> void:
 func load():
 	
 	# Reset the map
-	map.reset(blocks_config, markers_config, background_config)
+	map.reset(blocks_config, wind_config, markers_config, background_config)
 	
 	# Reset the inventory
 	inventory.set_inventory_dict_from_array(inventory_config)
@@ -158,7 +159,7 @@ func progress_one_tick():
 	tick_is_occurring = true
 	
 	## Apply player wind behaviour for player
-	_apply_player_wind()
+	await _apply_player_wind()
 	
 	## Wait one sub-tick
 	sub_tick_timer.start()
@@ -172,7 +173,7 @@ func progress_one_tick():
 			enemy.follow_player(player.get_current_coords())
 	
 	## Apply wind behaviour for enemies
-	_apply_enemy_wind()
+	await _apply_enemy_wind()
 	
 	## Setup block coords arrays
 	water_block_coords = map.get_block_tile_coords(Global.Block.WATER)
@@ -208,10 +209,9 @@ func progress_one_tick():
 ## WIND FUNCTIONALITY
 
 func _apply_player_wind():
-	if phase != Phase.EXPLORE: return
+	if phase != Phase.EXPLORE: return 
 	
 	while true:
-		
 		if !map.tile_is_blowable_wind(player.get_current_coords()):
 			return
 			
@@ -226,7 +226,7 @@ func _apply_enemy_wind():
 	
 	while true:
 		
-		# TODO: Account for when two enemies might be blown in a row
+		# TODO: Clean up when two enemies are blown in a row
 		
 		# Build the dict of enemies not to be blown
 		var enemies_not_to_be_blown:Dictionary = {}

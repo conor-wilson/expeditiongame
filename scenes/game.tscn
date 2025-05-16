@@ -22,52 +22,100 @@ tile_set = ExtResource("2_lbhrr")
 
 [node name="Levels" type="Node2D" parent="."]
 
-[node name="Level1" parent="Levels" node_paths=PackedStringArray("blocks_config", "markers_config", "enemies") instance=ExtResource("4_lbhrr")]
+[node name="Level1" parent="Levels" node_paths=PackedStringArray("blocks_config", "wind_config", "markers_config", "enemies") instance=ExtResource("4_lbhrr")]
 blocks_config = NodePath("BlocksConfig")
+wind_config = NodePath("WindConfig")
+markers_config = NodePath("MarkersConfig")
+inventory_config = Array[int]([1, 2])
+player_start_position = Vector2i(5, 9)
+enemies = [NodePath("AngryRedMan0")]
+
+[node name="MarkersConfig" parent="Levels/Level1" instance=ExtResource("4_p57ef")]
+position = Vector2(32, 80)
+tile_map_data = PackedByteArray("AAAFAAIAAAAAAAEAAAACAAMAAAADAAAAAAABAAMAAAADAAAAAAABAAQAAAADAAAAAAABAAUAAAADAAAAAAADAAMAAAADAAAAAAADAAQAAAADAAAAAAADAAUAAAADAAAAAAADAAYAAAADAAAAAAADAAgAAAADAAAAAAADAAcAAAADAAAAAAACAAgAAAADAAAAAAABAAgAAAADAAAAAAABAAcAAAADAAAAAAABAAYAAAADAAAAAAACAAcAAAADAAAAAAACAAYAAAADAAAAAAACAAUAAAADAAAAAAACAAQAAAADAAAAAAAJAAMAAAADAAAAAAAJAAQAAAADAAAAAAAJAAUAAAADAAAAAAAJAAYAAAADAAAAAAAJAAcAAAADAAAAAAAJAAgAAAADAAAAAAAIAAgAAAADAAAAAAAHAAgAAAADAAAAAAAHAAcAAAADAAAAAAAHAAYAAAADAAAAAAAHAAUAAAADAAAAAAAHAAQAAAADAAAAAAAHAAMAAAADAAAAAAAIAAMAAAADAAAAAAAIAAQAAAADAAAAAAAIAAUAAAADAAAAAAAIAAYAAAADAAAAAAAIAAcAAAADAAAAAAA=")
+
+[node name="WindConfig" parent="Levels/Level1" instance=ExtResource("4_p57ef")]
+position = Vector2(32, 80)
+tile_map_data = PackedByteArray("AAABAAQAAQAAAAQAAQABAAMAAQAAAAQAAQACAAMAAQAAAAQAAQADAAMAAQAAAAQAAQADAAQAAQAAAAQAAQACAAQAAQAAAAQAAQAHAAMAAQAAAAQAAQAIAAMAAQAAAAQAAQAJAAMAAQAAAAQAAQAJAAQAAQAAAAQAAQAIAAQAAQAAAAQAAQAHAAQAAQAAAAQAAQA=")
+
+[node name="BlocksConfig" parent="Levels/Level1" instance=ExtResource("4_p57ef")]
+position = Vector2(32, 80)
+tile_map_data = PackedByteArray("AAACAAoAAQAAAAEAAAADAAoAAQAAAAEAAAAEAAoAAQAAAAEAAAAJAAoAAQAAAAEAAAAKAAUAAQAAAAEAAAAKAAcAAQAAAAEAAAAKAAoAAQAAAAEAAAAAAAAAAQAAAAEAAAAAAAEAAQAAAAEAAAAAAAIAAQAAAAEAAAAAAAMAAQAAAAEAAAAAAAQAAQAAAAEAAAAAAAUAAQAAAAEAAAAAAAYAAQAAAAEAAAAAAAcAAQAAAAEAAAAAAAgAAQAAAAEAAAAAAAkAAQAAAAEAAAAAAAoAAQAAAAEAAAABAAAAAQAAAAEAAAABAAoAAQAAAAEAAAACAAAAAQAAAAEAAAADAAAAAQAAAAEAAAAEAAAAAQAAAAEAAAAFAAAAAQAAAAEAAAAGAAAAAQAAAAEAAAAGAAoAAQAAAAEAAAAHAAAAAQAAAAEAAAAHAAoAAQAAAAEAAAAIAAAAAQAAAAEAAAAIAAoAAQAAAAEAAAAJAAAAAQAAAAEAAAAKAAAAAQAAAAEAAAAKAAEAAQAAAAEAAAAKAAIAAQAAAAEAAAAKAAMAAQAAAAEAAAAKAAQAAQAAAAEAAAAKAAYAAQAAAAEAAAAKAAgAAQAAAAEAAAAKAAkAAQAAAAEAAAAFAAoAAQAAAAEAAAADAAkAAQAAAAEAAAABAAkAAQAAAAEAAAACAAkAAQAAAAEAAAAIAAkAAQAAAAEAAAAHAAkAAQAAAAEAAAAJAAkAAQAAAAEAAAABAAEAAQAAAAEAAAACAAEAAQAAAAEAAAADAAEAAQAAAAEAAAAHAAEAAQAAAAEAAAAIAAEAAQAAAAEAAAAJAAEAAQAAAAEAAAAEAAUAAQAAAAEAAAAFAAUAAQAAAAEAAAAGAAUAAQAAAAEAAAABAAIAAQAAAAMAAAACAAIAAQAAAAMAAAADAAIAAQAAAAMAAAAHAAIAAQAAAAMAAAAIAAIAAQAAAAMAAAAJAAIAAQAAAAMAAAA=")
+
+[node name="AngryRedMan0" parent="Levels/Level1" instance=ExtResource("5_iywne")]
+position = Vector2(32, 80)
+tile_map_data = PackedByteArray("AAAFAAYAAQAAAAAAAAA=")
+kind = 1
+start_position = Vector2i(5, 6)
+
+[node name="Level2" parent="Levels" node_paths=PackedStringArray("blocks_config", "wind_config", "markers_config", "enemies") instance=ExtResource("4_lbhrr")]
+blocks_config = NodePath("BlocksConfig")
+wind_config = NodePath("WindConfig")
 markers_config = NodePath("MarkersConfig")
 inventory_config = Array[int]([1, 4])
 player_start_position = Vector2i(5, 9)
 enemies = [NodePath("AngryRedMan0"), NodePath("AngryRedMan1"), NodePath("AngryRedMan2")]
 
-[node name="MarkersConfig" parent="Levels/Level1" instance=ExtResource("4_p57ef")]
+[node name="MarkersConfig" parent="Levels/Level2" instance=ExtResource("4_p57ef")]
 position = Vector2(32, 80)
-tile_map_data = PackedByteArray("AAACAAMAAAADAAAAAAAFAAEAAAAAAAEAAAABAAMAAQAAAAQAAgAEAAQAAQAAAAQAAgAFAAQAAQAAAAQAAgAGAAQAAQAAAAQAAgACAAUAAAADAAAAAAAIAAcAAAADAAAAAAAIAAMAAAADAAAAAAAIAAUAAAADAAAAAAACAAcAAAADAAAAAAADAAcAAAADAAAAAAAHAAcAAAADAAAAAAADAAMAAAADAAAAAAAJAAUAAAADAAAAAAAHAAMAAAADAAAAAAA=")
+tile_map_data = PackedByteArray("AAACAAMAAAADAAAAAAAFAAEAAAAAAAEAAAACAAUAAAADAAAAAAAIAAcAAAADAAAAAAAIAAMAAAADAAAAAAAIAAUAAAADAAAAAAACAAcAAAADAAAAAAADAAcAAAADAAAAAAAHAAcAAAADAAAAAAADAAMAAAADAAAAAAAJAAUAAAADAAAAAAAHAAMAAAADAAAAAAA=")
 
-[node name="BlocksConfig" parent="Levels/Level1" instance=ExtResource("4_p57ef")]
+[node name="WindConfig" parent="Levels/Level2" instance=ExtResource("4_p57ef")]
+position = Vector2(32, 80)
+tile_map_data = PackedByteArray("AAABAAMAAQAAAAQAAgAEAAQAAQAAAAQAAgAFAAQAAQAAAAQAAgAGAAQAAQAAAAQAAgA=")
+
+[node name="BlocksConfig" parent="Levels/Level2" instance=ExtResource("4_p57ef")]
 position = Vector2(32, 80)
 tile_map_data = PackedByteArray("AAACAAoAAQAAAAEAAAADAAoAAQAAAAEAAAAEAAoAAQAAAAEAAAAJAAoAAQAAAAEAAAAKAAUAAQAAAAEAAAAKAAcAAQAAAAEAAAAKAAoAAQAAAAEAAAAAAAAAAQAAAAEAAAAAAAEAAQAAAAEAAAAAAAIAAQAAAAEAAAAAAAMAAQAAAAEAAAAAAAQAAQAAAAEAAAAAAAUAAQAAAAEAAAAAAAYAAQAAAAEAAAAAAAcAAQAAAAEAAAAAAAgAAQAAAAEAAAAAAAkAAQAAAAEAAAAAAAoAAQAAAAEAAAABAAAAAQAAAAEAAAABAAoAAQAAAAEAAAACAAAAAQAAAAEAAAADAAAAAQAAAAEAAAAEAAAAAQAAAAEAAAAFAAAAAQAAAAEAAAAGAAAAAQAAAAEAAAAGAAoAAQAAAAEAAAAHAAAAAQAAAAEAAAAHAAoAAQAAAAEAAAAIAAAAAQAAAAEAAAAIAAoAAQAAAAEAAAAJAAAAAQAAAAEAAAAKAAAAAQAAAAEAAAAKAAEAAQAAAAEAAAAKAAIAAQAAAAEAAAAKAAMAAQAAAAEAAAAKAAQAAQAAAAEAAAAKAAYAAQAAAAEAAAAKAAgAAQAAAAEAAAAKAAkAAQAAAAEAAAAEAAEAAQAAAAEAAAADAAEAAQAAAAEAAAACAAEAAQAAAAEAAAABAAEAAQAAAAEAAAAGAAEAAQAAAAEAAAAHAAEAAQAAAAEAAAAIAAEAAQAAAAEAAAAJAAEAAQAAAAEAAAAEAAkAAQAAAAEAAAADAAkAAQAAAAEAAAACAAkAAQAAAAEAAAABAAkAAQAAAAEAAAAGAAkAAQAAAAEAAAAHAAkAAQAAAAEAAAAIAAkAAQAAAAEAAAAJAAkAAQAAAAEAAAAFAAoAAQAAAAEAAAAJAAMAAQAAAAEAAAAJAAIAAQAAAAEAAAABAAIAAQAAAAEAAAACAAIAAQAAAAEAAAAIAAIAAQAAAAEAAAABAAcAAQAAAAEAAAAJAAcAAQAAAAEAAAABAAUAAQAAAAEAAAA=")
 
-[node name="AngryRedMan0" parent="Levels/Level1" instance=ExtResource("5_iywne")]
+[node name="AngryRedMan0" parent="Levels/Level2" instance=ExtResource("5_iywne")]
 position = Vector2(32, 80)
 tile_map_data = PackedByteArray("AAAEAAcAAQAAAAAAAAA=")
 kind = 1
 start_position = Vector2i(4, 7)
 
-[node name="AngryRedMan1" parent="Levels/Level1" instance=ExtResource("5_iywne")]
+[node name="AngryRedMan1" parent="Levels/Level2" instance=ExtResource("5_iywne")]
 position = Vector2(32, 80)
 tile_map_data = PackedByteArray("AAAFAAUAAQAAAAAAAAA=")
 kind = 1
 start_position = Vector2i(5, 5)
 
-[node name="AngryRedMan2" parent="Levels/Level1" instance=ExtResource("5_iywne")]
+[node name="AngryRedMan2" parent="Levels/Level2" instance=ExtResource("5_iywne")]
 position = Vector2(32, 80)
 tile_map_data = PackedByteArray("AAAGAAMAAQAAAAAAAAA=")
 kind = 1
 start_position = Vector2i(6, 3)
 
-[node name="Level2" parent="Levels" node_paths=PackedStringArray("blocks_config") instance=ExtResource("4_lbhrr")]
+[node name="Level3" parent="Levels" node_paths=PackedStringArray("blocks_config", "wind_config", "markers_config", "enemies") instance=ExtResource("4_lbhrr")]
 blocks_config = NodePath("BlocksConfig")
+wind_config = NodePath("WindConfig")
+markers_config = NodePath("MarkersConfig")
+inventory_config = Array[int]([1, 1, 1, 1, 2])
+player_start_position = Vector2i(5, 9)
+enemies = [NodePath("AngryRedMan0"), NodePath("AngryRedMan1")]
 
-[node name="BlocksConfig" parent="Levels/Level2" instance=ExtResource("4_p57ef")]
+[node name="MarkersConfig" parent="Levels/Level3" instance=ExtResource("4_p57ef")]
 position = Vector2(32, 80)
-tile_map_data = PackedByteArray("AAADAAMAAQAAAAEAAAADAAUAAQAAAAEAAAADAAYAAQAAAAEAAAADAAcAAQAAAAEAAAAEAAMAAQAAAAEAAAAEAAUAAQAAAAEAAAAEAAcAAQAAAAEAAAAFAAMAAQAAAAEAAAAFAAUAAQAAAAEAAAAFAAcAAQAAAAEAAAAGAAMAAQAAAAEAAAAGAAQAAQAAAAEAAAAGAAUAAQAAAAEAAAAGAAcAAQAAAAEAAAA=")
+tile_map_data = PackedByteArray("AAAFAAIAAAADAAAAAAAGAAIAAAADAAAAAAAGAAMAAAADAAAAAAAGAAQAAAADAAAAAAAGAAUAAAADAAAAAAAGAAYAAAADAAAAAAAGAAcAAAADAAAAAAAFAAcAAAADAAAAAAAFAAYAAAADAAAAAAAFAAUAAAADAAAAAAAFAAQAAAADAAAAAAAFAAMAAAADAAAAAAADAAEAAAADAAAAAAABAAEAAAADAAAAAAABAAIAAAADAAAAAAABAAMAAAADAAAAAAACAAMAAAADAAAAAAADAAMAAAADAAAAAAADAAIAAAADAAAAAAACAAIAAAAAAAEAAAADAAQAAAADAAAAAAACAAQAAAADAAAAAAABAAQAAAADAAAAAAADAAUAAAADAAAAAAACAAUAAAADAAAAAAABAAUAAAADAAAAAAACAAEAAAADAAAAAAA=")
 
-[node name="Level3" parent="Levels" node_paths=PackedStringArray("blocks_config") instance=ExtResource("4_lbhrr")]
-blocks_config = NodePath("BlocksConfig")
+[node name="WindConfig" parent="Levels/Level3" instance=ExtResource("4_p57ef")]
+position = Vector2(32, 80)
+tile_map_data = PackedByteArray("AAAFAAIAAQAAAAQAAQAFAAMAAQAAAAQAAQAFAAQAAQAAAAQAAQAFAAUAAQAAAAQAAQAFAAYAAQAAAAQAAQAFAAcAAQAAAAQAAQAGAAIAAQAAAAQAAgAGAAMAAQAAAAQAAgAGAAQAAQAAAAQAAgAGAAUAAQAAAAQAAgAGAAYAAQAAAAQAAgAGAAcAAQAAAAQAAgACAAcAAQAAAAQAAwA=")
 
 [node name="BlocksConfig" parent="Levels/Level3" instance=ExtResource("4_p57ef")]
 position = Vector2(32, 80)
-tile_map_data = PackedByteArray("AAADAAMAAQAAAAEAAAADAAUAAQAAAAEAAAADAAcAAQAAAAEAAAAEAAMAAQAAAAEAAAAEAAUAAQAAAAEAAAAEAAcAAQAAAAEAAAAFAAMAAQAAAAEAAAAFAAUAAQAAAAEAAAAFAAcAAQAAAAEAAAAGAAMAAQAAAAEAAAAGAAQAAQAAAAEAAAAGAAUAAQAAAAEAAAAGAAcAAQAAAAEAAAAGAAYAAQAAAAEAAAA=")
+tile_map_data = PackedByteArray("AAACAAoAAQAAAAEAAAADAAoAAQAAAAEAAAAEAAoAAQAAAAEAAAAJAAoAAQAAAAEAAAAKAAUAAQAAAAEAAAAKAAcAAQAAAAEAAAAKAAoAAQAAAAEAAAAAAAAAAQAAAAEAAAAAAAEAAQAAAAEAAAAAAAIAAQAAAAEAAAAAAAMAAQAAAAEAAAAAAAQAAQAAAAEAAAAAAAUAAQAAAAEAAAAAAAgAAQAAAAEAAAAAAAkAAQAAAAEAAAAAAAoAAQAAAAEAAAABAAAAAQAAAAEAAAABAAoAAQAAAAEAAAACAAAAAQAAAAEAAAADAAAAAQAAAAEAAAAEAAAAAQAAAAEAAAAFAAAAAQAAAAEAAAAGAAAAAQAAAAEAAAAGAAoAAQAAAAEAAAAHAAAAAQAAAAEAAAAHAAoAAQAAAAEAAAAIAAAAAQAAAAEAAAAIAAoAAQAAAAEAAAAJAAAAAQAAAAEAAAAKAAAAAQAAAAEAAAAKAAEAAQAAAAEAAAAKAAIAAQAAAAEAAAAKAAMAAQAAAAEAAAAKAAQAAQAAAAEAAAAKAAYAAQAAAAEAAAAKAAgAAQAAAAEAAAAKAAkAAQAAAAEAAAAFAAoAAQAAAAEAAAAAAAYAAQAAAAEAAAAAAAcAAQAAAAEAAAAHAAcAAQAAAAEAAAAHAAYAAQAAAAEAAAAHAAUAAQAAAAEAAAAHAAQAAQAAAAEAAAAHAAMAAQAAAAEAAAAHAAIAAQAAAAEAAAAEAAIAAQAAAAEAAAAEAAMAAQAAAAEAAAAEAAQAAQAAAAEAAAAEAAUAAQAAAAEAAAAEAAYAAQAAAAEAAAAEAAcAAQAAAAEAAAABAAYAAQAAAAEAAAABAAgAAQAAAAEAAAAEAAEAAQAAAAAAAAAFAAEAAQAAAAAAAAAGAAEAAQAAAAAAAAAHAAEAAQAAAAAAAAAIAAEAAQAAAAAAAAAIAAIAAQAAAAAAAAAJAAIAAQAAAAAAAAAJAAMAAQAAAAAAAAAIAAMAAQAAAAAAAAAIAAQAAQAAAAAAAAAJAAQAAQAAAAAAAAAJAAUAAQAAAAAAAAAIAAUAAQAAAAAAAAAIAAYAAQAAAAAAAAAJAAYAAQAAAAAAAAAIAAcAAQAAAAAAAAAJAAcAAQAAAAAAAAAIAAgAAQAAAAAAAAAIAAkAAQAAAAAAAAAJAAkAAQAAAAAAAAAJAAgAAQAAAAAAAAAJAAEAAQAAAAMAAAA=")
+
+[node name="AngryRedMan0" parent="Levels/Level3" instance=ExtResource("5_iywne")]
+position = Vector2(32, 80)
+tile_map_data = PackedByteArray("AAAFAAkAAAAAAAAAAAACAAUAAQAAAAEAAAA=")
+start_position = Vector2i(2, 5)
+
+[node name="AngryRedMan1" parent="Levels/Level3" instance=ExtResource("5_iywne")]
+position = Vector2(32, 80)
+tile_map_data = PackedByteArray("AAADAAcAAQAAAAAAAAA=")
+kind = 1
+start_position = Vector2i(3, 7)
 
 [node name="Title" type="Label" parent="."]
 offset_right = 320.0
@@ -94,7 +142,7 @@ offset_left = 64.0
 offset_top = 128.0
 offset_right = 176.0
 offset_bottom = 216.0
-color = Color(0, 0, 0, 1)
+color = Color(0, 0, 0, 0.619608)
 
 [node name="WinMessage" type="Label" parent="WinMenu"]
 layout_mode = 0
@@ -113,15 +161,15 @@ offset_bottom = 72.0
 theme_override_font_sizes/font_size = 8
 text = "MENU"
 
-[node name="LoseMenu" type="ColorRect" parent="."]
+[node name="LossMenu" type="ColorRect" parent="."]
 visible = false
 offset_left = 64.0
 offset_top = 112.0
 offset_right = 176.0
 offset_bottom = 232.0
-color = Color(0, 0, 0, 1)
+color = Color(0, 0, 0, 0.607843)
 
-[node name="WinMessage" type="Label" parent="LoseMenu"]
+[node name="WinMessage" type="Label" parent="LossMenu"]
 layout_mode = 0
 offset_right = 112.0
 offset_bottom = 48.0
@@ -129,7 +177,7 @@ text = "YOU LOSE!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ResetButton" type="Button" parent="LoseMenu"]
+[node name="ResetButton" type="Button" parent="LossMenu"]
 layout_mode = 0
 offset_left = 32.0
 offset_top = 48.0
@@ -138,7 +186,7 @@ offset_bottom = 72.0
 theme_override_font_sizes/font_size = 8
 text = "RESET"
 
-[node name="MenuButton" type="Button" parent="LoseMenu"]
+[node name="MenuButton" type="Button" parent="LossMenu"]
 layout_mode = 0
 offset_left = 32.0
 offset_top = 80.0
@@ -147,9 +195,6 @@ offset_bottom = 104.0
 theme_override_font_sizes/font_size = 8
 text = "MENU"
 
-[connection signal="loss" from="Levels/Level1" to="." method="_on_level_1_loss"]
-[connection signal="phase_change" from="Levels/Level1" to="." method="_on_level_1_phase_change"]
-[connection signal="win" from="Levels/Level1" to="." method="_on_level_1_win"]
 [connection signal="pressed" from="WinMenu/MenuButton" to="." method="_on_menu_button_pressed"]
-[connection signal="pressed" from="LoseMenu/ResetButton" to="." method="_on_reset_button_pressed"]
-[connection signal="pressed" from="LoseMenu/MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="pressed" from="LossMenu/ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="LossMenu/MenuButton" to="." method="_on_menu_button_pressed"]

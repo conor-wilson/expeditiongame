@@ -5,6 +5,7 @@ const tile_global_position_offset:Vector2 = Vector2(32, 80)
 
 @onready var background: MapTiles = $Background
 @onready var markers: MapTiles = $Markers # Used for indicating placeable blocks and the exit tile
+@onready var wind: MapTiles = $Wind
 @onready var blocks: MapTiles = $Blocks
 @onready var hover_ghosts: MapTiles = $HoverGhosts
 @onready var red_hover_ghosts: MapTiles = $RedHoverGhosts
@@ -14,12 +15,15 @@ var hovered_block_coords:Vector2i = Vector2i(-1,-1 )# NOTE: Not 100% sure about 
 
 ## TILE PLACEMENT FUNCS
 
-func reset(blocks_config:MapTiles = null, markers_config:MapTiles = null, background_config:MapTiles = null):
+func reset(blocks_config:MapTiles = null, wind_config:MapTiles = null, markers_config:MapTiles = null, background_config:MapTiles = null):
 	
 	# Copy from the configs, and make sure that they are hidden
 	if blocks_config:
 		blocks.copy_tiles(blocks_config)
 		blocks_config.hide()
+	if wind_config:
+		wind.copy_tiles(wind_config)
+		wind_config.hide()
 	if markers_config:
 		markers.copy_tiles(markers_config)
 		markers_config.hide()
@@ -68,19 +72,18 @@ func stop_hovering():
 func tile_is_block(coords:Vector2i, block:Global.Block) -> bool:
 	return blocks.tile_is_block(coords, block)
 
-# TODO: Create Wind layer
 func tile_is_blowable_wind(coords:Vector2i) -> bool:
-	if !markers.tile_is_wind(coords):
+	if !wind.tile_is_wind(coords):
 		return false
 	
-	var blown_to_coords:Vector2i = markers.get_blown_to_coords_from_wind_tile(coords)
+	var blown_to_coords:Vector2i = wind.get_blown_to_coords_from_wind_tile(coords)
 	if !tile_is_walkable(blown_to_coords):
 		return false
 	
 	return true
 
 func get_blown_to_coords_from_wind_tile(coords:Vector2i) -> Vector2i:
-	return markers.get_blown_to_coords_from_wind_tile(coords)
+	return wind.get_blown_to_coords_from_wind_tile(coords)
 
 func tile_is_placeable(coords:Vector2i) -> bool:
 	return blocks.tile_is_within_map_area(coords) && (

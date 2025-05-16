@@ -4,9 +4,21 @@ signal main_menu
 
 @onready var levels: Node2D = $Levels
 
+var current_level:int = 1
+
 func _ready() -> void:
 	disable_all_levels()
 	hide_menus()
+	
+	for level in levels.get_children():
+		if level is Level:
+			level.loss.connect(_on_level_loss)
+			level.phase_change.connect(_on_level_phase_change)
+			level.win.connect(_on_level_win)
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("reset"):
+		load_level(current_level)
 
 func disable_all_levels():
 	for level in levels.get_children():
@@ -15,6 +27,7 @@ func disable_all_levels():
 			level.disable()
 
 func load_level(num:int):
+	current_level = num
 	disable_all_levels()
 	hide_menus()
 	var level = levels.get_child(num-1)
@@ -24,33 +37,28 @@ func load_level(num:int):
 
 func hide_menus():
 	$WinMenu.hide()
-	$LoseMenu.hide()
+	$LossMenu.hide()
 
-# TODO: Either change the way this is done, or apply the same methodology to the Inventory.
-func _on_level_1_phase_change(Phase: Variant) -> void:
+func _on_level_phase_change(Phase: Variant) -> void:
 	if Phase == Level.Phase.PLAN:
 		$PhaseLabel.text = "PLAN YOUR\nEXPEDITION"
 	elif Phase == Level.Phase.EXPLORE:
 		$PhaseLabel.text = "EXPLORE!"
 
 
-# TODO: Same here?
-func _on_level_1_win() -> void:
+func _on_level_win() -> void:
 	await get_tree().create_timer(0.5).timeout
 	$WinMenu.show()
 
-
-# TODO: Same here?
-func _on_level_1_loss() -> void:
+func _on_level_loss() -> void:
 	await get_tree().create_timer(0.5).timeout
-	$LoseMenu.show()
+	$LossMenu.show()
 
 
 func _on_menu_button_pressed() -> void:
 	main_menu.emit()
 
-
 func _on_reset_button_pressed() -> void:
-	$Levels/Level1.load()
+	load_level(current_level)
 	hide_menus()
 	
