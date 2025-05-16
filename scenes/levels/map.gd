@@ -68,9 +68,19 @@ func stop_hovering():
 func tile_is_block(coords:Vector2i, block:Global.Block) -> bool:
 	return blocks.tile_is_block(coords, block)
 
-func get_tile_wind_direction(coords:Vector2i) -> Vector2:
-	print("YO!")
-	return markers.get_tile_wind_direction(coords)
+# TODO: Create Wind layer
+func tile_is_blowable_wind(coords:Vector2i) -> bool:
+	if !markers.tile_is_wind(coords):
+		return false
+	
+	var blown_to_coords:Vector2i = markers.get_blown_to_coords_from_wind_tile(coords)
+	if !tile_is_walkable(blown_to_coords):
+		return false
+	
+	return true
+
+func get_blown_to_coords_from_wind_tile(coords:Vector2i) -> Vector2i:
+	return markers.get_blown_to_coords_from_wind_tile(coords)
 
 func tile_is_placeable(coords:Vector2i) -> bool:
 	return blocks.tile_is_within_map_area(coords) && (

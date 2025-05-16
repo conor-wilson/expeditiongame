@@ -16,10 +16,10 @@ const block_atlas_coords:Dictionary = {
 
 const wind_atlas_coords:Vector2i = Vector2i(0,4)
 const wind_alt_ids:Dictionary = {
-	Vector2.UP:    1,
-	Vector2.DOWN:  2,
-	Vector2.LEFT:  3,
-	Vector2.RIGHT: 4,
+	Vector2i.UP:    1,
+	Vector2i.DOWN:  2,
+	Vector2i.LEFT:  3,
+	Vector2i.RIGHT: 4,
 }
 
 const static_tiles_source_id:int = 0
@@ -51,25 +51,21 @@ func tile_is_block(coords:Vector2i, block:Global.Block) -> bool:
 	)
 
 func tile_is_wind(coords) -> bool:
-	print("get_cell_source_id(coords): ", get_cell_source_id(coords))
-	print("get_cell_atlas_coords(coords): ", get_cell_atlas_coords(coords))
 	return (
 		get_cell_source_id(coords) == block_source_id &&
 		get_cell_atlas_coords(coords) == wind_atlas_coords
 	)
 
-func get_tile_wind_direction(coords) -> Vector2:
-	print("FLAG1")
+func get_blown_to_coords_from_wind_tile(coords) -> Vector2i:
+	
 	if !tile_is_wind(coords):
-		return Vector2.ZERO
-		
-	print("FLAG2")
+		return coords
+	
 	for direction in wind_alt_ids:
 		if wind_alt_ids[direction] == get_cell_alternative_tile(coords):
-			return direction
+			return coords+direction
 	
-	print("FLAG3")
-	return Vector2.ZERO
+	return coords
 
 func tile_is_placeable(coords:Vector2i) -> bool:
 	return (

@@ -29,12 +29,23 @@ func _ready() -> void:
 func follow_player(player_coords):
 	if !alive: 
 		return
+	walk(get_next_tile_direction(player_coords))
+
+
+## TILE STATE GETTER FUNCS
+
+func get_next_tile_direction(player_coords) -> Vector2i:
 	
 	var direction:Vector2i = player_coords - current_coords
 	direction = direction.clamp(Vector2i(-1,-1), Vector2i(1,1))
 	
 	match kind:
 		Kind.GOBLIN:
-			walk(direction.clamp(Vector2i(0,-1), Vector2i(0,1)))
+			return direction.clamp(Vector2i(0,-1), Vector2i(0,1))
 		Kind.ANGRY_RED_MAN:
-			walk(direction.clamp(Vector2i(-1,0), Vector2i(1,0)))
+			return direction.clamp(Vector2i(-1,0), Vector2i(1,0))
+	
+	return get_current_coords()
+
+func get_next_tile_coords(player_coords) -> Vector2i:
+	return get_current_coords() + get_next_tile_direction(player_coords)

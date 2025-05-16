@@ -994,7 +994,7 @@ position = Vector2(32, 80)
 map = NodePath("../Map")
 
 [node name="SubTickTimer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.15
 one_shot = true
 
 [connection signal="focus_grabbed" from="Inventory" to="." method="_on_inventory_focus_grabbed"]
