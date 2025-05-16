@@ -65,6 +65,10 @@ func get_blown_to_coords_from_wind_tile(coords) -> Vector2i:
 		if wind_alt_ids[direction] == get_cell_alternative_tile(coords):
 			return coords+direction
 	
+	# On the off-chance that the root tile was placed and not the alt tile
+	if get_cell_alternative_tile(coords) == 0:
+		return coords+Vector2i.RIGHT
+	
 	return coords
 
 func tile_is_placeable(coords:Vector2i) -> bool:
