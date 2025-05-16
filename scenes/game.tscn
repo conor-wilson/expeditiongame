@@ -55,6 +55,20 @@ tile_map_data = PackedByteArray("AAAGAAMAAQAAAAAAAAA=")
 kind = 1
 start_position = Vector2i(6, 3)
 
+[node name="Level2" parent="Levels" node_paths=PackedStringArray("blocks_config") instance=ExtResource("4_lbhrr")]
+blocks_config = NodePath("BlocksConfig")
+
+[node name="BlocksConfig" parent="Levels/Level2" instance=ExtResource("4_p57ef")]
+position = Vector2(32, 80)
+tile_map_data = PackedByteArray("AAADAAMAAQAAAAEAAAADAAUAAQAAAAEAAAADAAYAAQAAAAEAAAADAAcAAQAAAAEAAAAEAAMAAQAAAAEAAAAEAAUAAQAAAAEAAAAEAAcAAQAAAAEAAAAFAAMAAQAAAAEAAAAFAAUAAQAAAAEAAAAFAAcAAQAAAAEAAAAGAAMAAQAAAAEAAAAGAAQAAQAAAAEAAAAGAAUAAQAAAAEAAAAGAAcAAQAAAAEAAAA=")
+
+[node name="Level3" parent="Levels" node_paths=PackedStringArray("blocks_config") instance=ExtResource("4_lbhrr")]
+blocks_config = NodePath("BlocksConfig")
+
+[node name="BlocksConfig" parent="Levels/Level3" instance=ExtResource("4_p57ef")]
+position = Vector2(32, 80)
+tile_map_data = PackedByteArray("AAADAAMAAQAAAAEAAAADAAUAAQAAAAEAAAADAAcAAQAAAAEAAAAEAAMAAQAAAAEAAAAEAAUAAQAAAAEAAAAEAAcAAQAAAAEAAAAFAAMAAQAAAAEAAAAFAAUAAQAAAAEAAAAFAAcAAQAAAAEAAAAGAAMAAQAAAAEAAAAGAAQAAQAAAAEAAAAGAAUAAQAAAAEAAAAGAAcAAQAAAAEAAAAGAAYAAQAAAAEAAAA=")
+
 [node name="Title" type="Label" parent="."]
 offset_right = 320.0
 offset_bottom = 80.0
@@ -75,6 +89,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="WinMenu" type="ColorRect" parent="."]
+visible = false
 offset_left = 64.0
 offset_top = 128.0
 offset_right = 176.0
@@ -99,6 +114,7 @@ theme_override_font_sizes/font_size = 8
 text = "MENU"
 
 [node name="LoseMenu" type="ColorRect" parent="."]
+visible = false
 offset_left = 64.0
 offset_top = 112.0
 offset_right = 176.0
@@ -123,6 +139,7 @@ theme_override_font_sizes/font_size = 8
 text = "RESET"
 
 [node name="MenuButton" type="Button" parent="LoseMenu"]
+layout_mode = 0
 offset_left = 32.0
 offset_top = 80.0
 offset_right = 80.0

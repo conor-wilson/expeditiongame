@@ -1,7 +1,60 @@
-[gd_scene load_steps=2 format=3 uid="uid://djjlfvgfynn6u"]
+[gd_scene load_steps=5 format=3 uid="uid://djjlfvgfynn6u"]
 
 [ext_resource type="PackedScene" uid="uid://dvu7ny3j1n00j" path="res://scenes/game.tscn" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://dmlfqgjpupeft" path="res://scenes/main.gd" id="1_sugp2"]
+[ext_resource type="TileSet" uid="uid://dh2a7tsjqwq4s" path="res://scenes/player/characters.tres" id="3_sugp2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tbgi4"]
+font_size = 24
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_sugp2")
 
 [node name="Game" parent="." instance=ExtResource("1_o5qli")]
+
+[node name="MainMenu" type="ColorRect" parent="."]
+offset_right = 320.0
+offset_bottom = 288.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="MainMenu"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 160.0
+text = "MAGIC MAP GAME"
+label_settings = SubResource("LabelSettings_tbgi4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TileMapLayer" type="TileMapLayer" parent="MainMenu"]
+tile_map_data = PackedByteArray(0, 0, 10, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+tile_set = ExtResource("3_sugp2")
+
+[node name="Level1" type="Button" parent="MainMenu"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 144.0
+offset_right = 190.0
+offset_bottom = 175.0
+text = "Level 1"
+
+[node name="Level2" type="Button" parent="MainMenu"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 184.0
+offset_right = 190.0
+offset_bottom = 215.0
+text = "Level 2"
+
+[node name="Level3" type="Button" parent="MainMenu"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 224.0
+offset_right = 190.0
+offset_bottom = 255.0
+text = "Level 3"
+
+[connection signal="main_menu" from="Game" to="." method="_on_game_main_menu"]
+[connection signal="pressed" from="MainMenu/Level1" to="." method="_on_level_1_pressed"]
+[connection signal="pressed" from="MainMenu/Level2" to="." method="_on_level_2_pressed"]
+[connection signal="pressed" from="MainMenu/Level3" to="." method="_on_level_3_pressed"]

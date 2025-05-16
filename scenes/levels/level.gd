@@ -208,6 +208,8 @@ func progress_one_tick():
 ## WIND FUNCTIONALITY
 
 func _apply_player_wind():
+	if phase != Phase.EXPLORE: return
+	
 	while true:
 		
 		if !map.tile_is_blowable_wind(player.get_current_coords()):
@@ -220,6 +222,8 @@ func _apply_player_wind():
 		player.teleport(map.get_blown_to_coords_from_wind_tile(player.get_current_coords()))
 
 func _apply_enemy_wind():
+	if phase != Phase.EXPLORE: return
+	
 	while true:
 		
 		# TODO: Account for when two enemies might be blown in a row
@@ -258,12 +262,16 @@ func _tile_contains_enemy(coords) -> bool:
 ## WATER FUNCTIONALITY
 
 func _flood_surrounding_tiles(coords:Vector2i):
+	if phase != Phase.EXPLORE: return
+	
 	_flood_tile(coords+Vector2i.UP)
 	_flood_tile(coords+Vector2i.DOWN)
 	_flood_tile(coords+Vector2i.LEFT)
 	_flood_tile(coords+Vector2i.RIGHT)
 
 func _flood_tile(coords:Vector2i):
+	if phase != Phase.EXPLORE: return
+	
 	if map.tile_is_floodable(coords):
 		map.place_block(coords, Global.Block.WATER)
 		fire_block_coords[coords] = null
@@ -272,16 +280,21 @@ func _flood_tile(coords:Vector2i):
 ## FIRE FUNCTIONALITY
 
 func _burn_surrounding_tiles(coords:Vector2i):
+	if phase != Phase.EXPLORE: return
+	
 	_burn_tile(coords+Vector2i.UP)
 	_burn_tile(coords+Vector2i.DOWN)
 	_burn_tile(coords+Vector2i.LEFT)
 	_burn_tile(coords+Vector2i.RIGHT)
 
 func _burn_tile(coords:Vector2i):
+	if phase != Phase.EXPLORE: return
+	
 	if map.tile_is_flamable(coords):
 		map.place_block(coords, Global.Block.FIRE)
 
 func _check_player_death() -> bool:
+	if phase != Phase.EXPLORE: return false
 	
 	var player_killed:bool = false
 	
@@ -301,6 +314,8 @@ func _check_player_death() -> bool:
 	return player_killed
 
 func _check_player_win() -> bool:
+	if phase != Phase.EXPLORE: return false
+	
 	if map.tile_is_exit(player.get_current_coords()):
 		win.emit()
 		disable()

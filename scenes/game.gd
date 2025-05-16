@@ -1,10 +1,26 @@
-extends Node2D
+class_name Game extends Node2D
 
 signal main_menu
 
+@onready var levels: Node2D = $Levels
+
 func _ready() -> void:
-	$Levels/Level1.load()
+	disable_all_levels()
 	hide_menus()
+
+func disable_all_levels():
+	for level in levels.get_children():
+		if level is Level:
+			level.hide()
+			level.disable()
+
+func load_level(num:int):
+	disable_all_levels()
+	hide_menus()
+	var level = levels.get_child(num-1)
+	if level is Level:
+		level.show()
+		level.load()
 
 func hide_menus():
 	$WinMenu.hide()
