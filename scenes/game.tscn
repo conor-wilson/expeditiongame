@@ -74,26 +74,65 @@ label_settings = SubResource("LabelSettings_lbhrr")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TempWinMessage" type="Label" parent="."]
-visible = false
-offset_left = 48.0
-offset_top = 152.0
-offset_right = 192.0
-offset_bottom = 184.0
+[node name="WinMenu" type="ColorRect" parent="."]
+offset_left = 64.0
+offset_top = 128.0
+offset_right = 176.0
+offset_bottom = 216.0
+color = Color(0, 0, 0, 1)
+
+[node name="WinMessage" type="Label" parent="WinMenu"]
+layout_mode = 0
+offset_right = 112.0
+offset_bottom = 48.0
 text = "YOU WIN!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TempLossMessage" type="Label" parent="."]
-visible = false
-offset_left = 48.0
-offset_top = 152.0
-offset_right = 192.0
-offset_bottom = 184.0
-text = "YOU ARE DEAD x.x"
+[node name="MenuButton" type="Button" parent="WinMenu"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 48.0
+offset_right = 80.0
+offset_bottom = 72.0
+theme_override_font_sizes/font_size = 8
+text = "MENU"
+
+[node name="LoseMenu" type="ColorRect" parent="."]
+offset_left = 64.0
+offset_top = 112.0
+offset_right = 176.0
+offset_bottom = 232.0
+color = Color(0, 0, 0, 1)
+
+[node name="WinMessage" type="Label" parent="LoseMenu"]
+layout_mode = 0
+offset_right = 112.0
+offset_bottom = 48.0
+text = "YOU LOSE!"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ResetButton" type="Button" parent="LoseMenu"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 48.0
+offset_right = 80.0
+offset_bottom = 72.0
+theme_override_font_sizes/font_size = 8
+text = "RESET"
+
+[node name="MenuButton" type="Button" parent="LoseMenu"]
+offset_left = 32.0
+offset_top = 80.0
+offset_right = 80.0
+offset_bottom = 104.0
+theme_override_font_sizes/font_size = 8
+text = "MENU"
 
 [connection signal="loss" from="Levels/Level1" to="." method="_on_level_1_loss"]
 [connection signal="phase_change" from="Levels/Level1" to="." method="_on_level_1_phase_change"]
 [connection signal="win" from="Levels/Level1" to="." method="_on_level_1_win"]
+[connection signal="pressed" from="WinMenu/MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="pressed" from="LoseMenu/ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="LoseMenu/MenuButton" to="." method="_on_menu_button_pressed"]

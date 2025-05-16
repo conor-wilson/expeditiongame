@@ -53,6 +53,7 @@ func load():
 	
 	# Reset the inventory
 	inventory.set_inventory_dict_from_array(inventory_config)
+	inventory.deselect_all_slots()
 	
 	# Reset the Player
 	player.reset()
