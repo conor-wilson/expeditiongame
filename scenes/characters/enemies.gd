@@ -54,10 +54,23 @@ func add_new_enemy(enemy_type:EnemyType, coords:Vector2i):
 	enemy_characters.append(new_enemy)
 
 func follow_player(player_coords:Vector2i):
-	# TODO: Formalise the fact that Goblins go first
+	
+	# TODO: Spin out some of this functionality. No need for so much duplication
+	
+	# Move Goblins
 	for enemy in enemy_characters:
-		
-		if enemy.alive && !tile_contains_enemy(_get_next_tile_coords(enemy, player_coords)):
+		var enemy_type:EnemyType = _get_enemy_type(enemy.get_cell_atlas_coords(enemy.get_current_coords()))
+		if enemy_type == EnemyType.GOBLIN && enemy.alive && !tile_contains_enemy(_get_next_tile_coords(enemy, player_coords)):
+			enemy.walk(_get_next_tile_direction(enemy, player_coords))
+	
+	# Wait one subtick
+	sub_tick_timer.start()
+	await sub_tick_timer.timeout
+	
+	# Move Angry Red Men
+	for enemy in enemy_characters:
+		var enemy_type:EnemyType = _get_enemy_type(enemy.get_cell_atlas_coords(enemy.get_current_coords()))
+		if enemy_type == EnemyType.ANGRY_RED_MAN && enemy.alive && !tile_contains_enemy(_get_next_tile_coords(enemy, player_coords)):
 			enemy.walk(_get_next_tile_direction(enemy, player_coords))
 
 func apply_wind():
