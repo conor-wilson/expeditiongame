@@ -47,10 +47,12 @@ func _on_level_phase_change(Phase: Variant) -> void:
 
 
 func _on_level_win() -> void:
+	print("LEVEL ", current_level, " WON")
 	await get_tree().create_timer(0.5).timeout
 	$WinMenu.show()
 
 func _on_level_loss() -> void:
+	print("LEVEL ", current_level, " LOST")
 	await get_tree().create_timer(0.5).timeout
 	$LossMenu.show()
 

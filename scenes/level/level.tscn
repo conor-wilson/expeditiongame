@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dvl5ql6jho5ec" path="res://scenes/map/map.tscn" id="3_d4w6o"]
 [ext_resource type="PackedScene" uid="uid://bqqiceuiy84sl" path="res://scenes/level/tile_button.tscn" id="3_urvlt"]
 [ext_resource type="PackedScene" uid="uid://k2me1ajen246" path="res://scenes/inventory/inventory.tscn" id="4_xb4v1"]
-[ext_resource type="PackedScene" uid="uid://c5v700ycfca72" path="res://scenes/characters/character.tscn" id="5_urvlt"]
+[ext_resource type="PackedScene" uid="uid://r3vvnyybe58p" path="res://scenes/characters/player.tscn" id="6_wcngd"]
 [ext_resource type="PackedScene" uid="uid://ckhb1606tnrwu" path="res://scenes/characters/enemies.tscn" id="7_wcngd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xb4v1"]
@@ -990,9 +990,11 @@ visible = false
 position = Vector2(88, 88)
 shape = SubResource("RectangleShape2D_xb4v1")
 
-[node name="Player" parent="." node_paths=PackedStringArray("map") instance=ExtResource("5_urvlt")]
+[node name="Player" parent="." node_paths=PackedStringArray("map", "enemies", "sub_tick_timer") instance=ExtResource("6_wcngd")]
 position = Vector2(32, 80)
 map = NodePath("../Map")
+enemies = NodePath("../Enemies")
+sub_tick_timer = NodePath("../SubTickTimer")
 
 [node name="Enemies" parent="." node_paths=PackedStringArray("map", "sub_tick_timer") instance=ExtResource("7_wcngd")]
 position = Vector2(32, 80)

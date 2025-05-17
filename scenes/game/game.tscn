@@ -22,13 +22,13 @@ tile_set = ExtResource("2_lbhrr")
 
 [node name="Levels" type="Node2D" parent="."]
 
-[node name="Level1" parent="Levels" node_paths=PackedStringArray("enemies_config", "blocks_config", "wind_config", "markers_config") instance=ExtResource("4_lbhrr")]
+[node name="Level1" parent="Levels" node_paths=PackedStringArray("player_config", "enemies_config", "blocks_config", "wind_config", "markers_config") instance=ExtResource("4_lbhrr")]
+player_config = NodePath("PlayerConfig")
 enemies_config = NodePath("EnemiesConfig")
 blocks_config = NodePath("BlocksConfig")
 wind_config = NodePath("WindConfig")
 markers_config = NodePath("MarkersConfig")
 inventory_config = Array[int]([1, 2])
-player_start_position = Vector2i(5, 9)
 
 [node name="MarkersConfig" parent="Levels/Level1" instance=ExtResource("4_p57ef")]
 position = Vector2(32, 80)
@@ -36,24 +36,30 @@ tile_map_data = PackedByteArray("AAAFAAIAAAAAAAEAAAACAAMAAAADAAAAAAABAAMAAAADAAA
 
 [node name="WindConfig" parent="Levels/Level1" instance=ExtResource("4_p57ef")]
 position = Vector2(32, 80)
-tile_map_data = PackedByteArray("AAABAAQAAQAAAAQAAQABAAMAAQAAAAQAAQACAAMAAQAAAAQAAQADAAMAAQAAAAQAAQADAAQAAQAAAAQAAQACAAQAAQAAAAQAAQAHAAMAAQAAAAQAAQAIAAMAAQAAAAQAAQAJAAMAAQAAAAQAAQAJAAQAAQAAAAQAAQAIAAQAAQAAAAQAAQAHAAQAAQAAAAQAAQA=")
+tile_map_data = PackedByteArray("AAABAAQAAQAAAAQAAQABAAMAAQAAAAQAAQACAAMAAQAAAAQAAQADAAMAAQAAAAQAAQADAAQAAQAAAAQAAQACAAQAAQAAAAQAAQAHAAMAAQAAAAQAAQAIAAMAAQAAAAQAAQAJAAMAAQAAAAQAAQAJAAQAAQAAAAQAAQAIAAQAAQAAAAQAAQAHAAQAAQAAAAQAAQAHAAUAAQAAAAQAAQAHAAYAAQAAAAQAAQA=")
 
 [node name="BlocksConfig" parent="Levels/Level1" instance=ExtResource("4_p57ef")]
 position = Vector2(32, 80)
-tile_map_data = PackedByteArray("AAACAAoAAQAAAAEAAAADAAoAAQAAAAEAAAAEAAoAAQAAAAEAAAAJAAoAAQAAAAEAAAAKAAUAAQAAAAEAAAAKAAcAAQAAAAEAAAAKAAoAAQAAAAEAAAAAAAAAAQAAAAEAAAAAAAEAAQAAAAEAAAAAAAIAAQAAAAEAAAAAAAMAAQAAAAEAAAAAAAQAAQAAAAEAAAAAAAUAAQAAAAEAAAAAAAYAAQAAAAEAAAAAAAcAAQAAAAEAAAAAAAgAAQAAAAEAAAAAAAkAAQAAAAEAAAAAAAoAAQAAAAEAAAABAAAAAQAAAAEAAAABAAoAAQAAAAEAAAACAAAAAQAAAAEAAAADAAAAAQAAAAEAAAAEAAAAAQAAAAEAAAAFAAAAAQAAAAEAAAAGAAAAAQAAAAEAAAAGAAoAAQAAAAEAAAAHAAAAAQAAAAEAAAAHAAoAAQAAAAEAAAAIAAAAAQAAAAEAAAAIAAoAAQAAAAEAAAAJAAAAAQAAAAEAAAAKAAAAAQAAAAEAAAAKAAEAAQAAAAEAAAAKAAIAAQAAAAEAAAAKAAMAAQAAAAEAAAAKAAQAAQAAAAEAAAAKAAYAAQAAAAEAAAAKAAgAAQAAAAEAAAAKAAkAAQAAAAEAAAAFAAoAAQAAAAEAAAADAAkAAQAAAAEAAAABAAkAAQAAAAEAAAACAAkAAQAAAAEAAAAIAAkAAQAAAAEAAAAHAAkAAQAAAAEAAAAJAAkAAQAAAAEAAAABAAEAAQAAAAEAAAACAAEAAQAAAAEAAAADAAEAAQAAAAEAAAAHAAEAAQAAAAEAAAAIAAEAAQAAAAEAAAAJAAEAAQAAAAEAAAAEAAUAAQAAAAEAAAAFAAUAAQAAAAEAAAAGAAUAAQAAAAEAAAABAAIAAQAAAAMAAAACAAIAAQAAAAMAAAADAAIAAQAAAAMAAAAHAAIAAQAAAAMAAAAIAAIAAQAAAAMAAAAJAAIAAQAAAAMAAAA=")
+tile_map_data = PackedByteArray("AAACAAoAAQAAAAEAAAADAAoAAQAAAAEAAAAEAAoAAQAAAAEAAAAJAAoAAQAAAAEAAAAKAAUAAQAAAAEAAAAKAAcAAQAAAAEAAAAKAAoAAQAAAAEAAAAAAAAAAQAAAAEAAAAAAAEAAQAAAAEAAAAAAAIAAQAAAAEAAAAAAAMAAQAAAAEAAAAAAAQAAQAAAAEAAAAAAAUAAQAAAAEAAAAAAAYAAQAAAAEAAAAAAAcAAQAAAAEAAAAAAAgAAQAAAAEAAAAAAAkAAQAAAAEAAAAAAAoAAQAAAAEAAAABAAAAAQAAAAEAAAABAAoAAQAAAAEAAAACAAAAAQAAAAEAAAADAAAAAQAAAAEAAAAEAAAAAQAAAAEAAAAFAAAAAQAAAAEAAAAGAAAAAQAAAAEAAAAGAAoAAQAAAAEAAAAHAAAAAQAAAAEAAAAHAAoAAQAAAAEAAAAIAAAAAQAAAAEAAAAIAAoAAQAAAAEAAAAJAAAAAQAAAAEAAAAKAAAAAQAAAAEAAAAKAAEAAQAAAAEAAAAKAAIAAQAAAAEAAAAKAAMAAQAAAAEAAAAKAAQAAQAAAAEAAAAKAAYAAQAAAAEAAAAKAAgAAQAAAAEAAAAKAAkAAQAAAAEAAAAFAAoAAQAAAAEAAAADAAkAAQAAAAEAAAABAAkAAQAAAAEAAAACAAkAAQAAAAEAAAAIAAkAAQAAAAEAAAAHAAkAAQAAAAEAAAAJAAkAAQAAAAEAAAABAAEAAQAAAAEAAAACAAEAAQAAAAEAAAADAAEAAQAAAAEAAAAHAAEAAQAAAAEAAAAIAAEAAQAAAAEAAAAJAAEAAQAAAAEAAAAEAAUAAQAAAAEAAAAFAAUAAQAAAAEAAAAGAAUAAQAAAAEAAAABAAIAAQAAAAMAAAACAAIAAQAAAAMAAAADAAIAAQAAAAMAAAAIAAIAAQAAAAMAAAAJAAIAAQAAAAMAAAAHAAMAAQAAAAMAAAA=")
 
 [node name="EnemiesConfig" type="TileMapLayer" parent="Levels/Level1"]
 position = Vector2(32, 80)
 tile_map_data = PackedByteArray("AAAFAAYAAQAAAAAAAAA=")
 tile_set = ExtResource("6_5i0tg")
 
-[node name="Level2" parent="Levels" node_paths=PackedStringArray("enemies_config", "blocks_config", "wind_config", "markers_config") instance=ExtResource("4_lbhrr")]
+[node name="PlayerConfig" type="TileMapLayer" parent="Levels/Level1"]
+position = Vector2(32, 80)
+tile_map_data = PackedByteArray("AAAFAAkAAAAAAAAAAAA=")
+tile_set = ExtResource("6_5i0tg")
+
+[node name="Level2" parent="Levels" node_paths=PackedStringArray("player_config", "enemies_config", "blocks_config", "wind_config", "markers_config") instance=ExtResource("4_lbhrr")]
+visible = false
+player_config = NodePath("PlayerConfig")
 enemies_config = NodePath("EnemiesConfig")
 blocks_config = NodePath("BlocksConfig")
 wind_config = NodePath("WindConfig")
 markers_config = NodePath("MarkersConfig")
 inventory_config = Array[int]([1, 4])
-player_start_position = Vector2i(5, 9)
 
 [node name="MarkersConfig" parent="Levels/Level2" instance=ExtResource("4_p57ef")]
 position = Vector2(32, 80)
@@ -72,13 +78,19 @@ position = Vector2(32, 80)
 tile_map_data = PackedByteArray("AAAEAAcAAQAAAAAAAAAFAAUAAQAAAAAAAAAGAAMAAQAAAAAAAAA=")
 tile_set = ExtResource("6_5i0tg")
 
-[node name="Level3" parent="Levels" node_paths=PackedStringArray("enemies_config", "blocks_config", "wind_config", "markers_config") instance=ExtResource("4_lbhrr")]
+[node name="PlayerConfig" type="TileMapLayer" parent="Levels/Level2"]
+position = Vector2(32, 80)
+tile_map_data = PackedByteArray("AAAFAAkAAAAAAAAAAAA=")
+tile_set = ExtResource("6_5i0tg")
+
+[node name="Level3" parent="Levels" node_paths=PackedStringArray("player_config", "enemies_config", "blocks_config", "wind_config", "markers_config") instance=ExtResource("4_lbhrr")]
+visible = false
+player_config = NodePath("PlayerConfig")
 enemies_config = NodePath("EnemiesConfig")
 blocks_config = NodePath("BlocksConfig")
 wind_config = NodePath("WindConfig")
 markers_config = NodePath("MarkersConfig")
 inventory_config = Array[int]([1, 1, 1, 1, 2])
-player_start_position = Vector2i(5, 9)
 
 [node name="MarkersConfig" parent="Levels/Level3" instance=ExtResource("4_p57ef")]
 position = Vector2(32, 80)
@@ -95,6 +107,11 @@ tile_map_data = PackedByteArray("AAACAAoAAQAAAAEAAAADAAoAAQAAAAEAAAAEAAoAAQAAAAE
 [node name="EnemiesConfig" type="TileMapLayer" parent="Levels/Level3"]
 position = Vector2(32, 80)
 tile_map_data = PackedByteArray("AAADAAcAAQAAAAAAAAACAAUAAQAAAAEAAAA=")
+tile_set = ExtResource("6_5i0tg")
+
+[node name="PlayerConfig" type="TileMapLayer" parent="Levels/Level3"]
+position = Vector2(32, 80)
+tile_map_data = PackedByteArray("AAAFAAkAAAAAAAAAAAA=")
 tile_set = ExtResource("6_5i0tg")
 
 [node name="Title" type="Label" parent="."]

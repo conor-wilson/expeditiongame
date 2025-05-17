@@ -21,7 +21,6 @@ func reset(enemies_config:TileMapLayer = null) -> void:
 	remove_all_enemies()
 	
 	if enemies_config != null:
-		print("YO")
 		copy_enemies_from_config(enemies_config)
 
 func remove_all_enemies():
@@ -61,7 +60,7 @@ func follow_player(player_coords:Vector2i):
 		if enemy.alive && !tile_contains_enemy(_get_next_tile_coords(enemy, player_coords)):
 			enemy.walk(_get_next_tile_direction(enemy, player_coords))
 
-func apply_enemy_wind():
+func apply_wind():
 	
 	while true:
 		
@@ -89,6 +88,8 @@ func apply_enemy_wind():
 		for enemy in enemy_characters: 
 			if !enemies_not_to_be_blown.has(enemy):
 				enemy.teleport(map.get_blown_to_coords_from_wind_tile(enemy.get_current_coords()))
+				
+				check_enemy_death()
 
 
 ## ENEMY STATE CHECKER FUNCS
