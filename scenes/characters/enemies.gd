@@ -53,38 +53,58 @@ func add_new_enemy(enemy_type:EnemyType, coords:Vector2i):
 	add_child(new_enemy)
 	enemy_characters.append(new_enemy)
 
+func _get_movable_enemies_of_type(desired_enemy_type:EnemyType, player_coords:Vector2i) -> Array[Character]:
+	var movable_enemies:Array[Character] = []
+	for enemy in enemy_characters:
+		var enemy_type:EnemyType = _get_enemy_type(enemy.get_cell_atlas_coords(enemy.get_current_coords()))
+		if enemy_type == desired_enemy_type && enemy.alive && !tile_contains_enemy(_get_next_tile_coords(enemy, player_coords)):
+			movable_enemies.append(enemy)
+	return movable_enemies
+
 func follow_player(player_coords:Vector2i):
 	
-	# TODO: Spin out some of this functionality. No need for so much duplication
+	# TODO: I have hard-coded it so that up to three of each type of enemy can
+	# move in a line together. This should be made dynamic in the future, but to
+	# be honest, I don't even feel remotely bad for doing it this way in the
+	# Game-Jam code. If this is still hard-coded here in any post-jam work 
+	# though, call my boss and get them to fire me.
+	#
+	# NOTE: While I'm still doing it this way, if there's ever a level with four
+	# or more enemies of one type, add another loop here.
 	
-	# Move Goblins
-	var movable_goblins:Array[Character] = []
-	for enemy in enemy_characters:
-		var enemy_type:EnemyType = _get_enemy_type(enemy.get_cell_atlas_coords(enemy.get_current_coords()))
-		if enemy_type == EnemyType.GOBLIN && enemy.alive && !tile_contains_enemy(_get_next_tile_coords(enemy, player_coords)):
-			movable_goblins.append(enemy)
-	
-	for goblin in movable_goblins:
+	# Move the Goblins
+	var first_movable_goblins:Array[Character] = _get_movable_enemies_of_type(EnemyType.GOBLIN, player_coords)
+	for goblin in first_movable_goblins:
 		goblin.walk(_get_next_tile_direction(goblin, player_coords))
+	var second_movable_goblins:Array[Character] = _get_movable_enemies_of_type(EnemyType.GOBLIN, player_coords)
+	for goblin in second_movable_goblins:
+		if !first_movable_goblins.has(goblin):
+			goblin.walk(_get_next_tile_direction(goblin, player_coords))
+	var third_movable_goblins:Array[Character] = _get_movable_enemies_of_type(EnemyType.GOBLIN, player_coords)
+	for goblin in third_movable_goblins:
+		if !first_movable_goblins.has(goblin) && !second_movable_goblins.has(goblin):
+			goblin.walk(_get_next_tile_direction(goblin, player_coords))
 	
-	# Wait one subtick
-	sub_tick_timer.start()
-	await sub_tick_timer.timeout
-	
-	# Move Angry Red Men
-	var movable_angry_red_men:Array[Character] = []
-	for enemy in enemy_characters:
-		var enemy_type:EnemyType = _get_enemy_type(enemy.get_cell_atlas_coords(enemy.get_current_coords()))
-		if enemy_type == EnemyType.ANGRY_RED_MAN && enemy.alive && !tile_contains_enemy(_get_next_tile_coords(enemy, player_coords)):
-			movable_angry_red_men.append(enemy)
+	# Build the array of movale Angry Red Men
+	var first_movable_angry_red_men:Array[Character] = _get_movable_enemies_of_type(EnemyType.ANGRY_RED_MAN, player_coords)
 	
 	# If there's both goblins and angry red men, leave a break between the two
-	if len(movable_goblins) > 0 && len(movable_angry_red_men) > 0:
+	if len(first_movable_goblins) > 0 && len(first_movable_angry_red_men) > 0:
 		sub_tick_timer.start()
 		await sub_tick_timer.timeout
 	
-	for angry_red_man in movable_angry_red_men:
+	# Move Angry Red Men
+	for angry_red_man in first_movable_angry_red_men:
 		angry_red_man.walk(_get_next_tile_direction(angry_red_man, player_coords))
+	var second_angry_red_men:Array[Character] = _get_movable_enemies_of_type(EnemyType.ANGRY_RED_MAN, player_coords)
+	for angry_red_man in second_angry_red_men:
+		if !first_movable_angry_red_men.has(angry_red_man):
+			angry_red_man.walk(_get_next_tile_direction(angry_red_man, player_coords))
+	var third_angry_red_men:Array[Character] = _get_movable_enemies_of_type(EnemyType.ANGRY_RED_MAN, player_coords)
+	for angry_red_man in third_angry_red_men:
+		if !first_movable_angry_red_men.has(angry_red_man) && !second_angry_red_men.has(angry_red_man):
+			angry_red_man.walk(_get_next_tile_direction(angry_red_man, player_coords))
+	
 
 func apply_wind():
 	
