@@ -147,6 +147,12 @@ func _get_next_tile_direction(enemy:Character, player_coords:Vector2i) -> Vector
 func _get_next_tile_coords(enemy:Character, player_coords:Vector2i) -> Vector2i:
 	return enemy.get_current_coords() + _get_next_tile_direction(enemy, player_coords)
 
+func get_enemy_at_coords(coords:Vector2i) -> Character:
+	for enemy in enemy_characters:
+		if enemy.current_coords == coords:
+			return enemy
+	return null
+
 
 ## ENEMY TYPE FUNCTIONALITY
 # NOTE: I know consts, enums and variables should be at the top of the file but

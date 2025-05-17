@@ -36,6 +36,12 @@ func copy_player_character_from_config(player_config:TileMapLayer) -> void:
 	player_config.hide()
 
 func walk(direction:Vector2i) -> bool:
+	
+	# Edge-case for when there's a dead enemy in front of the player
+	var next_enemy:Character = enemies.get_enemy_at_coords(player_character.get_current_coords()+direction)
+	if next_enemy != null && !next_enemy.alive:
+		return false
+	
 	return player_character.walk(direction)
 
 func get_current_coords() -> Vector2i:
