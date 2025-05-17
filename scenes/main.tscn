@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://djjlfvgfynn6u"]
 
-[ext_resource type="PackedScene" uid="uid://dvu7ny3j1n00j" path="res://scenes/game.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://dvu7ny3j1n00j" path="res://scenes/game/game.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://dmlfqgjpupeft" path="res://scenes/main.gd" id="1_sugp2"]
-[ext_resource type="TileSet" uid="uid://dh2a7tsjqwq4s" path="res://scenes/player/characters.tres" id="3_sugp2"]
+[ext_resource type="TileSet" uid="uid://dh2a7tsjqwq4s" path="res://assets/tilesets/characters.tres" id="3_sugp2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tbgi4"]
 font_size = 24

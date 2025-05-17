@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c5o3x6mtce48b" path="res://scenes/inventory/inventory_slot.gd" id="1_c7w7p"]
 [ext_resource type="Texture2D" uid="uid://f3l60kttwqkd" path="res://assets/art/BlockHighlight-Sheet.png" id="1_u6pog"]
-[ext_resource type="PackedScene" uid="uid://c1phvu5go5bn" path="res://scenes/levels/map_tiles.tscn" id="2_c7w7p"]
+[ext_resource type="PackedScene" uid="uid://c1phvu5go5bn" path="res://scenes/map/map_tiles.tscn" id="2_c7w7p"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c7w7p"]
 bg_color = Color(0.6, 0.6, 0.6, 0.513726)

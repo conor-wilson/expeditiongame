@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=4 uid="uid://dvu7ny3j1n00j"]
 
-[ext_resource type="Script" uid="uid://debtv741hvvl7" path="res://scenes/game.gd" id="1_lnu2h"]
-[ext_resource type="TileSet" uid="uid://cro1fx4ifi25h" path="res://scenes/gametiles.tres" id="2_lbhrr"]
-[ext_resource type="PackedScene" uid="uid://rfdyr27e7slo" path="res://scenes/levels/level.tscn" id="4_lbhrr"]
-[ext_resource type="PackedScene" uid="uid://c1phvu5go5bn" path="res://scenes/levels/map_tiles.tscn" id="4_p57ef"]
-[ext_resource type="PackedScene" uid="uid://2vyytgydvb1u" path="res://scenes/player/enemy.tscn" id="5_iywne"]
+[ext_resource type="Script" uid="uid://debtv741hvvl7" path="res://scenes/game/game.gd" id="1_lnu2h"]
+[ext_resource type="TileSet" uid="uid://cro1fx4ifi25h" path="res://assets/tilesets/gametiles.tres" id="2_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://rfdyr27e7slo" path="res://scenes/level/level.tscn" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://c1phvu5go5bn" path="res://scenes/map/map_tiles.tscn" id="4_p57ef"]
+[ext_resource type="PackedScene" uid="uid://2vyytgydvb1u" path="res://scenes/characters/enemy.tscn" id="5_iywne"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lnu2h"]
 

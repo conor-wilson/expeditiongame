@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c5v700ycfca72"]
 
-[ext_resource type="TileSet" uid="uid://dh2a7tsjqwq4s" path="res://scenes/player/characters.tres" id="1_ntlox"]
-[ext_resource type="Script" uid="uid://coytss6thqkkf" path="res://scenes/player/character.gd" id="3_s4akd"]
+[ext_resource type="TileSet" uid="uid://dh2a7tsjqwq4s" path="res://assets/tilesets/characters.tres" id="1_ntlox"]
+[ext_resource type="Script" uid="uid://coytss6thqkkf" path="res://scenes/characters/character.gd" id="3_s4akd"]
 
 [node name="Character" type="TileMapLayer"]
 tile_map_data = PackedByteArray(0, 0, 5, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0)

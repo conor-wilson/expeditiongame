@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=4 uid="uid://dvl5ql6jho5ec"]
 
-[ext_resource type="PackedScene" uid="uid://c1phvu5go5bn" path="res://scenes/levels/map_tiles.tscn" id="1_1j1lv"]
-[ext_resource type="Script" uid="uid://5ngi7nj3y0fr" path="res://scenes/levels/map.gd" id="1_4u8by"]
+[ext_resource type="PackedScene" uid="uid://c1phvu5go5bn" path="res://scenes/map/map_tiles.tscn" id="1_1j1lv"]
+[ext_resource type="Script" uid="uid://5ngi7nj3y0fr" path="res://scenes/map/map.gd" id="1_4u8by"]
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_4u8by")
