@@ -1,9 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://2vyytgydvb1u"]
+[gd_scene load_steps=3 format=3 uid="uid://bd7t0qf04wllm"]
 
 [ext_resource type="TileSet" uid="uid://dh2a7tsjqwq4s" path="res://assets/tilesets/characters.tres" id="1_2aby3"]
-[ext_resource type="Script" uid="uid://b5bla80n6rtbi" path="res://scenes/characters/enemy.gd" id="1_34alg"]
+
+[sub_resource type="GDScript" id="GDScript_7jb55"]
+script/source = "class_name Enemy extends Character
+"
 
 [node name="Enemy" type="TileMapLayer"]
 tile_set = ExtResource("1_2aby3")
-script = ExtResource("1_34alg")
+script = SubResource("GDScript_7jb55")
 metadata/_custom_type_script = "uid://coytss6thqkkf"

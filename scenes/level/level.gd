@@ -164,15 +164,10 @@ func progress_one_tick():
 	await sub_tick_timer.timeout
 	
 	## Move enemies
-	# TODO: Move this to the Enemies scene
-	for enemy in enemies.enemy_characters:
-		if !_tile_contains_enemy(enemy.get_next_tile_coords(player.get_current_coords())):
-			# TODO: Create an Enemies type, and handle it similar to the Map type. That will remove
-			# much of the burden of this code file. 
-			enemy.follow_player(player.get_current_coords())
+	enemies.follow_player(player.get_current_coords())
 	
 	## Apply wind behaviour for enemies
-	await _apply_enemy_wind()
+	await enemies.apply_enemy_wind()
 	
 	## Setup block coords arrays
 	water_block_coords = map.get_block_tile_coords(Global.Block.WATER)
@@ -194,10 +189,7 @@ func progress_one_tick():
 			_burn_surrounding_tiles(coords)
 	
 	## Resolve enemy death
-	# TODO: Move this to the Enemies scene
-	for enemy in enemies.enemy_characters:
-		if map.tile_is_deadly(enemy.get_current_coords()):
-			enemy.kill()
+	enemies.check_enemy_death()
 	
 	## Resolve player win or loss
 	if !_check_player_death():
@@ -220,45 +212,6 @@ func _apply_player_wind():
 		await sub_tick_timer.timeout
 		
 		player.teleport(map.get_blown_to_coords_from_wind_tile(player.get_current_coords()))
-
-# TODO: Move this to the Enemies scene
-func _apply_enemy_wind():
-	if phase != Phase.EXPLORE: return
-	
-	while true:
-		
-		# TODO: Clean up when two enemies are blown in a row
-		
-		# Build the dict of enemies not to be blown
-		var enemies_not_to_be_blown:Dictionary = {}
-		for enemy in enemies.enemy_characters:
-			if !map.tile_is_blowable_wind(enemy.get_current_coords()):
-				enemies_not_to_be_blown[enemy] = true
-		
-		# Add enemies from that would be blown onto another enemy's current space
-		for enemy in enemies.enemy_characters:
-			if _tile_contains_enemy(map.get_blown_to_coords_from_wind_tile(enemy.get_current_coords())):
-				enemies_not_to_be_blown[enemy] = true
-		
-		if len(enemies_not_to_be_blown) == len(enemies.enemy_characters):
-			return
-		
-		## Wait one sub-tick
-		sub_tick_timer.start()
-		await sub_tick_timer.timeout
-		
-		# Blow the other enemies
-		for enemy in enemies.enemy_characters: 
-			if !enemies_not_to_be_blown.has(enemy):
-				enemy.teleport(map.get_blown_to_coords_from_wind_tile(enemy.get_current_coords()))
-		
-
-# TODO: Move this to the Enemies scene
-func _tile_contains_enemy(coords) -> bool:
-	for enemy in enemies.enemy_characters:
-		if enemy.get_current_coords() == coords:
-			return true
-	return false
 
 
 ## WATER FUNCTIONALITY
@@ -305,7 +258,7 @@ func _check_player_death() -> bool:
 		player_killed = true
 	
 	# Check for enemies
-	if _tile_contains_enemy(player.get_current_coords()):
+	if enemies.tile_contains_enemy(player.get_current_coords()):
 		player_killed = true
 	
 	# Kill the playewr

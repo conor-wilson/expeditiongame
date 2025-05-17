@@ -994,9 +994,10 @@ shape = SubResource("RectangleShape2D_xb4v1")
 position = Vector2(32, 80)
 map = NodePath("../Map")
 
-[node name="Enemies" parent="." node_paths=PackedStringArray("map") instance=ExtResource("7_wcngd")]
+[node name="Enemies" parent="." node_paths=PackedStringArray("map", "sub_tick_timer") instance=ExtResource("7_wcngd")]
 position = Vector2(32, 80)
 map = NodePath("../Map")
+sub_tick_timer = NodePath("../SubTickTimer")
 
 [node name="SubTickTimer" type="Timer" parent="."]
 wait_time = 0.15
