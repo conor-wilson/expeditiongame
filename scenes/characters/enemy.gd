@@ -18,10 +18,10 @@ const character_tilemap_atlas_coords:Dictionary = {
 
 ## INITIALISATION FUNCS
 
-func _ready() -> void:
-	tilemap_source = character_tilemap_sources[kind]
-	tilemap_atlas_coords = character_tilemap_atlas_coords[kind]
-	reset()
+func set_kind(new_kind:Kind):
+	tilemap_source = character_tilemap_sources[new_kind]
+	tilemap_atlas_coords = character_tilemap_atlas_coords[new_kind]
+	kind = new_kind
 
 
 ## TILE PLACEMENT FUNCS

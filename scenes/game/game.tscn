@@ -4,7 +4,7 @@
 [ext_resource type="TileSet" uid="uid://cro1fx4ifi25h" path="res://assets/tilesets/gametiles.tres" id="2_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://rfdyr27e7slo" path="res://scenes/level/level.tscn" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://c1phvu5go5bn" path="res://scenes/map/map_tiles.tscn" id="4_p57ef"]
-[ext_resource type="PackedScene" uid="uid://2vyytgydvb1u" path="res://scenes/characters/enemy.tscn" id="5_iywne"]
+[ext_resource type="TileSet" uid="uid://dh2a7tsjqwq4s" path="res://assets/tilesets/characters.tres" id="6_5i0tg"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lnu2h"]
 
@@ -22,13 +22,13 @@ tile_set = ExtResource("2_lbhrr")
 
 [node name="Levels" type="Node2D" parent="."]
 
-[node name="Level1" parent="Levels" node_paths=PackedStringArray("blocks_config", "wind_config", "markers_config", "enemies") instance=ExtResource("4_lbhrr")]
+[node name="Level1" parent="Levels" node_paths=PackedStringArray("enemies_config", "blocks_config", "wind_config", "markers_config") instance=ExtResource("4_lbhrr")]
+enemies_config = NodePath("EnemiesConfig")
 blocks_config = NodePath("BlocksConfig")
 wind_config = NodePath("WindConfig")
 markers_config = NodePath("MarkersConfig")
 inventory_config = Array[int]([1, 2])
 player_start_position = Vector2i(5, 9)
-enemies = [NodePath("AngryRedMan0")]
 
 [node name="MarkersConfig" parent="Levels/Level1" instance=ExtResource("4_p57ef")]
 position = Vector2(32, 80)
@@ -42,19 +42,18 @@ tile_map_data = PackedByteArray("AAABAAQAAQAAAAQAAQABAAMAAQAAAAQAAQACAAMAAQAAAAQ
 position = Vector2(32, 80)
 tile_map_data = PackedByteArray("AAACAAoAAQAAAAEAAAADAAoAAQAAAAEAAAAEAAoAAQAAAAEAAAAJAAoAAQAAAAEAAAAKAAUAAQAAAAEAAAAKAAcAAQAAAAEAAAAKAAoAAQAAAAEAAAAAAAAAAQAAAAEAAAAAAAEAAQAAAAEAAAAAAAIAAQAAAAEAAAAAAAMAAQAAAAEAAAAAAAQAAQAAAAEAAAAAAAUAAQAAAAEAAAAAAAYAAQAAAAEAAAAAAAcAAQAAAAEAAAAAAAgAAQAAAAEAAAAAAAkAAQAAAAEAAAAAAAoAAQAAAAEAAAABAAAAAQAAAAEAAAABAAoAAQAAAAEAAAACAAAAAQAAAAEAAAADAAAAAQAAAAEAAAAEAAAAAQAAAAEAAAAFAAAAAQAAAAEAAAAGAAAAAQAAAAEAAAAGAAoAAQAAAAEAAAAHAAAAAQAAAAEAAAAHAAoAAQAAAAEAAAAIAAAAAQAAAAEAAAAIAAoAAQAAAAEAAAAJAAAAAQAAAAEAAAAKAAAAAQAAAAEAAAAKAAEAAQAAAAEAAAAKAAIAAQAAAAEAAAAKAAMAAQAAAAEAAAAKAAQAAQAAAAEAAAAKAAYAAQAAAAEAAAAKAAgAAQAAAAEAAAAKAAkAAQAAAAEAAAAFAAoAAQAAAAEAAAADAAkAAQAAAAEAAAABAAkAAQAAAAEAAAACAAkAAQAAAAEAAAAIAAkAAQAAAAEAAAAHAAkAAQAAAAEAAAAJAAkAAQAAAAEAAAABAAEAAQAAAAEAAAACAAEAAQAAAAEAAAADAAEAAQAAAAEAAAAHAAEAAQAAAAEAAAAIAAEAAQAAAAEAAAAJAAEAAQAAAAEAAAAEAAUAAQAAAAEAAAAFAAUAAQAAAAEAAAAGAAUAAQAAAAEAAAABAAIAAQAAAAMAAAACAAIAAQAAAAMAAAADAAIAAQAAAAMAAAAHAAIAAQAAAAMAAAAIAAIAAQAAAAMAAAAJAAIAAQAAAAMAAAA=")
 
-[node name="AngryRedMan0" parent="Levels/Level1" instance=ExtResource("5_iywne")]
+[node name="EnemiesConfig" type="TileMapLayer" parent="Levels/Level1"]
 position = Vector2(32, 80)
 tile_map_data = PackedByteArray("AAAFAAYAAQAAAAAAAAA=")
-kind = 1
-start_position = Vector2i(5, 6)
+tile_set = ExtResource("6_5i0tg")
 
-[node name="Level2" parent="Levels" node_paths=PackedStringArray("blocks_config", "wind_config", "markers_config", "enemies") instance=ExtResource("4_lbhrr")]
+[node name="Level2" parent="Levels" node_paths=PackedStringArray("enemies_config", "blocks_config", "wind_config", "markers_config") instance=ExtResource("4_lbhrr")]
+enemies_config = NodePath("EnemiesConfig")
 blocks_config = NodePath("BlocksConfig")
 wind_config = NodePath("WindConfig")
 markers_config = NodePath("MarkersConfig")
 inventory_config = Array[int]([1, 4])
 player_start_position = Vector2i(5, 9)
-enemies = [NodePath("AngryRedMan0"), NodePath("AngryRedMan1"), NodePath("AngryRedMan2")]
 
 [node name="MarkersConfig" parent="Levels/Level2" instance=ExtResource("4_p57ef")]
 position = Vector2(32, 80)
@@ -68,31 +67,18 @@ tile_map_data = PackedByteArray("AAABAAMAAQAAAAQAAgAEAAQAAQAAAAQAAgAFAAQAAQAAAAQ
 position = Vector2(32, 80)
 tile_map_data = PackedByteArray("AAACAAoAAQAAAAEAAAADAAoAAQAAAAEAAAAEAAoAAQAAAAEAAAAJAAoAAQAAAAEAAAAKAAUAAQAAAAEAAAAKAAcAAQAAAAEAAAAKAAoAAQAAAAEAAAAAAAAAAQAAAAEAAAAAAAEAAQAAAAEAAAAAAAIAAQAAAAEAAAAAAAMAAQAAAAEAAAAAAAQAAQAAAAEAAAAAAAUAAQAAAAEAAAAAAAYAAQAAAAEAAAAAAAcAAQAAAAEAAAAAAAgAAQAAAAEAAAAAAAkAAQAAAAEAAAAAAAoAAQAAAAEAAAABAAAAAQAAAAEAAAABAAoAAQAAAAEAAAACAAAAAQAAAAEAAAADAAAAAQAAAAEAAAAEAAAAAQAAAAEAAAAFAAAAAQAAAAEAAAAGAAAAAQAAAAEAAAAGAAoAAQAAAAEAAAAHAAAAAQAAAAEAAAAHAAoAAQAAAAEAAAAIAAAAAQAAAAEAAAAIAAoAAQAAAAEAAAAJAAAAAQAAAAEAAAAKAAAAAQAAAAEAAAAKAAEAAQAAAAEAAAAKAAIAAQAAAAEAAAAKAAMAAQAAAAEAAAAKAAQAAQAAAAEAAAAKAAYAAQAAAAEAAAAKAAgAAQAAAAEAAAAKAAkAAQAAAAEAAAAEAAEAAQAAAAEAAAADAAEAAQAAAAEAAAACAAEAAQAAAAEAAAABAAEAAQAAAAEAAAAGAAEAAQAAAAEAAAAHAAEAAQAAAAEAAAAIAAEAAQAAAAEAAAAJAAEAAQAAAAEAAAAEAAkAAQAAAAEAAAADAAkAAQAAAAEAAAACAAkAAQAAAAEAAAABAAkAAQAAAAEAAAAGAAkAAQAAAAEAAAAHAAkAAQAAAAEAAAAIAAkAAQAAAAEAAAAJAAkAAQAAAAEAAAAFAAoAAQAAAAEAAAAJAAMAAQAAAAEAAAAJAAIAAQAAAAEAAAABAAIAAQAAAAEAAAACAAIAAQAAAAEAAAAIAAIAAQAAAAEAAAABAAcAAQAAAAEAAAAJAAcAAQAAAAEAAAABAAUAAQAAAAEAAAA=")
 
-[node name="AngryRedMan0" parent="Levels/Level2" instance=ExtResource("5_iywne")]
+[node name="EnemiesConfig" type="TileMapLayer" parent="Levels/Level2"]
 position = Vector2(32, 80)
-tile_map_data = PackedByteArray("AAAEAAcAAQAAAAAAAAA=")
-kind = 1
-start_position = Vector2i(4, 7)
+tile_map_data = PackedByteArray("AAAEAAcAAQAAAAAAAAAFAAUAAQAAAAAAAAAGAAMAAQAAAAAAAAA=")
+tile_set = ExtResource("6_5i0tg")
 
-[node name="AngryRedMan1" parent="Levels/Level2" instance=ExtResource("5_iywne")]
-position = Vector2(32, 80)
-tile_map_data = PackedByteArray("AAAFAAUAAQAAAAAAAAA=")
-kind = 1
-start_position = Vector2i(5, 5)
-
-[node name="AngryRedMan2" parent="Levels/Level2" instance=ExtResource("5_iywne")]
-position = Vector2(32, 80)
-tile_map_data = PackedByteArray("AAAGAAMAAQAAAAAAAAA=")
-kind = 1
-start_position = Vector2i(6, 3)
-
-[node name="Level3" parent="Levels" node_paths=PackedStringArray("blocks_config", "wind_config", "markers_config", "enemies") instance=ExtResource("4_lbhrr")]
+[node name="Level3" parent="Levels" node_paths=PackedStringArray("enemies_config", "blocks_config", "wind_config", "markers_config") instance=ExtResource("4_lbhrr")]
+enemies_config = NodePath("EnemiesConfig")
 blocks_config = NodePath("BlocksConfig")
 wind_config = NodePath("WindConfig")
 markers_config = NodePath("MarkersConfig")
 inventory_config = Array[int]([1, 1, 1, 1, 2])
 player_start_position = Vector2i(5, 9)
-enemies = [NodePath("AngryRedMan0"), NodePath("AngryRedMan1")]
 
 [node name="MarkersConfig" parent="Levels/Level3" instance=ExtResource("4_p57ef")]
 position = Vector2(32, 80)
@@ -106,16 +92,10 @@ tile_map_data = PackedByteArray("AAAFAAIAAQAAAAQAAQAFAAMAAQAAAAQAAQAFAAQAAQAAAAQ
 position = Vector2(32, 80)
 tile_map_data = PackedByteArray("AAACAAoAAQAAAAEAAAADAAoAAQAAAAEAAAAEAAoAAQAAAAEAAAAJAAoAAQAAAAEAAAAKAAUAAQAAAAEAAAAKAAcAAQAAAAEAAAAKAAoAAQAAAAEAAAAAAAAAAQAAAAEAAAAAAAEAAQAAAAEAAAAAAAIAAQAAAAEAAAAAAAMAAQAAAAEAAAAAAAQAAQAAAAEAAAAAAAUAAQAAAAEAAAAAAAgAAQAAAAEAAAAAAAkAAQAAAAEAAAAAAAoAAQAAAAEAAAABAAAAAQAAAAEAAAABAAoAAQAAAAEAAAACAAAAAQAAAAEAAAADAAAAAQAAAAEAAAAEAAAAAQAAAAEAAAAFAAAAAQAAAAEAAAAGAAAAAQAAAAEAAAAGAAoAAQAAAAEAAAAHAAAAAQAAAAEAAAAHAAoAAQAAAAEAAAAIAAAAAQAAAAEAAAAIAAoAAQAAAAEAAAAJAAAAAQAAAAEAAAAKAAAAAQAAAAEAAAAKAAEAAQAAAAEAAAAKAAIAAQAAAAEAAAAKAAMAAQAAAAEAAAAKAAQAAQAAAAEAAAAKAAYAAQAAAAEAAAAKAAgAAQAAAAEAAAAKAAkAAQAAAAEAAAAFAAoAAQAAAAEAAAAAAAYAAQAAAAEAAAAAAAcAAQAAAAEAAAAHAAcAAQAAAAEAAAAHAAYAAQAAAAEAAAAHAAUAAQAAAAEAAAAHAAQAAQAAAAEAAAAHAAMAAQAAAAEAAAAHAAIAAQAAAAEAAAAEAAIAAQAAAAEAAAAEAAMAAQAAAAEAAAAEAAQAAQAAAAEAAAAEAAUAAQAAAAEAAAAEAAYAAQAAAAEAAAAEAAcAAQAAAAEAAAABAAYAAQAAAAEAAAABAAgAAQAAAAEAAAAEAAEAAQAAAAAAAAAFAAEAAQAAAAAAAAAGAAEAAQAAAAAAAAAHAAEAAQAAAAAAAAAIAAEAAQAAAAAAAAAIAAIAAQAAAAAAAAAJAAIAAQAAAAAAAAAJAAMAAQAAAAAAAAAIAAMAAQAAAAAAAAAIAAQAAQAAAAAAAAAJAAQAAQAAAAAAAAAJAAUAAQAAAAAAAAAIAAUAAQAAAAAAAAAIAAYAAQAAAAAAAAAJAAYAAQAAAAAAAAAIAAcAAQAAAAAAAAAJAAcAAQAAAAAAAAAIAAgAAQAAAAAAAAAIAAkAAQAAAAAAAAAJAAkAAQAAAAAAAAAJAAgAAQAAAAAAAAAJAAEAAQAAAAMAAAA=")
 
-[node name="AngryRedMan0" parent="Levels/Level3" instance=ExtResource("5_iywne")]
+[node name="EnemiesConfig" type="TileMapLayer" parent="Levels/Level3"]
 position = Vector2(32, 80)
-tile_map_data = PackedByteArray("AAAFAAkAAAAAAAAAAAACAAUAAQAAAAEAAAA=")
-start_position = Vector2i(2, 5)
-
-[node name="AngryRedMan1" parent="Levels/Level3" instance=ExtResource("5_iywne")]
-position = Vector2(32, 80)
-tile_map_data = PackedByteArray("AAADAAcAAQAAAAAAAAA=")
-kind = 1
-start_position = Vector2i(3, 7)
+tile_map_data = PackedByteArray("AAADAAcAAQAAAAAAAAACAAUAAQAAAAEAAAA=")
+tile_set = ExtResource("6_5i0tg")
 
 [node name="Title" type="Label" parent="."]
 offset_right = 320.0

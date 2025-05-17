@@ -5,6 +5,7 @@ signal win
 signal loss
 signal tick
 
+@export var enemies_config:TileMapLayer
 @export var blocks_config:MapTiles
 @export var wind_config:MapTiles
 @export var markers_config:MapTiles
@@ -12,7 +13,6 @@ signal tick
 @export var inventory_config:Array[Global.Block]
 
 @export var player_start_position:Vector2i = Vector2i(5, 10) # TODO: Maybe use a marker here to make it easier to do visually?
-@export var enemies:Array[Enemy]
 
 enum Phase { DISABLED, PLAN, EXPLORE }
 var phase:Phase
@@ -20,6 +20,7 @@ var phase:Phase
 @onready var map: Map = $Map
 @onready var player: Character = $Player
 @onready var inventory: Inventory = $Inventory
+@onready var enemies: Enemies = $Enemies
 @onready var sub_tick_timer: Timer = $SubTickTimer
 
 var tick_is_occurring:bool = false
@@ -40,9 +41,7 @@ func _ready() -> void:
 	# Initialise everything
 	player.start_position = player_start_position
 	player.reset()
-	for enemy in enemies:
-		enemy.set_map(map)
-		enemy.reset()
+	enemies.reset(enemies_config)
 	
 	# Disable everything
 	disable()
@@ -60,8 +59,7 @@ func load():
 	player.reset()
 	
 	# Reset the Enemies
-	for enemy in enemies:
-		enemy.reset()
+	enemies.reset(enemies_config)
 	
 	# Start the Planning Phase
 	_start_planning_phase()
@@ -166,7 +164,8 @@ func progress_one_tick():
 	await sub_tick_timer.timeout
 	
 	## Move enemies
-	for enemy in enemies:
+	# TODO: Move this to the Enemies scene
+	for enemy in enemies.enemy_characters:
 		if !_tile_contains_enemy(enemy.get_next_tile_coords(player.get_current_coords())):
 			# TODO: Create an Enemies type, and handle it similar to the Map type. That will remove
 			# much of the burden of this code file. 
@@ -195,7 +194,8 @@ func progress_one_tick():
 			_burn_surrounding_tiles(coords)
 	
 	## Resolve enemy death
-	for enemy in enemies:
+	# TODO: Move this to the Enemies scene
+	for enemy in enemies.enemy_characters:
 		if map.tile_is_deadly(enemy.get_current_coords()):
 			enemy.kill()
 	
@@ -221,6 +221,7 @@ func _apply_player_wind():
 		
 		player.teleport(map.get_blown_to_coords_from_wind_tile(player.get_current_coords()))
 
+# TODO: Move this to the Enemies scene
 func _apply_enemy_wind():
 	if phase != Phase.EXPLORE: return
 	
@@ -230,16 +231,16 @@ func _apply_enemy_wind():
 		
 		# Build the dict of enemies not to be blown
 		var enemies_not_to_be_blown:Dictionary = {}
-		for enemy in enemies:
+		for enemy in enemies.enemy_characters:
 			if !map.tile_is_blowable_wind(enemy.get_current_coords()):
 				enemies_not_to_be_blown[enemy] = true
 		
 		# Add enemies from that would be blown onto another enemy's current space
-		for enemy in enemies:
+		for enemy in enemies.enemy_characters:
 			if _tile_contains_enemy(map.get_blown_to_coords_from_wind_tile(enemy.get_current_coords())):
 				enemies_not_to_be_blown[enemy] = true
 		
-		if len(enemies_not_to_be_blown) == len(enemies):
+		if len(enemies_not_to_be_blown) == len(enemies.enemy_characters):
 			return
 		
 		## Wait one sub-tick
@@ -247,13 +248,14 @@ func _apply_enemy_wind():
 		await sub_tick_timer.timeout
 		
 		# Blow the other enemies
-		for enemy in enemies: 
+		for enemy in enemies.enemy_characters: 
 			if !enemies_not_to_be_blown.has(enemy):
 				enemy.teleport(map.get_blown_to_coords_from_wind_tile(enemy.get_current_coords()))
 		
 
+# TODO: Move this to the Enemies scene
 func _tile_contains_enemy(coords) -> bool:
-	for enemy in enemies:
+	for enemy in enemies.enemy_characters:
 		if enemy.get_current_coords() == coords:
 			return true
 	return false

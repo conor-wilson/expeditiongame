@@ -11,9 +11,9 @@ tile_map_data = PackedByteArray("AAAAAAAAAAACAAAAAAAAAAEAAAACAAAAAAAAAAMAAAACAAA
 
 [node name="Markers" parent="." instance=ExtResource("1_1j1lv")]
 
-[node name="Wind" parent="." instance=ExtResource("1_1j1lv")]
-
 [node name="Blocks" parent="." instance=ExtResource("1_1j1lv")]
+
+[node name="Wind" parent="." instance=ExtResource("1_1j1lv")]
 
 [node name="HoverGhosts" parent="." instance=ExtResource("1_1j1lv")]
 modulate = Color(1, 1, 1, 0.498039)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://rfdyr27e7slo"]
+[gd_scene load_steps=9 format=4 uid="uid://rfdyr27e7slo"]
 
 [ext_resource type="Script" uid="uid://deljq3x1fx6hv" path="res://scenes/level/level.gd" id="1_b2cq8"]
 [ext_resource type="TileSet" uid="uid://cro1fx4ifi25h" path="res://assets/tilesets/gametiles.tres" id="2_xb4v1"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bqqiceuiy84sl" path="res://scenes/level/tile_button.tscn" id="3_urvlt"]
 [ext_resource type="PackedScene" uid="uid://k2me1ajen246" path="res://scenes/inventory/inventory.tscn" id="4_xb4v1"]
 [ext_resource type="PackedScene" uid="uid://c5v700ycfca72" path="res://scenes/characters/character.tscn" id="5_urvlt"]
+[ext_resource type="PackedScene" uid="uid://ckhb1606tnrwu" path="res://scenes/characters/enemies.tscn" id="7_wcngd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xb4v1"]
 size = Vector2(176, 176)
@@ -990,6 +991,10 @@ position = Vector2(88, 88)
 shape = SubResource("RectangleShape2D_xb4v1")
 
 [node name="Player" parent="." node_paths=PackedStringArray("map") instance=ExtResource("5_urvlt")]
+position = Vector2(32, 80)
+map = NodePath("../Map")
+
+[node name="Enemies" parent="." node_paths=PackedStringArray("map") instance=ExtResource("7_wcngd")]
 position = Vector2(32, 80)
 map = NodePath("../Map")
 
