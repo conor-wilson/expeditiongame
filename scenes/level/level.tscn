@@ -1002,7 +1002,7 @@ map = NodePath("../Map")
 sub_tick_timer = NodePath("../SubTickTimer")
 
 [node name="SubTickTimer" type="Timer" parent="."]
-wait_time = 0.15
+wait_time = 0.075
 one_shot = true
 
 [connection signal="focus_grabbed" from="Inventory" to="." method="_on_inventory_focus_grabbed"]

@@ -41,25 +41,24 @@ func walk(direction:Vector2i) -> bool:
 func get_current_coords() -> Vector2i:
 	return player_character.get_current_coords()
 
-func apply_wind() -> bool:
+func apply_wind():
 	
-	var player_killed:bool = false
 	while true:
 		if !map.tile_is_blowable_wind(player_character.get_current_coords()):
-			return player_killed
+			return
 		
-		if check_death():
-			player_killed = true
+		check_death()
 		
 		## Wait one sub-tick
 		sub_tick_timer.start()
 		await sub_tick_timer.timeout
 		
 		player_character.teleport(map.get_blown_to_coords_from_wind_tile(player_character.get_current_coords()))
-	
-	return player_killed
 
 func check_death() -> bool:
+	
+	if !player_character.alive:
+		return true
 	
 	# Check for deadly block tiles
 	if map.tile_is_deadly(player_character.get_current_coords()):

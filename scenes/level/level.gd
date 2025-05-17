@@ -23,10 +23,15 @@ var phase:Phase
 @onready var sub_tick_timer: Timer = $SubTickTimer
 
 var tick_is_occurring:bool = false
+var input_direction_queue:Array[Vector2i] = [] # Used to queue up inputs 
 
 ##########################
 ## BOOTUP FUNCTIONALITY ##
 ##########################
+
+func _process(delta: float) -> void:
+	if len(input_direction_queue) > 0:
+		_process_input_direction_queue()
 
 func _ready() -> void:
 	
@@ -124,18 +129,11 @@ func _start_explore_phase():
 	phase_change.emit(phase)
 
 func _input(event: InputEvent) -> void:
-	if phase != Phase.EXPLORE || tick_is_occurring: 
+	if phase != Phase.EXPLORE: 
 		return
 	
-	var direction:Vector2i = _event_to_direction_vector(event)
-	if direction && player.walk(direction):
-		
-		var player_killed:bool = player.check_death()
-		if player_killed:
-			player.apply_wind()
-			loss.emit()
-		else:
-			progress_one_tick()
+	input_direction_queue.append(_event_to_direction_vector(event))
+	#_process_input_direction_queue()
 
 func _event_to_direction_vector(event: InputEvent) -> Vector2i:
 	if event.is_action_pressed("up"):
@@ -152,6 +150,21 @@ func _event_to_direction_vector(event: InputEvent) -> Vector2i:
 var water_block_coords:Dictionary = {}
 var fire_block_coords:Dictionary = {} 
 
+func _process_input_direction_queue():
+	
+	if tick_is_occurring:
+		return
+	
+	var direction:Vector2i = input_direction_queue.pop_front()
+	if direction && player.walk(direction):
+		
+		var player_killed:bool = player.check_death()
+		if player_killed:
+			player.apply_wind()
+			loss.emit()
+		else:
+			progress_one_tick()
+
 func progress_one_tick():
 	
 	# Start the tick
@@ -160,8 +173,8 @@ func progress_one_tick():
 	tick_is_occurring = true
 	
 	## Apply player wind behaviour for player
-	var player_killed:bool = await player.apply_wind()
-	if player_killed:
+	await player.apply_wind()
+	if player.check_death():
 		# This accounts for when the player is blown directly into fire
 		loss.emit()
 		disable()
@@ -201,13 +214,14 @@ func progress_one_tick():
 	enemies.check_enemy_death()
 	
 	## Resolve player loss
-	player_killed = player.check_death()
-	if player_killed:
+	if player.check_death():
 		loss.emit()
 		disable()
+		tick_is_occurring = false
+		return
 	
 	## Resolve player win
-	if !player_killed && player.check_win():
+	if player.check_win():
 		win.emit()
 		disable()
 	
