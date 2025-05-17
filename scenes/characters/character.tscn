@@ -4,6 +4,5 @@
 [ext_resource type="Script" uid="uid://coytss6thqkkf" path="res://scenes/characters/character.gd" id="3_s4akd"]
 
 [node name="Character" type="TileMapLayer"]
-tile_map_data = PackedByteArray(0, 0, 5, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 tile_set = ExtResource("1_ntlox")
 script = ExtResource("3_s4akd")
