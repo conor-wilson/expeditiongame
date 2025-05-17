@@ -58,20 +58,33 @@ func follow_player(player_coords:Vector2i):
 	# TODO: Spin out some of this functionality. No need for so much duplication
 	
 	# Move Goblins
+	var movable_goblins:Array[Character] = []
 	for enemy in enemy_characters:
 		var enemy_type:EnemyType = _get_enemy_type(enemy.get_cell_atlas_coords(enemy.get_current_coords()))
 		if enemy_type == EnemyType.GOBLIN && enemy.alive && !tile_contains_enemy(_get_next_tile_coords(enemy, player_coords)):
-			enemy.walk(_get_next_tile_direction(enemy, player_coords))
+			movable_goblins.append(enemy)
+	
+	for goblin in movable_goblins:
+		goblin.walk(_get_next_tile_direction(goblin, player_coords))
 	
 	# Wait one subtick
 	sub_tick_timer.start()
 	await sub_tick_timer.timeout
 	
 	# Move Angry Red Men
+	var movable_angry_red_men:Array[Character] = []
 	for enemy in enemy_characters:
 		var enemy_type:EnemyType = _get_enemy_type(enemy.get_cell_atlas_coords(enemy.get_current_coords()))
 		if enemy_type == EnemyType.ANGRY_RED_MAN && enemy.alive && !tile_contains_enemy(_get_next_tile_coords(enemy, player_coords)):
-			enemy.walk(_get_next_tile_direction(enemy, player_coords))
+			movable_angry_red_men.append(enemy)
+	
+	# If there's both goblins and angry red men, leave a break between the two
+	if len(movable_goblins) > 0 && len(movable_angry_red_men) > 0:
+		sub_tick_timer.start()
+		await sub_tick_timer.timeout
+	
+	for angry_red_man in movable_angry_red_men:
+		angry_red_man.walk(_get_next_tile_direction(angry_red_man, player_coords))
 
 func apply_wind():
 	

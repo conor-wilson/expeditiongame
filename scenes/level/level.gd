@@ -186,7 +186,7 @@ func progress_one_tick():
 	await sub_tick_timer.timeout
 	
 	## Move enemies
-	enemies.follow_player(player.get_current_coords())
+	await enemies.follow_player(player.get_current_coords())
 	
 	## Apply wind behaviour for enemies
 	await enemies.apply_wind()
