@@ -1,7 +1,13 @@
-[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://cro1fx4ifi25h"]
+[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://cro1fx4ifi25h"]
 
 [ext_resource type="Texture2D" uid="uid://lodcoadeks5q" path="res://assets/art/TileMap.png" id="1_qy32k"]
 [ext_resource type="Texture2D" uid="uid://ewbrx7d35sd6" path="res://assets/art/tiles/Blocks-Sheet.png" id="2_nryul"]
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_aa4cq"]
+tile_data = PackedInt32Array(0, 327680, 196608, 65536, 327680, 65536, 1, 327680, 262144, 65537, 327680, 131072)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_n6wkp"]
+tile_data = PackedInt32Array(0, 327680, 196608, 65536, 262144, 262144, 131072, 327680, 65536, 1, 262144, 196608, 65537, 65536, 0, 131073, 262144, 65536, 2, 327680, 262144, 65538, 262144, 131072, 131074, 327680, 131072)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjtg"]
 texture = ExtResource("1_qy32k")
@@ -13,6 +19,26 @@ texture = ExtResource("1_qy32k")
 3:1/0 = 0
 1:1/0 = 0
 2:1/0 = 0
+4:0/next_alternative_id = 5
+4:0/0 = 0
+4:0/1 = 1
+4:0/2 = 2
+4:0/2/transpose = true
+4:0/3 = 3
+4:0/3/flip_v = true
+4:0/4 = 4
+4:0/4/flip_h = true
+4:0/4/transpose = true
+5:0/next_alternative_id = 5
+5:0/0 = 0
+5:0/1 = 1
+5:0/1/flip_h = true
+5:0/2 = 2
+5:0/3 = 3
+5:0/3/flip_h = true
+5:0/3/flip_v = true
+5:0/4 = 4
+5:0/4/flip_v = true
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pu314"]
 texture = ExtResource("2_nryul")
@@ -22,7 +48,7 @@ texture = ExtResource("2_nryul")
 0:1/animation_frame_2/duration = 1.0
 0:1/animation_frame_3/duration = 1.0
 0:1/0 = 0
-0:2/animation_speed = 5.0
+0:2/animation_speed = 2.5
 0:2/animation_frame_0/duration = 1.0
 0:2/animation_frame_1/duration = 1.0
 0:2/animation_frame_2/duration = 1.0
@@ -59,3 +85,5 @@ texture = ExtResource("2_nryul")
 [resource]
 sources/0 = SubResource("TileSetAtlasSource_yqjtg")
 sources/1 = SubResource("TileSetAtlasSource_pu314")
+pattern_0 = SubResource("TileMapPattern_aa4cq")
+pattern_1 = SubResource("TileMapPattern_n6wkp")

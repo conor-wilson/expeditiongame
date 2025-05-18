@@ -23,7 +23,6 @@ tile_set = ExtResource("2_lbhrr")
 [node name="Levels" type="Node2D" parent="."]
 
 [node name="Level1" parent="Levels" node_paths=PackedStringArray("player_config", "enemies_config", "blocks_config", "wind_config", "markers_config") instance=ExtResource("4_lbhrr")]
-visible = false
 player_config = NodePath("PlayerConfig")
 enemies_config = NodePath("EnemiesConfig")
 blocks_config = NodePath("BlocksConfig")
@@ -237,6 +236,7 @@ tile_map_data = PackedByteArray("AAAFAAkAAAAAAAAAAAA=")
 tile_set = ExtResource("6_5i0tg")
 
 [node name="Level8" parent="Levels" node_paths=PackedStringArray("player_config", "enemies_config", "blocks_config", "wind_config", "markers_config") instance=ExtResource("4_lbhrr")]
+visible = false
 player_config = NodePath("PlayerConfig")
 enemies_config = NodePath("EnemiesConfig")
 blocks_config = NodePath("BlocksConfig")

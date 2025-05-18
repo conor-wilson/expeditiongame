@@ -14,11 +14,13 @@ texture = ExtResource("1_qm8se")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1u06v"]
 texture = ExtResource("2_tmbgi")
+0:0/animation_speed = 5.0
 0:0/animation_frame_0/duration = 1.0
 0:0/animation_frame_1/duration = 1.0
 0:0/animation_frame_2/duration = 1.0
 0:0/animation_frame_3/duration = 1.0
 0:0/0 = 0
+0:1/animation_speed = 5.0
 0:1/animation_frame_0/duration = 1.0
 0:1/animation_frame_1/duration = 1.0
 0:1/animation_frame_2/duration = 1.0
