@@ -17,26 +17,26 @@ tile_set = ExtResource("1_el5y6")
 [node name="Slots" type="Node2D" parent="."]
 
 [node name="Slot0" parent="Slots" instance=ExtResource("2_4axmw")]
-offset_left = 16.0
-offset_top = 24.0
-offset_right = 32.0
-offset_bottom = 40.0
+offset_left = 13.0
+offset_top = 21.0
+offset_right = 37.0
+offset_bottom = 45.0
 focus_neighbor_bottom = NodePath("../Slot1")
 block = 1
 
 [node name="Slot1" parent="Slots" instance=ExtResource("2_4axmw")]
-offset_left = 16.0
-offset_top = 56.0
-offset_right = 32.0
-offset_bottom = 72.0
+offset_left = 13.0
+offset_top = 53.0
+offset_right = 37.0
+offset_bottom = 77.0
 focus_neighbor_top = NodePath("../Slot0")
 block = 2
 
 [node name="Slot2" parent="Slots" instance=ExtResource("2_4axmw")]
-offset_left = 16.0
-offset_top = 88.0
-offset_right = 32.0
-offset_bottom = 104.0
+offset_left = 13.0
+offset_top = 85.0
+offset_right = 37.0
+offset_bottom = 109.0
 block = 4
 
 [connection signal="focus_entered" from="Slots/Slot0" to="." method="_on_slot_focus_entered"]

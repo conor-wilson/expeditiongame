@@ -53,9 +53,9 @@ func hide_menus():
 
 func _on_level_phase_change(Phase: Variant) -> void:
 	if Phase == Level.Phase.PLAN:
-		$PhaseLabel.text = "PLAN YOUR\nEXPEDITION"
+		$PhaseLabel.text = "PLAN"
 	elif Phase == Level.Phase.EXPLORE:
-		$PhaseLabel.text = "EXPLORE!"
+		$PhaseLabel.text = "EXPLORE"
 
 
 func _on_level_win() -> void:
@@ -69,7 +69,7 @@ func _on_level_loss() -> void:
 	$LossMenu.show()
 
 
-func _on_level_select_pressed() -> void:
+func _on_level_select_button_pressed() -> void:
 	level_select.emit()
 
 func _on_reset_button_pressed() -> void:

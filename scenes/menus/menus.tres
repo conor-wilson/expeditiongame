@@ -1,0 +1,11 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bexo1ll0gvbof"]
+
+[ext_resource type="FontFile" uid="uid://jvihol7jhwgq" path="res://assets/fonts/High_Birth.ttf" id="1_w3kxh"]
+
+[resource]
+default_font = ExtResource("1_w3kxh")
+default_font_size = 8
+Button/colors/font_color = Color(0.0509804, 0.0313726, 0.0509804, 1)
+Button/colors/font_hover_color = Color(0.164706, 0.137255, 0.286275, 1)
+Button/colors/font_pressed_color = Color(0.196078, 0.32549, 0.372549, 1)
+Label/colors/font_color = Color(0.0509804, 0.0313726, 0.0509804, 1)

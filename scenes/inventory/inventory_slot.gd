@@ -24,7 +24,7 @@ func set_contents(new_block:Global.Block, amount:int):
 	set_count(amount)
 
 func set_count(amount:int):
-	$Count.text = String.num_int64(amount)
+	text = String.num_int64(amount)
 	if !amount:
 		hide()
 

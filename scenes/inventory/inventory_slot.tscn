@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://nig5w7o84v7"]
 
+[ext_resource type="Theme" uid="uid://bexo1ll0gvbof" path="res://scenes/menus/menus.tres" id="1_0uvgv"]
 [ext_resource type="Script" uid="uid://c5o3x6mtce48b" path="res://scenes/inventory/inventory_slot.gd" id="1_c7w7p"]
 [ext_resource type="Texture2D" uid="uid://f3l60kttwqkd" path="res://assets/art/BlockHighlight-Sheet.png" id="1_u6pog"]
 [ext_resource type="PackedScene" uid="uid://c1phvu5go5bn" path="res://scenes/map/map_tiles.tscn" id="2_c7w7p"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c7w7p"]
-bg_color = Color(0.6, 0.6, 0.6, 0.513726)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0uvgv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iywne"]
 atlas = ExtResource("1_u6pog")
@@ -29,35 +29,28 @@ animations = [{
 "speed": 2.0
 }]
 
-[sub_resource type="LabelSettings" id="LabelSettings_c7w7p"]
-font_size = 8
-
 [node name="InventorySlot" type="Button"]
-offset_left = -8.0
-offset_top = -8.0
-offset_right = 8.0
-offset_bottom = 8.0
-theme_override_styles/focus = SubResource("StyleBoxFlat_c7w7p")
+offset_right = 23.0
+offset_bottom = 24.0
+theme = ExtResource("1_0uvgv")
+theme_override_colors/font_hover_color = Color(0.984314, 0.87451, 0.607843, 1)
+theme_override_colors/font_color = Color(1, 0.976471, 0.894118, 1)
+theme_override_colors/font_pressed_color = Color(0.772549, 0.568627, 0.329412, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0uvgv")
+text = "1"
 flat = true
 script = ExtResource("1_c7w7p")
 
 [node name="Blocks" parent="." instance=ExtResource("2_c7w7p")]
+show_behind_parent = true
+position = Vector2(3, 3)
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0)
 
 [node name="Highlight" type="AnimatedSprite2D" parent="."]
-visible = false
-position = Vector2(8, 8)
+position = Vector2(11, 11)
 scale = Vector2(0.666667, 0.666667)
 sprite_frames = SubResource("SpriteFrames_0uvgv")
 autoplay = "default"
-
-[node name="Count" type="Label" parent="."]
-layout_mode = 0
-offset_right = 16.0
-offset_bottom = 16.0
-text = "1"
-label_settings = SubResource("LabelSettings_c7w7p")
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -980,9 +980,6 @@ focus_neighbor_left = NodePath("../../../TileButtons/Row5/Column10")
 [node name="Slot2" parent="Inventory/Slots" index="2"]
 focus_neighbor_left = NodePath("../../../TileButtons/Row7/Column10")
 
-[node name="Slot3" parent="Inventory/Slots" index="3"]
-focus_neighbor_left = NodePath("../../../TileButtons/Row9/Column10")
-
 [node name="GameArea" type="Area2D" parent="."]
 visible = false
 
