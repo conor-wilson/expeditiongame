@@ -65,6 +65,11 @@ func load_level(num:int):
 		level.load()
 	loss_menu_active = false
 	win_menu_active = false
+	
+	if num == 1:
+		$Levels/Level1/Hint1.show()
+		$Levels/Level1/Hint2.show()
+		$Levels/Level1/Hint3.hide()
 
 func hide_menus():
 	$WinMenu.hide()
@@ -78,6 +83,11 @@ func _on_level_phase_change(Phase: Variant) -> void:
 		$PhaseLabel.text = "PLAN"
 	elif Phase == Level.Phase.EXPLORE:
 		$PhaseLabel.text = "EXPLORE"
+		
+		if current_level == 1:
+			$Levels/Level1/Hint1.hide()
+			$Levels/Level1/Hint2.hide()
+			$Levels/Level1/Hint3.show()
 
 
 func _on_level_win() -> void:

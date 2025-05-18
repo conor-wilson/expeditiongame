@@ -47,25 +47,37 @@ position = Vector2(32, 80)
 tile_map_data = PackedByteArray("AAAFAAgAAAAAAAAAAAA=")
 tile_set = ExtResource("6_5i0tg")
 
-[node name="Title" type="Label" parent="Levels/Level1"]
-offset_top = -16.0
-offset_right = 64.0
-offset_bottom = 64.0
+[node name="Hint1" type="Label" parent="Levels/Level1"]
+offset_left = 1.0
+offset_top = 9.0
+offset_right = 305.0
+offset_bottom = 41.0
 theme = ExtResource("6_bdhmt")
 theme_override_colors/font_color = Color(1, 0.976471, 0.894118, 1)
-theme_override_font_sizes/font_size = 16
-text = "1"
+text = "First plan with the mouse. Blocks"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Hint" type="Label" parent="Levels/Level1"]
-offset_left = 16.0
-offset_top = 8.0
-offset_right = 320.0
-offset_bottom = 40.0
+[node name="Hint2" type="Label" parent="Levels/Level1"]
+offset_left = 1.0
+offset_top = 25.0
+offset_right = 305.0
+offset_bottom = 57.0
 theme = ExtResource("6_bdhmt")
 theme_override_colors/font_color = Color(1, 0.976471, 0.894118, 1)
-text = "Wind blows in the arrow's direction"
+text = "can only be placed on sand..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hint3" type="Label" parent="Levels/Level1"]
+visible = false
+offset_left = 1.0
+offset_top = 9.0
+offset_right = 305.0
+offset_bottom = 64.0
+theme = ExtResource("6_bdhmt")
+theme_override_colors/font_color = Color(1, 0.976471, 0.894118, 1)
+text = "Then explore with the arrow keys..."
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -99,6 +111,28 @@ position = Vector2(32, 80)
 tile_map_data = PackedByteArray("AAAFAAgAAAAAAAAAAAA=")
 tile_set = ExtResource("6_5i0tg")
 
+[node name="Hint1" type="Label" parent="Levels/Level2"]
+offset_left = 1.0
+offset_top = 9.0
+offset_right = 305.0
+offset_bottom = 41.0
+theme = ExtResource("6_bdhmt")
+theme_override_colors/font_color = Color(1, 0.976471, 0.894118, 1)
+text = "Press R to reset..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hint2" type="Label" parent="Levels/Level2"]
+offset_left = 1.0
+offset_top = 25.0
+offset_right = 305.0
+offset_bottom = 57.0
+theme = ExtResource("6_bdhmt")
+theme_override_colors/font_color = Color(1, 0.976471, 0.894118, 1)
+text = "Press ESC to exit..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Level3" parent="Levels" node_paths=PackedStringArray("player_config", "enemies_config", "blocks_config", "wind_config", "markers_config") instance=ExtResource("4_lbhrr")]
 visible = false
 player_config = NodePath("PlayerConfig")
@@ -130,8 +164,29 @@ position = Vector2(32, 80)
 tile_map_data = PackedByteArray("AAACAAgAAAAAAAAAAAA=")
 tile_set = ExtResource("6_5i0tg")
 
+[node name="Hint1" type="Label" parent="Levels/Level3"]
+offset_left = 1.0
+offset_top = 9.0
+offset_right = 305.0
+offset_bottom = 41.0
+theme = ExtResource("6_bdhmt")
+theme_override_colors/font_color = Color(1, 0.976471, 0.894118, 1)
+text = "Watch out for enemies, they"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hint2" type="Label" parent="Levels/Level3"]
+offset_left = 1.0
+offset_top = 25.0
+offset_right = 305.0
+offset_bottom = 57.0
+theme = ExtResource("6_bdhmt")
+theme_override_colors/font_color = Color(1, 0.976471, 0.894118, 1)
+text = "will always try to follow you..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Level4" parent="Levels" node_paths=PackedStringArray("player_config", "enemies_config", "blocks_config", "wind_config", "markers_config") instance=ExtResource("4_lbhrr")]
-visible = false
 player_config = NodePath("PlayerConfig")
 enemies_config = NodePath("EnemiesConfig")
 blocks_config = NodePath("BlocksConfig")
@@ -160,6 +215,28 @@ tile_set = ExtResource("6_5i0tg")
 position = Vector2(32, 80)
 tile_map_data = PackedByteArray("AAABAAUAAAAAAAAAAAA=")
 tile_set = ExtResource("6_5i0tg")
+
+[node name="Hint1" type="Label" parent="Levels/Level4"]
+offset_left = 1.0
+offset_top = 9.0
+offset_right = 305.0
+offset_bottom = 41.0
+theme = ExtResource("6_bdhmt")
+theme_override_colors/font_color = Color(1, 0.976471, 0.894118, 1)
+text = "Enemies are effected by wind"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hint2" type="Label" parent="Levels/Level4"]
+offset_left = 1.0
+offset_top = 25.0
+offset_right = 305.0
+offset_bottom = 57.0
+theme = ExtResource("6_bdhmt")
+theme_override_colors/font_color = Color(1, 0.976471, 0.894118, 1)
+text = "just like the you..."
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Level5" parent="Levels" node_paths=PackedStringArray("player_config", "enemies_config", "blocks_config", "wind_config", "markers_config") instance=ExtResource("4_lbhrr")]
 visible = false
@@ -190,6 +267,28 @@ tile_set = ExtResource("6_5i0tg")
 position = Vector2(32, 80)
 tile_map_data = PackedByteArray("AAAIAAUAAAAAAAAAAAA=")
 tile_set = ExtResource("6_5i0tg")
+
+[node name="Hint1" type="Label" parent="Levels/Level5"]
+offset_left = 1.0
+offset_top = 9.0
+offset_right = 305.0
+offset_bottom = 41.0
+theme = ExtResource("6_bdhmt")
+theme_override_colors/font_color = Color(1, 0.976471, 0.894118, 1)
+text = "Some enemies crawl,"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hint2" type="Label" parent="Levels/Level5"]
+offset_left = 1.0
+offset_top = 25.0
+offset_right = 305.0
+offset_bottom = 57.0
+theme = ExtResource("6_bdhmt")
+theme_override_colors/font_color = Color(1, 0.976471, 0.894118, 1)
+text = "other enemies fly..."
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Level6" parent="Levels" node_paths=PackedStringArray("player_config", "enemies_config", "blocks_config", "wind_config", "markers_config") instance=ExtResource("4_lbhrr")]
 visible = false
@@ -222,6 +321,28 @@ position = Vector2(32, 80)
 tile_map_data = PackedByteArray("AAAFAAkAAAAAAAAAAAA=")
 tile_set = ExtResource("6_5i0tg")
 
+[node name="Hint1" type="Label" parent="Levels/Level6"]
+offset_left = 1.0
+offset_top = 9.0
+offset_right = 305.0
+offset_bottom = 57.0
+theme = ExtResource("6_bdhmt")
+theme_override_colors/font_color = Color(1, 0.976471, 0.894118, 1)
+text = "Beware of fire..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hint2" type="Label" parent="Levels/Level6"]
+visible = false
+offset_left = 1.0
+offset_top = 25.0
+offset_right = 305.0
+offset_bottom = 57.0
+theme = ExtResource("6_bdhmt")
+theme_override_colors/font_color = Color(1, 0.976471, 0.894118, 1)
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Level7" parent="Levels" node_paths=PackedStringArray("player_config", "enemies_config", "blocks_config", "wind_config", "markers_config") instance=ExtResource("4_lbhrr")]
 visible = false
 player_config = NodePath("PlayerConfig")
@@ -252,6 +373,29 @@ tile_set = ExtResource("6_5i0tg")
 position = Vector2(32, 80)
 tile_map_data = PackedByteArray("AAAFAAkAAAAAAAAAAAA=")
 tile_set = ExtResource("6_5i0tg")
+
+[node name="Hint1" type="Label" parent="Levels/Level7"]
+offset_left = 1.0
+offset_top = 9.0
+offset_right = 305.0
+offset_bottom = 57.0
+theme = ExtResource("6_bdhmt")
+theme_override_colors/font_color = Color(1, 0.976471, 0.894118, 1)
+text = "Fire effects all creatures equeally..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hint2" type="Label" parent="Levels/Level7"]
+visible = false
+offset_left = 1.0
+offset_top = 25.0
+offset_right = 305.0
+offset_bottom = 57.0
+theme = ExtResource("6_bdhmt")
+theme_override_colors/font_color = Color(1, 0.976471, 0.894118, 1)
+text = "then explore with the arrow keys"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Level8" parent="Levels" node_paths=PackedStringArray("player_config", "enemies_config", "blocks_config", "wind_config", "markers_config") instance=ExtResource("4_lbhrr")]
 visible = false
@@ -284,6 +428,29 @@ position = Vector2(32, 80)
 tile_map_data = PackedByteArray("AAAFAAUAAAAAAAAAAAA=")
 tile_set = ExtResource("6_5i0tg")
 
+[node name="Hint1" type="Label" parent="Levels/Level8"]
+offset_left = 1.0
+offset_top = 9.0
+offset_right = 305.0
+offset_bottom = 57.0
+theme = ExtResource("6_bdhmt")
+theme_override_colors/font_color = Color(1, 0.976471, 0.894118, 1)
+text = "Careful. Fire spreads..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hint2" type="Label" parent="Levels/Level8"]
+visible = false
+offset_left = 1.0
+offset_top = 25.0
+offset_right = 305.0
+offset_bottom = 57.0
+theme = ExtResource("6_bdhmt")
+theme_override_colors/font_color = Color(1, 0.976471, 0.894118, 1)
+text = "then explore with the arrow keys"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Level9" parent="Levels" node_paths=PackedStringArray("player_config", "enemies_config", "blocks_config", "wind_config", "markers_config") instance=ExtResource("4_lbhrr")]
 visible = false
 player_config = NodePath("PlayerConfig")
@@ -315,6 +482,28 @@ position = Vector2(32, 80)
 tile_map_data = PackedByteArray("AAAFAAkAAAAAAAAAAAA=")
 tile_set = ExtResource("6_5i0tg")
 
+[node name="Hint1" type="Label" parent="Levels/Level9"]
+offset_left = 1.0
+offset_top = 9.0
+offset_right = 305.0
+offset_bottom = 41.0
+theme = ExtResource("6_bdhmt")
+theme_override_colors/font_color = Color(1, 0.976471, 0.894118, 1)
+text = "Birds are faster to"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hint2" type="Label" parent="Levels/Level9"]
+offset_left = 1.0
+offset_top = 25.0
+offset_right = 305.0
+offset_bottom = 57.0
+theme = ExtResource("6_bdhmt")
+theme_override_colors/font_color = Color(1, 0.976471, 0.894118, 1)
+text = "act than crabs..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Level10" parent="Levels" node_paths=PackedStringArray("player_config", "enemies_config", "blocks_config", "wind_config", "markers_config") instance=ExtResource("4_lbhrr")]
 visible = false
 player_config = NodePath("PlayerConfig")
@@ -345,6 +534,28 @@ tile_set = ExtResource("6_5i0tg")
 position = Vector2(32, 80)
 tile_map_data = PackedByteArray("AAAFAAkAAAAAAAAAAAA=")
 tile_set = ExtResource("6_5i0tg")
+
+[node name="Hint1" type="Label" parent="Levels/Level10"]
+offset_top = 8.0
+offset_right = 304.0
+offset_bottom = 56.0
+theme = ExtResource("6_bdhmt")
+theme_override_colors/font_color = Color(1, 0.976471, 0.894118, 1)
+text = "You can do this..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hint2" type="Label" parent="Levels/Level10"]
+visible = false
+offset_left = 1.0
+offset_top = 25.0
+offset_right = 305.0
+offset_bottom = 57.0
+theme = ExtResource("6_bdhmt")
+theme_override_colors/font_color = Color(1, 0.976471, 0.894118, 1)
+text = "then explore with the arrow keys"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="PhaseLabel" type="Label" parent="."]
 offset_left = 224.0
