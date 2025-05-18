@@ -22,33 +22,19 @@ color = Color(0.23212, 0.23212, 0.23212, 1)
 
 [node name="Title" type="Label" parent="MainMenu"]
 layout_mode = 0
-offset_top = 16.0
+offset_top = 32.0
 offset_right = 320.0
-offset_bottom = 64.0
+offset_bottom = 80.0
 text = "MAGIC MAP GAME"
 label_settings = SubResource("LabelSettings_tbgi4")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TileMapLayer" type="TileMapLayer" parent="MainMenu"]
-tile_map_data = PackedByteArray(0, 0, 9, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-tile_set = ExtResource("3_sugp2")
-
-[node name="VersionTag" type="Label" parent="MainMenu"]
-layout_mode = 0
-offset_left = 240.0
-offset_top = 264.0
-offset_right = 312.0
-offset_bottom = 280.0
-text = "WIP Playtest v0.1"
-label_settings = SubResource("LabelSettings_sugp2")
-vertical_alignment = 1
-
 [node name="Credit" type="Label" parent="MainMenu"]
 layout_mode = 0
-offset_top = 64.0
+offset_top = 80.0
 offset_right = 320.0
-offset_bottom = 80.0
+offset_bottom = 96.0
 text = "Made for Godot Wild Jam 81 by @QuietLantern"
 label_settings = SubResource("LabelSettings_sugp2")
 horizontal_alignment = 1
@@ -57,9 +43,9 @@ vertical_alignment = 1
 [node name="LevelButtons" type="Control" parent="MainMenu"]
 layout_mode = 3
 anchors_preset = 0
-offset_top = 112.0
+offset_top = 144.0
 offset_right = 320.0
-offset_bottom = 272.0
+offset_bottom = 288.0
 
 [node name="Level1" type="Button" parent="MainMenu/LevelButtons"]
 layout_mode = 0
@@ -141,45 +127,19 @@ offset_right = 272.0
 offset_bottom = 95.0
 text = "10"
 
-[node name="Level11" type="Button" parent="MainMenu/LevelButtons"]
-layout_mode = 0
-offset_left = 48.0
-offset_top = 112.0
-offset_right = 80.0
-offset_bottom = 143.0
-text = "11"
-
-[node name="Level12" type="Button" parent="MainMenu/LevelButtons"]
-layout_mode = 0
-offset_left = 96.0
-offset_top = 112.0
-offset_right = 128.0
-offset_bottom = 143.0
-text = "12"
-
-[node name="Level13" type="Button" parent="MainMenu/LevelButtons"]
-layout_mode = 0
-offset_left = 144.0
-offset_top = 112.0
-offset_right = 176.0
-offset_bottom = 143.0
-text = "13"
-
-[node name="Level14" type="Button" parent="MainMenu/LevelButtons"]
-layout_mode = 0
-offset_left = 192.0
-offset_top = 112.0
-offset_right = 224.0
-offset_bottom = 143.0
-text = "14"
-
-[node name="Level15" type="Button" parent="MainMenu/LevelButtons"]
+[node name="VersionTag" type="Label" parent="MainMenu"]
 layout_mode = 0
 offset_left = 240.0
-offset_top = 112.0
-offset_right = 272.0
-offset_bottom = 143.0
-text = "15"
+offset_top = 256.0
+offset_right = 312.0
+offset_bottom = 272.0
+text = "WIP Playtest v0.2"
+label_settings = SubResource("LabelSettings_sugp2")
+vertical_alignment = 1
+
+[node name="TileMapLayer" type="TileMapLayer" parent="MainMenu"]
+tile_map_data = PackedByteArray(0, 0, 9, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+tile_set = ExtResource("3_sugp2")
 
 [connection signal="main_menu" from="Game" to="." method="_on_game_main_menu"]
 [connection signal="pressed" from="MainMenu/LevelButtons/Level1" to="." method="_on_level_1_pressed"]
@@ -192,8 +152,3 @@ text = "15"
 [connection signal="pressed" from="MainMenu/LevelButtons/Level8" to="." method="_on_level_8_pressed"]
 [connection signal="pressed" from="MainMenu/LevelButtons/Level9" to="." method="_on_level_9_pressed"]
 [connection signal="pressed" from="MainMenu/LevelButtons/Level10" to="." method="_on_level_10_pressed"]
-[connection signal="pressed" from="MainMenu/LevelButtons/Level11" to="." method="_on_level_11_pressed"]
-[connection signal="pressed" from="MainMenu/LevelButtons/Level12" to="." method="_on_level_12_pressed"]
-[connection signal="pressed" from="MainMenu/LevelButtons/Level13" to="." method="_on_level_13_pressed"]
-[connection signal="pressed" from="MainMenu/LevelButtons/Level14" to="." method="_on_level_14_pressed"]
-[connection signal="pressed" from="MainMenu/LevelButtons/Level15" to="." method="_on_level_15_pressed"]
