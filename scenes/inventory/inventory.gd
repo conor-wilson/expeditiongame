@@ -14,8 +14,20 @@ var selected_block:Global.Block
 	#Global.Block.WATER: $Slots/Slot3,
 }
 
+const TRIMMED_FALLING_STONE = preload("res://assets/sfx/trimmed_falling_stone.mp3")
+const TRIMMED_WOOD_KNOCK = preload("res://assets/sfx/trimmed_wood_knock.mp3")
+const TRIMMED_FIRE_SOUND_EFFECT = preload("res://assets/sfx/trimmed_fire_sound_effect.mp3")
+const MAX_SFX_PLAYERS:int = 6
+var sfx_players:Array[AudioStreamPlayer] = []
+var current_sfx_player_index:int = 0
+
 func _ready() -> void:
 	set_empty_inventory_dict()
+	
+	for i in range(MAX_SFX_PLAYERS):
+		var new_sfx_player = AudioStreamPlayer.new()
+		add_child(new_sfx_player)
+		sfx_players.append(new_sfx_player)
 
 
 ## INVENTORY SETUP FUNCS
@@ -40,9 +52,30 @@ func set_empty_inventory_dict():
 
 func set_selected_block(new_block:Global.Block):
 	selected_block = new_block
+	play_sfx()
+
+func play_sfx():
+	if selected_block == null || selected_block == Global.Block.EMPTY:
+		return
+	
+	var sfx_player = sfx_players[current_sfx_player_index]
+	sfx_player.stop()
+	
+	match selected_block:
+		Global.Block.WOOD:
+			sfx_player.stream = TRIMMED_WOOD_KNOCK
+		Global.Block.STONE:
+			sfx_player.stream = TRIMMED_FALLING_STONE
+		Global.Block.FIRE:
+			sfx_player.stream = TRIMMED_FIRE_SOUND_EFFECT
+	
+	sfx_player.pitch_scale = randf_range(0.9, 1.1)
+	sfx_player.play()
+	current_sfx_player_index = (current_sfx_player_index + 1) % MAX_SFX_PLAYERS
 
 func subtract_from_selected_block():
 	inventory_dict[selected_block] -= 1
+	play_sfx()
 	
 	if inventory_dict[selected_block] <= 0:
 		set_selected_block(Global.Block.EMPTY)
