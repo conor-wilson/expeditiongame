@@ -2,6 +2,7 @@ class_name Game extends Node2D
 
 signal main_menu
 signal level_select
+signal level_won(level:int)
 
 @onready var levels: Node2D = $Levels
 @onready var spare_levels: Node2D = $SpareLevels
@@ -97,6 +98,7 @@ func _on_level_win() -> void:
 	$WinMenu.show()
 	loss_menu_active = false
 	win_menu_active = true
+	level_won.emit(current_level)
 
 func _on_level_loss() -> void:
 	$DeathNoise.pitch_scale = randf_range(0.9, 1.1)

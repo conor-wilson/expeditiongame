@@ -153,6 +153,7 @@ offset_right = 121.0
 offset_bottom = 57.0
 theme = SubResource("Theme_sugp2")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_jyhfs")
+disabled = true
 text = "2"
 flat = true
 
@@ -164,6 +165,7 @@ offset_right = 185.0
 offset_bottom = 57.0
 theme = SubResource("Theme_sugp2")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_jyhfs")
+disabled = true
 text = "3"
 flat = true
 
@@ -175,6 +177,7 @@ offset_right = 249.0
 offset_bottom = 57.0
 theme = SubResource("Theme_sugp2")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_jyhfs")
+disabled = true
 text = "4"
 flat = true
 
@@ -186,6 +189,7 @@ offset_right = 57.0
 offset_bottom = 121.0
 theme = SubResource("Theme_sugp2")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_jyhfs")
+disabled = true
 text = "5"
 flat = true
 
@@ -197,6 +201,7 @@ offset_right = 121.0
 offset_bottom = 121.0
 theme = SubResource("Theme_sugp2")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_jyhfs")
+disabled = true
 text = "6"
 flat = true
 
@@ -208,6 +213,7 @@ offset_right = 185.0
 offset_bottom = 121.0
 theme = SubResource("Theme_sugp2")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_jyhfs")
+disabled = true
 text = "7"
 flat = true
 
@@ -219,6 +225,7 @@ offset_right = 249.0
 offset_bottom = 121.0
 theme = SubResource("Theme_sugp2")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_jyhfs")
+disabled = true
 text = "8"
 flat = true
 
@@ -230,6 +237,7 @@ offset_right = 57.0
 offset_bottom = 185.0
 theme = SubResource("Theme_sugp2")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_jyhfs")
+disabled = true
 text = "9"
 flat = true
 
@@ -241,6 +249,7 @@ offset_right = 121.0
 offset_bottom = 185.0
 theme = SubResource("Theme_sugp2")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_jyhfs")
+disabled = true
 text = "10"
 flat = true
 
@@ -363,6 +372,7 @@ flat = true
 stream = ExtResource("6_tefeu")
 
 [connection signal="level_select" from="Game" to="." method="_on_game_level_select"]
+[connection signal="level_won" from="Game" to="." method="_on_game_level_won"]
 [connection signal="main_menu" from="Game" to="." method="_on_game_main_menu"]
 [connection signal="pressed" from="MainMenu/LevelSelectButton" to="." method="_on_level_select_pressed"]
 [connection signal="pressed" from="MainMenu/CreditsButton" to="." method="_on_credits_button_pressed"]

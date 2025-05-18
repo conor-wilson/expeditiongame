@@ -113,3 +113,15 @@ func _on_credits_button_pressed() -> void:
 
 func _on_settings_button_pressed() -> void:
 	_show_settings()
+
+
+func _on_game_level_won(level:int) -> void:
+	var level_buttons = $LevelSelectMenu/LevelButtons.get_children()
+	
+	if level == 10:
+		# TODO: Victory screen!
+		return
+	
+	if level_buttons[level] is Button:
+		level_buttons[level].disabled = false
+	
