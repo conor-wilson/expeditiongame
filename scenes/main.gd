@@ -8,6 +8,7 @@ extends Node2D
 
 func _ready() -> void:
 	_show_main_menu()
+	$Music/OceanWaves.play()
 
 func _show_main_menu():
 	_close_menus()

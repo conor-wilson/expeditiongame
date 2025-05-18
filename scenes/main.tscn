@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=4 uid="uid://djjlfvgfynn6u"]
+[gd_scene load_steps=15 format=4 uid="uid://djjlfvgfynn6u"]
 
 [ext_resource type="PackedScene" uid="uid://dvu7ny3j1n00j" path="res://scenes/game/game.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://dmlfqgjpupeft" path="res://scenes/main.gd" id="1_sugp2"]
 [ext_resource type="TileSet" uid="uid://cro1fx4ifi25h" path="res://assets/tilesets/gametiles.tres" id="3_sugp2"]
 [ext_resource type="Theme" uid="uid://bexo1ll0gvbof" path="res://scenes/menus/menus.tres" id="3_tbgi4"]
 [ext_resource type="FontFile" uid="uid://jvihol7jhwgq" path="res://assets/fonts/High_Birth.ttf" id="4_jyhfs"]
+[ext_resource type="AudioStream" uid="uid://g31n3p0auqpn" path="res://assets/music/ocean-waves-250310.mp3" id="6_tefeu"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tbgi4"]
 font = ExtResource("4_jyhfs")
@@ -355,6 +356,12 @@ offset_bottom = 263.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_tefeu")
 text = "Back"
 flat = true
+
+[node name="Music" type="Node2D" parent="."]
+
+[node name="OceanWaves" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("6_tefeu")
+autoplay = true
 
 [connection signal="level_select" from="Game" to="." method="_on_game_level_select"]
 [connection signal="main_menu" from="Game" to="." method="_on_game_main_menu"]
