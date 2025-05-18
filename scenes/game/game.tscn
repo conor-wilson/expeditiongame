@@ -368,6 +368,7 @@ tile_map_data = PackedByteArray("AAADAAMAAAAEAAAABAADAAQAAAAFAAAAAQAEAAMAAAACAAA
 tile_set = ExtResource("2_lbhrr")
 
 [node name="WinMessage" type="Label" parent="WinMenu"]
+layout_mode = 0
 offset_left = 57.0
 offset_top = 41.0
 offset_right = 153.0
@@ -377,6 +378,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LevelSelectButton" type="Button" parent="WinMenu"]
+layout_mode = 0
 offset_left = 57.0
 offset_top = 105.0
 offset_right = 153.0
@@ -386,12 +388,13 @@ text = "Level Select"
 flat = true
 
 [node name="HideMenu" type="Label" parent="WinMenu"]
+layout_mode = 0
 offset_left = 40.0
 offset_top = 160.0
 offset_right = 172.0
 offset_bottom = 195.0
 theme_override_colors/font_color = Color(1, 0.976471, 0.894118, 1)
-text = "Press and hold H to
+text = "Press and hold M to
 view the map"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -450,7 +453,7 @@ offset_top = 160.0
 offset_right = 172.0
 offset_bottom = 195.0
 theme_override_colors/font_color = Color(1, 0.976471, 0.894118, 1)
-text = "Press and hold H to
+text = "Press and hold M to
 view the map"
 horizontal_alignment = 1
 vertical_alignment = 1
