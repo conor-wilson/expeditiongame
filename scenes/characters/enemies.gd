@@ -75,15 +75,18 @@ func follow_player(player_coords:Vector2i):
 	# Move the Goblins
 	var first_movable_goblins:Array[Character] = _get_movable_enemies_of_type(EnemyType.GOBLIN, player_coords)
 	for goblin in first_movable_goblins:
-		goblin.walk(_get_next_tile_direction(goblin, player_coords))
+		if !tile_contains_enemy(_get_next_tile_coords(goblin, player_coords)): # This extra check ensures goblins don't mush onto the same tile
+			goblin.walk(_get_next_tile_direction(goblin, player_coords))
 	var second_movable_goblins:Array[Character] = _get_movable_enemies_of_type(EnemyType.GOBLIN, player_coords)
 	for goblin in second_movable_goblins:
 		if !first_movable_goblins.has(goblin):
-			goblin.walk(_get_next_tile_direction(goblin, player_coords))
+			if !tile_contains_enemy(_get_next_tile_coords(goblin, player_coords)): # This extra check ensures goblins don't mush onto the same tile
+				goblin.walk(_get_next_tile_direction(goblin, player_coords))
 	var third_movable_goblins:Array[Character] = _get_movable_enemies_of_type(EnemyType.GOBLIN, player_coords)
 	for goblin in third_movable_goblins:
 		if !first_movable_goblins.has(goblin) && !second_movable_goblins.has(goblin):
-			goblin.walk(_get_next_tile_direction(goblin, player_coords))
+			if !tile_contains_enemy(_get_next_tile_coords(goblin, player_coords)): # This extra check ensures goblins don't mush onto the same tile
+				goblin.walk(_get_next_tile_direction(goblin, player_coords))
 	
 	# Build the array of movale Angry Red Men
 	var first_movable_angry_red_men:Array[Character] = _get_movable_enemies_of_type(EnemyType.ANGRY_RED_MAN, player_coords)
@@ -95,15 +98,18 @@ func follow_player(player_coords:Vector2i):
 	
 	# Move Angry Red Men
 	for angry_red_man in first_movable_angry_red_men:
-		angry_red_man.walk(_get_next_tile_direction(angry_red_man, player_coords))
+		if !tile_contains_enemy(_get_next_tile_coords(angry_red_man, player_coords)): # This extra check ensures angry red men don't mush onto the same tile
+			angry_red_man.walk(_get_next_tile_direction(angry_red_man, player_coords))
 	var second_angry_red_men:Array[Character] = _get_movable_enemies_of_type(EnemyType.ANGRY_RED_MAN, player_coords)
 	for angry_red_man in second_angry_red_men:
 		if !first_movable_angry_red_men.has(angry_red_man):
-			angry_red_man.walk(_get_next_tile_direction(angry_red_man, player_coords))
+			if !tile_contains_enemy(_get_next_tile_coords(angry_red_man, player_coords)): # This extra check ensures angry red men don't mush onto the same tile
+				angry_red_man.walk(_get_next_tile_direction(angry_red_man, player_coords))
 	var third_angry_red_men:Array[Character] = _get_movable_enemies_of_type(EnemyType.ANGRY_RED_MAN, player_coords)
 	for angry_red_man in third_angry_red_men:
 		if !first_movable_angry_red_men.has(angry_red_man) && !second_angry_red_men.has(angry_red_man):
-			angry_red_man.walk(_get_next_tile_direction(angry_red_man, player_coords))
+			if !tile_contains_enemy(_get_next_tile_coords(angry_red_man, player_coords)): # This extra check ensures angry red men don't mush onto the same tile
+				angry_red_man.walk(_get_next_tile_direction(angry_red_man, player_coords))
 	
 
 func apply_wind():

@@ -228,9 +228,6 @@ func progress_one_tick():
 	tick_is_occurring = false
 
 
-## WIND FUNCTIONALITY
-
-
 ## WATER FUNCTIONALITY
 
 func _flood_surrounding_tiles(coords:Vector2i):

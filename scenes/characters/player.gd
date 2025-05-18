@@ -52,6 +52,11 @@ func apply_wind():
 	while true:
 		if !map.tile_is_blowable_wind(player_character.get_current_coords()):
 			return
+			
+		# Edge-case for when there's a dead enemy in front of the player
+		var next_enemy:Character = enemies.get_enemy_at_coords(map.get_blown_to_coords_from_wind_tile(player_character.get_current_coords()))
+		if next_enemy != null && !next_enemy.alive:
+			return
 		
 		check_death()
 		
