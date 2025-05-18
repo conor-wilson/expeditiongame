@@ -29,6 +29,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("reset"):
 		load_level(current_level)
 	if Input.is_action_just_pressed("pause"):
+		CursorManager.set_mouse_block_cursor(Global.Block.EMPTY)
 		main_menu.emit()
 	
 	if Input.is_action_just_pressed("hide_menu"):
@@ -101,22 +102,26 @@ func _on_level_loss() -> void:
 	print("LEVEL ", current_level, " LOST")
 	await get_tree().create_timer(0.5).timeout
 	$LossMenu.show()
+	CursorManager.set_mouse_block_cursor(Global.Block.EMPTY)
 	loss_menu_active = true
 	win_menu_active  = false
 
 
 func _on_level_select_button_pressed() -> void:
 	level_select.emit()
+	CursorManager.set_mouse_block_cursor(Global.Block.EMPTY)
 	loss_menu_active = false
 	win_menu_active  = false
 
 func _on_reset_button_pressed() -> void:
 	load_level(current_level)
 	hide_menus()
+	CursorManager.set_mouse_block_cursor(Global.Block.EMPTY)
 	loss_menu_active = false
 	win_menu_active  = false
 
 func _on_menu_button_pressed() -> void:
 	main_menu.emit()
+	CursorManager.set_mouse_block_cursor(Global.Block.EMPTY)
 	loss_menu_active = false
 	win_menu_active  = false
