@@ -44,7 +44,7 @@ func walk(direction:Vector2i) -> bool:
 
 func kill():
 	alive = false
-	modulate = Color.RED
+	modulate = Color("4f4f4e")
 	# TODO: Add some alternative tiles for death
 
 
