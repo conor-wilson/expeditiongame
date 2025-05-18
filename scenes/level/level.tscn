@@ -449,7 +449,7 @@ offset_left = 160.0
 offset_right = 176.0
 focus_neighbor_left = NodePath("../Column9")
 focus_neighbor_top = NodePath("../../Row3/Column10")
-focus_neighbor_right = NodePath("../../../Inventory/Slots/Slot1")
+focus_neighbor_right = NodePath("../../../Inventory/Slots/Slot0")
 focus_neighbor_bottom = NodePath("../../Row5/Column10")
 
 [node name="Row5" type="Node2D" parent="TileButtons"]
@@ -625,7 +625,7 @@ offset_left = 160.0
 offset_right = 176.0
 focus_neighbor_left = NodePath("../Column9")
 focus_neighbor_top = NodePath("../../Row5/Column10")
-focus_neighbor_right = NodePath("../../../Inventory/Slots/Slot2")
+focus_neighbor_right = NodePath("../../../Inventory/Slots/Slot1")
 focus_neighbor_bottom = NodePath("../../Row7/Column10")
 
 [node name="Row7" type="Node2D" parent="TileButtons"]
@@ -801,7 +801,7 @@ offset_left = 160.0
 offset_right = 176.0
 focus_neighbor_left = NodePath("../Column9")
 focus_neighbor_top = NodePath("../../Row7/Column10")
-focus_neighbor_right = NodePath("../../../Inventory/Slots/Slot3")
+focus_neighbor_right = NodePath("../../../Inventory/Slots/Slot2")
 focus_neighbor_bottom = NodePath("../../Row9/Column10")
 
 [node name="Row9" type="Node2D" parent="TileButtons"]
@@ -889,7 +889,7 @@ offset_left = 160.0
 offset_right = 176.0
 focus_neighbor_left = NodePath("../Column9")
 focus_neighbor_top = NodePath("../../Row8/Column10")
-focus_neighbor_right = NodePath("../../../Inventory/Slots/Slot3")
+focus_neighbor_right = NodePath("../../../Inventory/Slots/Slot2")
 focus_neighbor_bottom = NodePath("../../Row10/Column10")
 
 [node name="Row10" type="Node2D" parent="TileButtons"]
@@ -967,6 +967,7 @@ offset_left = 160.0
 offset_right = 176.0
 focus_neighbor_left = NodePath("../Column9")
 focus_neighbor_top = NodePath("../../Row9/Column10")
+focus_neighbor_right = NodePath("../../../Inventory/Slots/Slot2")
 
 [node name="Inventory" parent="." instance=ExtResource("4_xb4v1")]
 position = Vector2(240, 112)

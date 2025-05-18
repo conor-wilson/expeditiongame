@@ -35,6 +35,7 @@ offset_bottom = 24.0
 theme = ExtResource("1_0uvgv")
 theme_override_colors/font_hover_color = Color(0.984314, 0.87451, 0.607843, 1)
 theme_override_colors/font_color = Color(1, 0.976471, 0.894118, 1)
+theme_override_colors/font_focus_color = Color(0.984314, 0.87451, 0.607843, 1)
 theme_override_colors/font_pressed_color = Color(0.772549, 0.568627, 0.329412, 1)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_0uvgv")
 text = "1"
