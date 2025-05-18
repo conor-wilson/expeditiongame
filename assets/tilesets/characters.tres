@@ -20,12 +20,16 @@ texture = ExtResource("2_tmbgi")
 0:0/animation_frame_2/duration = 1.0
 0:0/animation_frame_3/duration = 1.0
 0:0/0 = 0
+0:1/next_alternative_id = 3
 0:1/animation_speed = 5.0
 0:1/animation_frame_0/duration = 1.0
 0:1/animation_frame_1/duration = 1.0
 0:1/animation_frame_2/duration = 1.0
 0:1/animation_frame_3/duration = 1.0
 0:1/0 = 0
+0:1/1 = 1
+0:1/2 = 2
+0:1/2/flip_h = true
 
 [resource]
 sources/1 = SubResource("TileSetAtlasSource_1u06v")

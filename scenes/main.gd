@@ -5,6 +5,7 @@ extends Node2D
 @onready var level_select_menu: ColorRect = $LevelSelectMenu
 @onready var settings_menu: ColorRect = $SettingsMenu
 @onready var credits_menu: ColorRect = $CreditsMenu
+@onready var victory_screen: ColorRect = $VictoryScreen
 
 func _ready() -> void:
 	_show_main_menu()
@@ -26,11 +27,16 @@ func _show_credits():
 	_close_menus()
 	credits_menu.show()
 
+func _show_victory_screen():
+	_close_menus()
+	victory_screen.show()
+
 func _close_menus():
 	main_menu.hide()
 	level_select_menu.hide()
 	settings_menu.hide()
 	credits_menu.hide()
+	victory_screen.hide()
 
 func _on_game_main_menu() -> void:
 	_show_main_menu()
@@ -118,8 +124,8 @@ func _on_settings_button_pressed() -> void:
 func _on_game_level_won(level:int) -> void:
 	var level_buttons = $LevelSelectMenu/LevelButtons.get_children()
 	
-	if level == 10:
-		# TODO: Victory screen!
+	if level >= 10:
+		_show_victory_screen()
 		return
 	
 	if level_buttons[level] is Button:
