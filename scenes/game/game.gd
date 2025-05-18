@@ -1,6 +1,7 @@
 class_name Game extends Node2D
 
 signal main_menu
+signal level_select
 
 @onready var levels: Node2D = $Levels
 @onready var spare_levels: Node2D = $SpareLevels
@@ -68,10 +69,12 @@ func _on_level_loss() -> void:
 	$LossMenu.show()
 
 
-func _on_menu_button_pressed() -> void:
-	main_menu.emit()
+func _on_level_select_pressed() -> void:
+	level_select.emit()
 
 func _on_reset_button_pressed() -> void:
 	load_level(current_level)
 	hide_menus()
-	
+
+func _on_menu_button_pressed() -> void:
+	main_menu.emit()

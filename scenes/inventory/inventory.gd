@@ -10,8 +10,8 @@ var selected_block:Global.Block
 	# TODO: Make this configurable
 	Global.Block.WOOD:  $Slots/Slot0,
 	Global.Block.STONE: $Slots/Slot1,
-	Global.Block.WATER: $Slots/Slot2,
-	Global.Block.FIRE:  $Slots/Slot3,
+	Global.Block.FIRE:  $Slots/Slot2,
+	#Global.Block.WATER: $Slots/Slot3,
 }
 
 func _ready() -> void:
@@ -34,7 +34,7 @@ func set_empty_inventory_dict():
 	inventory_dict = {
 		Global.Block.WOOD: 0,
 		Global.Block.STONE: 0,
-		Global.Block.WATER: 0,
+		#Global.Block.WATER: 0,
 		Global.Block.FIRE: 0,
 	}
 
@@ -53,7 +53,7 @@ func subtract_from_selected_block():
 func refresh_slots():
 	slots[Global.Block.WOOD].set_contents(Global.Block.WOOD,  inventory_dict[Global.Block.WOOD])
 	slots[Global.Block.STONE].set_contents(Global.Block.STONE, inventory_dict[Global.Block.STONE])
-	slots[Global.Block.WATER].set_contents(Global.Block.WATER, inventory_dict[Global.Block.WATER])
+	#slots[Global.Block.WATER].set_contents(Global.Block.WATER, inventory_dict[Global.Block.WATER])
 	slots[Global.Block.FIRE].set_contents(Global.Block.FIRE,  inventory_dict[Global.Block.FIRE])
 
 
@@ -69,7 +69,7 @@ func is_empty() -> bool:
 	return (
 		inventory_dict[Global.Block.WOOD] == 0 &&
 		inventory_dict[Global.Block.STONE] == 0 &&
-		inventory_dict[Global.Block.WATER] == 0 &&
+		#inventory_dict[Global.Block.WATER] == 0 &&
 		inventory_dict[Global.Block.FIRE] == 0
 	)
 

@@ -9,7 +9,7 @@
 script = ExtResource("1_tvok8")
 
 [node name="Background" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAAAAAAAAACAAAAAAABAAAAAAACAAAAAAACAAAAAAACAAAAAAAAAAEAAAACAAAAAAAAAAIAAAACAAAAAAAAAAMAAAACAAAAAAAAAAQAAAACAAAAAAAAAAUAAAACAAAAAAAAAAYAAAACAAAAAAAAAAcAAAACAAAAAAAAAAgAAAACAAAAAAACAAgAAAACAAAAAAACAAcAAAACAAAAAAABAAgAAAACAAAAAAABAAcAAAACAAAAAAACAAYAAAACAAAAAAABAAYAAAACAAAAAAABAAUAAAACAAAAAAABAAQAAAACAAAAAAABAAMAAAACAAAAAAABAAIAAAACAAAAAAABAAEAAAACAAAAAAACAAEAAAACAAAAAAACAAIAAAACAAAAAAACAAMAAAACAAAAAAACAAUAAAACAAAAAAACAAQAAAACAAAAAAA=")
+tile_map_data = PackedByteArray("AAAAAAAAAAAFAAAAAwABAAAAAAAEAAAAAwACAAAAAAAFAAAABAAAAAEAAAAEAAAABAAAAAIAAAAEAAAABAAAAAMAAAAEAAAABAAAAAQAAAAEAAAABAAAAAUAAAAEAAAABAAAAAYAAAAEAAAABAAAAAcAAAAFAAAAAQACAAcAAAAFAAAAAgABAAcAAAAEAAAAAQACAAYAAAAEAAAAAgABAAYAAAACAAAAAAABAAUAAAACAAAAAAABAAQAAAACAAAAAAABAAMAAAACAAAAAAABAAIAAAACAAAAAAABAAEAAAACAAAAAAACAAEAAAAEAAAAAgACAAIAAAAEAAAAAgACAAMAAAAEAAAAAgACAAUAAAAEAAAAAgACAAQAAAAEAAAAAgA=")
 tile_set = ExtResource("1_el5y6")
 
 [node name="Blocks" parent="." instance=ExtResource("3_tvok8")]
@@ -18,36 +18,25 @@ tile_set = ExtResource("1_el5y6")
 
 [node name="Slot0" parent="Slots" instance=ExtResource("2_4axmw")]
 offset_left = 16.0
-offset_top = 16.0
+offset_top = 24.0
 offset_right = 32.0
-offset_bottom = 32.0
+offset_bottom = 40.0
 focus_neighbor_bottom = NodePath("../Slot1")
 block = 1
 
 [node name="Slot1" parent="Slots" instance=ExtResource("2_4axmw")]
 offset_left = 16.0
-offset_top = 48.0
+offset_top = 56.0
 offset_right = 32.0
-offset_bottom = 64.0
+offset_bottom = 72.0
 focus_neighbor_top = NodePath("../Slot0")
-focus_neighbor_bottom = NodePath("../Slot2")
 block = 2
 
 [node name="Slot2" parent="Slots" instance=ExtResource("2_4axmw")]
 offset_left = 16.0
-offset_top = 80.0
+offset_top = 88.0
 offset_right = 32.0
-offset_bottom = 96.0
-focus_neighbor_top = NodePath("../Slot1")
-focus_neighbor_bottom = NodePath("../Slot3")
-block = 3
-
-[node name="Slot3" parent="Slots" instance=ExtResource("2_4axmw")]
-offset_left = 16.0
-offset_top = 112.0
-offset_right = 32.0
-offset_bottom = 128.0
-focus_neighbor_top = NodePath("../Slot2")
+offset_bottom = 104.0
 block = 4
 
 [connection signal="focus_entered" from="Slots/Slot0" to="." method="_on_slot_focus_entered"]
@@ -56,5 +45,3 @@ block = 4
 [connection signal="selected" from="Slots/Slot1" to="." method="_on_slot_selected"]
 [connection signal="focus_entered" from="Slots/Slot2" to="." method="_on_slot_focus_entered"]
 [connection signal="selected" from="Slots/Slot2" to="." method="_on_slot_selected"]
-[connection signal="focus_entered" from="Slots/Slot3" to="." method="_on_slot_focus_entered"]
-[connection signal="selected" from="Slots/Slot3" to="." method="_on_slot_selected"]

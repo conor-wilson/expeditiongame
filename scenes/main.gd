@@ -34,6 +34,9 @@ func _close_menus():
 func _on_game_main_menu() -> void:
 	_show_main_menu()
 
+func _on_game_level_select() -> void:
+	_show_level_select()
+
 func _on_level_select_pressed() -> void:
 	_show_level_select()
 

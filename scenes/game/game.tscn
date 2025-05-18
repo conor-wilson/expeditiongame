@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://dvu7ny3j1n00j"]
+[gd_scene load_steps=9 format=4 uid="uid://dvu7ny3j1n00j"]
 
 [ext_resource type="Script" uid="uid://debtv741hvvl7" path="res://scenes/game/game.gd" id="1_lnu2h"]
 [ext_resource type="TileSet" uid="uid://cro1fx4ifi25h" path="res://assets/tilesets/gametiles.tres" id="2_lbhrr"]
@@ -11,6 +11,8 @@
 [sub_resource type="LabelSettings" id="LabelSettings_lbhrr"]
 line_spacing = 0.0
 font_size = 8
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lfrn8"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_lnu2h")
@@ -353,7 +355,7 @@ offset_left = 64.0
 offset_top = 128.0
 offset_right = 176.0
 offset_bottom = 216.0
-color = Color(0, 0, 0, 0.619608)
+color = Color(0.0509804, 0.0313726, 0.0509804, 1)
 
 [node name="WinMessage" type="Label" parent="WinMenu"]
 layout_mode = 0
@@ -363,48 +365,63 @@ text = "YOU WIN!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MenuButton" type="Button" parent="WinMenu"]
+[node name="LevelSelect" type="Button" parent="WinMenu"]
 layout_mode = 0
 offset_left = 32.0
 offset_top = 48.0
 offset_right = 80.0
 offset_bottom = 72.0
 theme_override_font_sizes/font_size = 8
-text = "MENU"
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lfrn8")
+text = "Level Select"
 
 [node name="LossMenu" type="ColorRect" parent="."]
 visible = false
-offset_left = 64.0
-offset_top = 112.0
-offset_right = 176.0
-offset_bottom = 232.0
-color = Color(0, 0, 0, 0.607843)
+offset_left = 48.0
+offset_top = 96.0
+offset_right = 256.0
+offset_bottom = 240.0
+color = Color(0.0509804, 0.0313726, 0.0509804, 1)
+
+[node name="Background" type="TileMapLayer" parent="LossMenu"]
+tile_map_data = PackedByteArray("AAAAAAYAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAABAAEAAAAAAAAAAAABAAIAAAAAAAAAAAABAAMAAAAAAAAAAAABAAQAAAAAAAAAAAABAAUAAAAAAAAAAAABAAYAAAAAAAAAAAACAAYAAAAAAAAAAAACAAUAAAAAAAAAAAACAAQAAAAAAAAAAAACAAMAAAAAAAAAAAACAAIAAAAAAAAAAAACAAEAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAADAAEAAAAAAAAAAAADAAIAAAAAAAAAAAADAAMAAAAAAAAAAAADAAQAAAAAAAAAAAADAAUAAAAAAAAAAAADAAYAAAAAAAAAAAAEAAYAAAAAAAAAAAAEAAUAAAAAAAAAAAAEAAQAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAFAAEAAAAAAAAAAAAFAAIAAAAAAAAAAAAFAAMAAAAAAAAAAAAFAAQAAAAAAAAAAAAFAAUAAAAAAAAAAAAFAAYAAAAAAAAAAAAGAAYAAAAAAAAAAAAGAAUAAAAAAAAAAAAGAAQAAAAAAAAAAAAGAAMAAAAAAAAAAAAGAAIAAAAAAAAAAAAGAAEAAAAAAAAAAAAGAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAHAAEAAAAAAAAAAAAHAAIAAAAAAAAAAAAHAAMAAAAAAAAAAAAHAAQAAAAAAAAAAAAHAAUAAAAAAAAAAAAHAAYAAAAAAAAAAAAHAAcAAAAAAAAAAAAHAAgAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAcAAAAAAAAAAAABAAcAAAAAAAAAAAACAAcAAAAAAAAAAAADAAcAAAAAAAAAAAAEAAcAAAAAAAAAAAAFAAcAAAAAAAAAAAAGAAcAAAAAAAAAAAAGAAgAAAAAAAAAAAAFAAgAAAAAAAAAAAAEAAgAAAAAAAAAAAADAAgAAAAAAAAAAAACAAgAAAAAAAAAAAABAAgAAAAAAAAAAAAIAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAALAAAAAAAAAAAAAAALAAEAAAAAAAAAAAALAAIAAAAAAAAAAAALAAMAAAAAAAAAAAALAAQAAAAAAAAAAAALAAUAAAAAAAAAAAALAAYAAAAAAAAAAAALAAcAAAAAAAAAAAALAAgAAAAAAAAAAAAMAAcAAAAAAAAAAAAMAAgAAAAAAAAAAAAMAAYAAAAAAAAAAAAMAAUAAAAAAAAAAAAMAAQAAAAAAAAAAAAMAAMAAAAAAAAAAAAMAAIAAAAAAAAAAAAMAAEAAAAAAAAAAAAMAAAAAAAAAAAAAAAKAAEAAAAAAAAAAAAJAAEAAAAAAAAAAAAIAAEAAAAAAAAAAAAIAAIAAAAAAAAAAAAJAAIAAAAAAAAAAAAJAAMAAAAAAAAAAAAJAAQAAAAAAAAAAAAJAAUAAAAAAAAAAAAIAAUAAAAAAAAAAAAIAAYAAAAAAAAAAAAIAAgAAAAAAAAAAAAJAAgAAAAAAAAAAAAKAAgAAAAAAAAAAAAKAAcAAAAAAAAAAAAKAAYAAAAAAAAAAAAJAAYAAAAAAAAAAAAIAAcAAAAAAAAAAAAJAAcAAAAAAAAAAAAIAAQAAAAAAAAAAAAIAAMAAAAAAAAAAAAKAAIAAAAAAAAAAAAKAAMAAAAAAAAAAAAKAAQAAAAAAAAAAAAKAAUAAAAAAAAAAAA=")
+tile_set = ExtResource("2_lbhrr")
+
+[node name="Islands" type="TileMapLayer" parent="LossMenu"]
+tile_map_data = PackedByteArray("AAABAAUAAAAFAAAAAwABAAYAAAAEAAAABAABAAcAAAAFAAAAAQACAAUAAAAEAAAAAwACAAYAAAACAAAAAAACAAcAAAAEAAAAAQADAAEAAAAFAAAAAwADAAIAAAAEAAAABAADAAMAAAAFAAAAAQADAAUAAAAEAAAAAwADAAYAAAACAAAAAAADAAcAAAAEAAAAAQAEAAEAAAAEAAAAAwAEAAIAAAACAAAAAAAEAAMAAAAEAAAAAQAFAAEAAAAEAAAAAwAFAAIAAAACAAAAAAAFAAMAAAAEAAAAAQAFAAUAAAAFAAAABAAFAAYAAAAEAAAAAgAFAAcAAAAFAAAAAgAGAAEAAAAEAAAAAwAGAAIAAAACAAAAAAAGAAMAAAAEAAAAAQAHAAEAAAAEAAAAAwAHAAIAAAACAAAAAAAHAAMAAAAEAAAAAQAHAAUAAAAFAAAAAwAHAAYAAAAEAAAABAAHAAcAAAAFAAAAAQAIAAUAAAAEAAAAAwAIAAYAAAACAAAAAAAIAAcAAAAEAAAAAQAJAAUAAAAEAAAAAwAJAAYAAAACAAAAAAAJAAcAAAAEAAAAAQAEAAUAAAAEAAAAAwAEAAYAAAACAAAAAAAEAAcAAAAEAAAAAQAIAAEAAAAEAAAAAwAIAAIAAAACAAAAAAAIAAMAAAAEAAAAAQAJAAEAAAAFAAAABAAJAAIAAAAEAAAAAgAJAAMAAAAFAAAAAgAKAAUAAAAEAAAAAwAKAAYAAAACAAAAAAAKAAcAAAAEAAAAAQALAAUAAAAFAAAABAALAAYAAAAEAAAAAgALAAcAAAAFAAAAAgA=")
+tile_set = ExtResource("2_lbhrr")
 
 [node name="WinMessage" type="Label" parent="LossMenu"]
 layout_mode = 0
-offset_right = 112.0
-offset_bottom = 48.0
+offset_left = 56.0
+offset_top = 24.0
+offset_right = 152.0
+offset_bottom = 56.0
 text = "YOU LOSE!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ResetButton" type="Button" parent="LossMenu"]
 layout_mode = 0
-offset_left = 32.0
-offset_top = 48.0
-offset_right = 80.0
-offset_bottom = 72.0
+offset_left = 24.0
+offset_top = 88.0
+offset_right = 88.0
+offset_bottom = 120.0
 theme_override_font_sizes/font_size = 8
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lfrn8")
 text = "RESET"
+flat = true
 
 [node name="MenuButton" type="Button" parent="LossMenu"]
 layout_mode = 0
-offset_left = 32.0
-offset_top = 80.0
-offset_right = 80.0
-offset_bottom = 104.0
+offset_left = 120.0
+offset_top = 88.0
+offset_right = 184.0
+offset_bottom = 120.0
 theme_override_font_sizes/font_size = 8
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lfrn8")
 text = "MENU"
+flat = true
 
 [node name="SpareLevels" type="Node2D" parent="."]
 visible = false
@@ -532,6 +549,6 @@ position = Vector2(32, 80)
 tile_map_data = PackedByteArray("AAAIAAgAAAAAAAAAAAA=")
 tile_set = ExtResource("6_5i0tg")
 
-[connection signal="pressed" from="WinMenu/MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="pressed" from="WinMenu/LevelSelect" to="." method="_on_level_select_pressed"]
 [connection signal="pressed" from="LossMenu/ResetButton" to="." method="_on_reset_button_pressed"]
 [connection signal="pressed" from="LossMenu/MenuButton" to="." method="_on_menu_button_pressed"]
