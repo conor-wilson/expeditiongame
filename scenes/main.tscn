@@ -361,7 +361,6 @@ flat = true
 
 [node name="OceanWaves" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("6_tefeu")
-autoplay = true
 
 [connection signal="level_select" from="Game" to="." method="_on_game_level_select"]
 [connection signal="main_menu" from="Game" to="." method="_on_game_main_menu"]

@@ -9,6 +9,17 @@ class_name Player extends Node2D
 const PLAYER_ATLAS_COORDS:Vector2i = Vector2i(0,0)
 const PLAYER_SOURCE_ID:int = 0
 
+const TRIMMED_SAND_STEP_1:AudioStream = preload("res://assets/sfx/trimmed_sand_step_1.mp3")
+const MAX_FOOTSTEP_PLAYERS:int = 6
+var footstep_players:Array[AudioStreamPlayer] = []
+var current_footstep_player_index:int = 0
+
+func _ready() -> void:
+	for i in range(MAX_FOOTSTEP_PLAYERS):
+		var new_footstep_player = AudioStreamPlayer.new()
+		new_footstep_player.stream = TRIMMED_SAND_STEP_1
+		add_child(new_footstep_player)
+		footstep_players.append(new_footstep_player)
 
 func reset(player_config:TileMapLayer = null) -> void:
 	clear_player_character()
@@ -42,7 +53,20 @@ func walk(direction:Vector2i) -> bool:
 	if next_enemy != null && !next_enemy.alive:
 		return false
 	
-	return player_character.walk(direction)
+	var walked:bool = player_character.walk(direction)
+	
+	if walked:
+		play_footstep()
+	
+	return walked
+
+
+func play_footstep():
+	var footstep_player = footstep_players[current_footstep_player_index]
+	footstep_player.stop()
+	footstep_player.pitch_scale = randf_range(0.9, 1.1)
+	footstep_player.play()
+	current_footstep_player_index = (current_footstep_player_index + 1) % MAX_FOOTSTEP_PLAYERS
 
 func get_current_coords() -> Vector2i:
 	return player_character.get_current_coords()
