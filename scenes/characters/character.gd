@@ -45,7 +45,8 @@ func walk(direction:Vector2i) -> bool:
 func kill():
 	alive = false
 	modulate = Color("4f4f4e")
-	# TODO: Add some alternative tiles for death
+	#$DeathNoise.pitch_scale = randf_range(0.9, 1.1)
+	#$DeathNoise.play()
 
 
 ## TILE STATE CHECKER FUNCS

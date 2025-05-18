@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://dvu7ny3j1n00j"]
+[gd_scene load_steps=9 format=4 uid="uid://dvu7ny3j1n00j"]
 
 [ext_resource type="Script" uid="uid://debtv741hvvl7" path="res://scenes/game/game.gd" id="1_lnu2h"]
 [ext_resource type="TileSet" uid="uid://cro1fx4ifi25h" path="res://assets/tilesets/gametiles.tres" id="2_lbhrr"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c1phvu5go5bn" path="res://scenes/map/map_tiles.tscn" id="4_p57ef"]
 [ext_resource type="TileSet" uid="uid://dh2a7tsjqwq4s" path="res://assets/tilesets/characters.tres" id="6_5i0tg"]
 [ext_resource type="Theme" uid="uid://bexo1ll0gvbof" path="res://scenes/menus/menus.tres" id="6_bdhmt"]
+[ext_resource type="AudioStream" uid="uid://gt1gqwg23q75" path="res://assets/sfx/throat-strangle-male-smartsound-fx-short-3-00-00.mp3" id="7_bdhmt"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lfrn8"]
 
@@ -799,6 +800,9 @@ tile_set = ExtResource("6_5i0tg")
 position = Vector2(32, 80)
 tile_map_data = PackedByteArray("AAAIAAgAAAAAAAAAAAA=")
 tile_set = ExtResource("6_5i0tg")
+
+[node name="DeathNoise" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_bdhmt")
 
 [connection signal="pressed" from="WinMenu/LevelSelectButton" to="." method="_on_level_select_button_pressed"]
 [connection signal="pressed" from="LossMenu/ResetButton" to="." method="_on_reset_button_pressed"]

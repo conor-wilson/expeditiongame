@@ -153,9 +153,17 @@ func tile_contains_enemy(coords) -> bool:
 	return false
 
 func check_enemy_death():
+	var new_enemy_killed:bool = false
 	for enemy in enemy_characters:
 		if map.tile_is_deadly(enemy.get_current_coords()):
+			
+			if enemy.alive:
+				new_enemy_killed = true
 			enemy.kill()
+	
+	if new_enemy_killed:
+		$DeathNoise.pitch_scale = randf_range(0.9, 1.1)
+		$DeathNoise.play()
 
 func _get_next_tile_direction(enemy:Character, player_coords:Vector2i) -> Vector2i:
 	

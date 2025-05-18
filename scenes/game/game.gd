@@ -99,6 +99,8 @@ func _on_level_win() -> void:
 	win_menu_active = true
 
 func _on_level_loss() -> void:
+	$DeathNoise.pitch_scale = randf_range(0.9, 1.1)
+	$DeathNoise.play()
 	print("LEVEL ", current_level, " LOST")
 	await get_tree().create_timer(0.5).timeout
 	$LossMenu.show()
