@@ -14,7 +14,7 @@ config/name="Expedition Game"
 run/main_scene="uid://djjlfvgfynn6u"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="uid://dd5vjsk0kav7m"
-config/windows_native_icon="res://assets/art/icon.ico"
+config/windows_native_icon="res://assets/art/export/icon.ico"
 
 [autoload]
 

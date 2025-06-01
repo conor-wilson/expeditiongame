@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lodcoadeks5q"
-path="res://.godot/imported/TileMap.png-feab531852a310a06ecdf7c3ea1a616c.ctex"
+uid="uid://dnfd6cifa7n8e"
+path="res://.godot/imported/SideBanner.png-e41f1784935ecbec704041d0a6f2db41.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/TileMap.png"
-dest_files=["res://.godot/imported/TileMap.png-feab531852a310a06ecdf7c3ea1a616c.ctex"]
+source_file="res://assets/art/export/SideBanner.png"
+dest_files=["res://.godot/imported/SideBanner.png-e41f1784935ecbec704041d0a6f2db41.ctex"]
 
 [params]
 

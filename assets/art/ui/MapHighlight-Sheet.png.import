@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c37687jjmhppb"
-path="res://.godot/imported/MapHighlight-Sheet.png-c09e767dff8b87bfd8da986e0166d1b0.ctex"
+path="res://.godot/imported/MapHighlight-Sheet.png-250e96dc8fcaed416e184c85b489e42a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/MapHighlight-Sheet.png"
-dest_files=["res://.godot/imported/MapHighlight-Sheet.png-c09e767dff8b87bfd8da986e0166d1b0.ctex"]
+source_file="res://assets/art/ui/MapHighlight-Sheet.png"
+dest_files=["res://.godot/imported/MapHighlight-Sheet.png-250e96dc8fcaed416e184c85b489e42a.ctex"]
 
 [params]
 

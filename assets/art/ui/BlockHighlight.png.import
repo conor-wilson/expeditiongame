@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://f3l60kttwqkd"
-path="res://.godot/imported/BlockHighlight-Sheet.png-b47d1a5bb2569f8ab23e1460bed800f0.ctex"
+uid="uid://bgexrhi5coj37"
+path="res://.godot/imported/BlockHighlight.png-01bb6657ad22964c55902c7282e9b232.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/BlockHighlight-Sheet.png"
-dest_files=["res://.godot/imported/BlockHighlight-Sheet.png-b47d1a5bb2569f8ab23e1460bed800f0.ctex"]
+source_file="res://assets/art/ui/BlockHighlight.png"
+dest_files=["res://.godot/imported/BlockHighlight.png-01bb6657ad22964c55902c7282e9b232.ctex"]
 
 [params]
 

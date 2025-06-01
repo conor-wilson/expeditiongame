@@ -2,27 +2,27 @@
 
 [ext_resource type="Theme" uid="uid://bexo1ll0gvbof" path="res://scenes/menus/menus.tres" id="1_0uvgv"]
 [ext_resource type="Script" uid="uid://c5o3x6mtce48b" path="res://scenes/inventory/inventory_slot.gd" id="1_c7w7p"]
-[ext_resource type="Texture2D" uid="uid://f3l60kttwqkd" path="res://assets/art/BlockHighlight-Sheet.png" id="1_u6pog"]
 [ext_resource type="PackedScene" uid="uid://c1phvu5go5bn" path="res://scenes/map/map_tiles.tscn" id="2_c7w7p"]
+[ext_resource type="Texture2D" uid="uid://f3l60kttwqkd" path="res://assets/art/ui/BlockHighlight-Sheet.png" id="4_0uvgv"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0uvgv"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_iywne"]
-atlas = ExtResource("1_u6pog")
+[sub_resource type="AtlasTexture" id="AtlasTexture_td8r7"]
+atlas = ExtResource("4_0uvgv")
 region = Rect2(0, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_p57ef"]
-atlas = ExtResource("1_u6pog")
+[sub_resource type="AtlasTexture" id="AtlasTexture_c00wg"]
+atlas = ExtResource("4_0uvgv")
 region = Rect2(48, 0, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0uvgv"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_iywne")
+"texture": SubResource("AtlasTexture_td8r7")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_p57ef")
+"texture": SubResource("AtlasTexture_c00wg")
 }],
 "loop": true,
 "name": &"default",
